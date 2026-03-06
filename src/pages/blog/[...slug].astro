@@ -1,0 +1,249 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props:  { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year:  'numeric',
+    month: 'long',
+    day:   'numeric',
+  });
+}
+
+// BlogPosting JSON-LD for individual post SEO
+const postSchema = {
+  '@context': 'https://schema.org',
+  '@type':    'BlogPosting',
+  headline:   post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  author: {
+    '@type': 'Person',
+    name:    post.data.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name:    'NCR Digital',
+    url:     'https://ncrdigi.com',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id':   Astro.url.href,
+  },
+  ...(post.data.image ? { image: `https://ncrdigi.com${post.data.image}` } : {}),
+};
+---
+
+<Layout
+  title={`${post.data.title} | NCR Digital`}
+  description={post.data.description}
+>
+  <!-- Inject BlogPosting schema in addition to the base ProfessionalService schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(postSchema)} slot="head" />
+
+  <Navigation />
+
+  <main id="main-content" class="pt-16">
+
+    <!-- Post header -->
+    <header class="relative py-20 overflow-hidden bg-ncr-bg border-b border-ncr-border/40">
+      <!-- Dot grid -->
+      <div
+        class="absolute inset-0"
+        style="background-image: radial-gradient(rgba(0,229,255,0.05) 1px, transparent 1px); background-size: 28px 28px;"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[250px] rounded-full"
+        style="background: radial-gradient(ellipse at center, rgba(0,229,255,0.07) 0%, transparent 70%);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-8">
+          <ol class="flex items-center gap-2 font-mono text-xs text-ncr-muted">
+            <li><a href="/" class="hover:text-ncr-cyan transition-colors">Home</a></li>
+            <li aria-hidden="true" class="text-ncr-border">/</li>
+            <li><a href="/blog/" class="hover:text-ncr-cyan transition-colors">Blog</a></li>
+            <li aria-hidden="true" class="text-ncr-border">/</li>
+            <li class="text-ncr-muted/60 truncate max-w-[200px]" aria-current="page">{post.data.title}</li>
+          </ol>
+        </nav>
+
+        <!-- Meta -->
+        <div class="flex items-center gap-3 mb-6">
+          <time
+            datetime={post.data.pubDate.toISOString()}
+            class="font-mono text-xs text-ncr-cyan tracking-widest uppercase"
+          >
+            {formatDate(post.data.pubDate)}
+          </time>
+          <span class="text-ncr-border" aria-hidden="true">·</span>
+          <span class="font-mono text-xs text-ncr-muted">{post.data.author}</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-ncr-text mb-6">
+          {post.data.title}
+        </h1>
+
+        <!-- Description -->
+        <p class="text-ncr-muted text-lg leading-relaxed">
+          {post.data.description}
+        </p>
+      </div>
+    </header>
+
+    <!-- Post body -->
+    <article
+      class="py-16 bg-ncr-surface"
+      aria-label={post.data.title}
+    >
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="ncr-prose">
+          <Content />
+        </div>
+
+        <!-- Back link -->
+        <div class="mt-16 pt-10 border-t border-ncr-border/60">
+          <a
+            href="/blog/"
+            class="inline-flex items-center gap-2 font-mono text-xs text-ncr-cyan tracking-widest uppercase hover:gap-3 transition-all duration-200"
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+              <path d="M10 6H2M6 2L2 6l4 4"/>
+            </svg>
+            Back to Blog
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* Prose styles for rendered markdown — scoped via .ncr-prose */
+  .ncr-prose {
+    color: #b0bdd4;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .ncr-prose h2 {
+    color: #e8f0fe;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0f2040;
+  }
+
+  .ncr-prose h3 {
+    color: #e8f0fe;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .ncr-prose p {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .ncr-prose a {
+    color: #00e5ff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(0, 229, 255, 0.35);
+    transition: text-decoration-color 0.2s;
+  }
+
+  .ncr-prose a:hover {
+    text-decoration-color: #00e5ff;
+  }
+
+  .ncr-prose strong {
+    color: #e8f0fe;
+    font-weight: 600;
+  }
+
+  .ncr-prose ul,
+  .ncr-prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ncr-prose ul { list-style-type: none; padding-left: 0; }
+  .ncr-prose ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; }
+  .ncr-prose ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #00ff87;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8em;
+  }
+
+  .ncr-prose ol { list-style-type: decimal; }
+  .ncr-prose ol li { margin-bottom: 0.5rem; padding-left: 0.5rem; }
+  .ncr-prose ol li::marker { color: #00e5ff; font-family: 'Roboto Mono', monospace; }
+
+  .ncr-prose code:not(pre code) {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85em;
+    color: #00e5ff;
+    background: rgba(0, 229, 255, 0.08);
+    padding: 0.15em 0.45em;
+    border-radius: 2px;
+  }
+
+  .ncr-prose pre {
+    background: #071226;
+    border: 1px solid #0f2040;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #b0bdd4;
+  }
+
+  .ncr-prose pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+  .ncr-prose blockquote {
+    border-left: 2px solid #00e5ff;
+    padding-left: 1.25rem;
+    margin-left: 0;
+    color: #6b7a99;
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+
+  .ncr-prose hr {
+    border: none;
+    border-top: 1px solid #0f2040;
+    margin: 2rem 0;
+  }
+</style>
