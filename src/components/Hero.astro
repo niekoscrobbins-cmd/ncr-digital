@@ -1,93 +1,128 @@
 ---
 const stats = [
-  { value: 'DA 44',  label: 'Peak Authority Hit' },
-  { value: '7 mo',   label: 'DA 20→44 Sprint' },
-  { value: '3.2x',   label: 'Avg Traffic Growth' },
+  { value: 'DA 44',  label: 'Peak Authority Hit',   icon: '▲' },
+  { value: '7 mo',   label: 'DA 20→44 Sprint',      icon: '◆' },
+  { value: '3.2x',   label: 'Avg Traffic Growth',   icon: '▲' },
 ];
 ---
 
 <section
-  class="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden"
+  class="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden bg-ncr-bg"
   aria-label="Hero"
 >
-  <!-- Background: grid + glow -->
+
+  <!-- ── Layered background ────────────────────────────────── -->
+  <!-- Dot grid -->
   <div
-    class="absolute inset-0 bg-grid-pattern bg-[size:50px_50px]"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="absolute inset-0 bg-hero-glow"
-    aria-hidden="true"
-  ></div>
-  <!-- Side accent lines -->
-  <div
-    class="absolute left-0 top-1/4 h-px w-1/3 bg-gradient-to-r from-transparent via-ncr-cyan/20 to-transparent"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="absolute right-0 bottom-1/4 h-px w-1/3 bg-gradient-to-l from-transparent via-ncr-cyan/20 to-transparent"
+    class="absolute inset-0"
+    style="background-image: radial-gradient(rgba(0,229,255,0.07) 1px, transparent 1px); background-size: 28px 28px;"
     aria-hidden="true"
   ></div>
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-    <!-- Eyebrow -->
-    <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-7 flex items-center gap-3">
-      <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
-      Technical SEO Agency
-    </p>
+  <!-- Top-center radial bloom -->
+  <div
+    class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full"
+    style="background: radial-gradient(ellipse at center, rgba(0,229,255,0.10) 0%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
 
-    <!-- H1 -->
-    <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[1.05] mb-7 max-w-5xl">
-      Technical SEO for<br />
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-ncr-cyan via-blue-400 to-ncr-cyan">
-        High-Growth
+  <!-- Bottom-left secondary bloom -->
+  <div
+    class="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full"
+    style="background: radial-gradient(ellipse at center, rgba(79,142,247,0.07) 0%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Horizontal accent lines -->
+  <div class="absolute top-1/3 left-0 h-px w-2/5 bg-gradient-to-r from-ncr-cyan/25 via-ncr-cyan/10 to-transparent" aria-hidden="true"></div>
+  <div class="absolute bottom-1/3 right-0 h-px w-2/5 bg-gradient-to-l from-ncr-cyan/25 via-ncr-cyan/10 to-transparent" aria-hidden="true"></div>
+
+  <!-- ── Content ───────────────────────────────────────────── -->
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-36 w-full">
+
+    <!-- Eyebrow pill -->
+    <div class="inline-flex items-center gap-2.5 border border-ncr-cyan/25 bg-ncr-cyan/5 px-4 py-1.5 mb-10 rounded-sm">
+      <span class="w-1.5 h-1.5 rounded-full bg-ncr-cyan animate-pulse" aria-hidden="true"></span>
+      <span class="font-mono text-ncr-cyan text-xs tracking-[0.25em] uppercase">Technical SEO Agency — NCR Digital</span>
+    </div>
+
+    <!-- H1 — two-line stacked layout -->
+    <h1 class="font-extrabold tracking-tight leading-[1.04] mb-8 max-w-5xl">
+      <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] text-ncr-text">
+        We Don't Chase Rankings.
       </span>
-      &nbsp;Ventures.
+      <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] mt-2">
+        <span class="text-transparent bg-clip-text"
+          style="background-image: linear-gradient(90deg, #00e5ff 0%, #4f8ef7 50%, #00e5ff 100%); background-size: 200% auto; animation: shimmer 4s linear infinite;">
+          We Engineer Them.
+        </span>
+      </span>
     </h1>
 
-    <!-- Subheadline -->
-    <p class="text-ncr-muted text-lg sm:text-xl max-w-2xl mb-12 leading-relaxed">
-      We architect search dominance for ambitious startups and mid-market firms.
-      Data-driven audits. Precision content strategy. Measurable rankings growth.
+    <!-- Sub-headline -->
+    <p class="text-ncr-muted text-lg sm:text-xl max-w-2xl mb-6 leading-relaxed">
+      Bridging the gap between raw data and ROI — NCR Digital architects search dominance
+      for startups and mid-market firms through technical precision and measurable strategy.
+    </p>
+
+    <!-- Trust line -->
+    <p class="font-mono text-xs text-ncr-muted/60 tracking-widest uppercase mb-12">
+      Technical Audits &nbsp;·&nbsp; Content Silos &nbsp;·&nbsp; Backlink Architecture &nbsp;·&nbsp; Core Web Vitals
     </p>
 
     <!-- CTAs -->
     <div class="flex flex-wrap gap-4 mb-24" role="group" aria-label="Primary actions">
       <a
         href="#contact"
-        class="inline-flex items-center gap-2 px-7 py-3.5 bg-ncr-cyan text-ncr-bg font-semibold text-sm tracking-wide hover:bg-[#00ccdd] active:scale-[0.98] transition-all duration-200"
+        class="group inline-flex items-center gap-2.5 px-8 py-4 bg-ncr-cyan text-ncr-bg font-bold text-sm tracking-wider uppercase hover:bg-[#00ccdd] active:scale-[0.98] transition-all duration-200 shadow-[0_0_24px_rgba(0,229,255,0.25)] hover:shadow-[0_0_36px_rgba(0,229,255,0.40)]"
       >
-        Start Your Audit
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-          <path d="M3 8h10M9 4l4 4-4 4"/>
+        Get a Free Audit
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" class="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
+          <path d="M2 7.5h11M8 3l5 4.5L8 12"/>
         </svg>
       </a>
       <a
         href="#case-studies"
-        class="inline-flex items-center gap-2 px-7 py-3.5 border border-ncr-border text-ncr-text text-sm tracking-wide hover:border-ncr-cyan/60 hover:text-ncr-cyan transition-all duration-200"
+        class="inline-flex items-center gap-2.5 px-8 py-4 border border-ncr-border/80 text-ncr-text text-sm font-semibold tracking-wider uppercase hover:border-ncr-cyan/50 hover:text-ncr-cyan hover:bg-ncr-cyan/5 transition-all duration-200"
       >
-        View Case Study
+        See Results
       </a>
     </div>
 
-    <!-- Stats -->
+    <!-- Stats row -->
     <div
-      class="grid grid-cols-3 sm:grid-cols-3 gap-6 sm:gap-10 border-t border-ncr-border pt-10 max-w-lg"
+      class="flex flex-wrap gap-x-10 gap-y-6 border-t border-ncr-border/60 pt-10"
       role="list"
       aria-label="Key metrics"
     >
-      {stats.map(({ value, label }) => (
-        <div role="listitem">
-          <p class="font-mono text-2xl sm:text-3xl font-bold text-ncr-cyan tracking-tight">{value}</p>
-          <p class="text-ncr-muted text-xs sm:text-sm mt-1 leading-snug">{label}</p>
+      {stats.map(({ value, label, icon }, i) => (
+        <div class="flex items-start gap-4" role="listitem">
+          {i > 0 && (
+            <div class="hidden sm:block self-stretch w-px bg-ncr-border/60 mt-1" aria-hidden="true"></div>
+          )}
+          <div class={i > 0 ? 'sm:pl-10' : ''}>
+            <p class="font-mono text-3xl sm:text-4xl font-bold text-ncr-cyan tracking-tight leading-none">
+              {value}
+            </p>
+            <p class="text-ncr-muted text-xs sm:text-sm mt-1.5 leading-snug max-w-[100px]">{label}</p>
+          </div>
         </div>
       ))}
     </div>
+
   </div>
 
-  <!-- Bottom fade -->
+  <!-- Bottom fade into next section -->
   <div
-    class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ncr-bg to-transparent"
+    class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-ncr-bg to-transparent"
     aria-hidden="true"
   ></div>
+
 </section>
+
+<style>
+  @keyframes shimmer {
+    0%   { background-position: 0%   center; }
+    100% { background-position: 200% center; }
+  }
+</style>
