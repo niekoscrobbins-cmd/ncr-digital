@@ -4,12 +4,9 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://ncrdigi.com',
-  trailingSlash: 'always',
-  compressHTML: true,
   integrations: [
     tailwind(),
     sitemap(),
   ],
   output: 'static',
 });
-
