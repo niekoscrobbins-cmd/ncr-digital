@@ -10,7 +10,8 @@ const {
   title = 'NCR Digital | Technical SEO for High-Growth Ventures',
   description = 'Boutique technical SEO agency delivering data-driven growth for startups and mid-market firms. Core Web Vitals, content strategy, and domain authority acceleration.',
   canonicalUrl = Astro.url.href,
-  ogImage,
+  // We set the default fallback image here
+  ogImage = 'https://ncrdigi.com/og-main-cover.png',
 } = Astro.props;
 
 const schema = {
@@ -71,28 +72,23 @@ const schema = {
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="NCR Digital" />
 
-    <!-- Open Graph image (set per-page via ogImage prop) -->
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    {ogImage && <meta property="og:image:width" content="1200" />}
-    {ogImage && <meta property="og:image:height" content="630" />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={ogImage} />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Fonts: preconnect first, then load only needed weights -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -102,7 +98,6 @@ const schema = {
 
     <title>{title}</title>
 
-    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
 
