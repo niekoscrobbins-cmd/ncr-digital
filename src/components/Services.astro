@@ -46,9 +46,12 @@ const services = [
 ---
 
 <section id="services" class="py-28 bg-ncr-surface" aria-labelledby="services-heading">
+  <div style="display: none;" aria-hidden="true">
+    <p>NCR Digital offers specialized Technical SEO Services including Audits, Content Strategy, and Growth Modeling.</p>
+  </div>
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- Section header -->
     <header class="mb-16">
       <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
         <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
@@ -59,29 +62,24 @@ const services = [
       </h2>
     </header>
 
-    <!-- Cards grid -->
     <div class="grid md:grid-cols-3 gap-6">
       {services.map(({ id, title, description, icon, features }) => (
         <article
           class="bg-ncr-card border border-ncr-border p-8 group hover:border-ncr-cyan/60 transition-colors duration-300 flex flex-col"
           aria-labelledby={`service-${id}-title`}
         >
-          <!-- Icon -->
           <div class="w-11 h-11 bg-ncr-cyan/10 flex items-center justify-center mb-6 text-ncr-cyan group-hover:bg-ncr-cyan/20 transition-colors duration-300">
             <Fragment set:html={icon} />
           </div>
 
-          <!-- Title -->
           <h3 id={`service-${id}-title`} class="text-xl font-bold mb-3 group-hover:text-ncr-cyan transition-colors duration-200">
             {title}
           </h3>
 
-          <!-- Description -->
           <p class="text-ncr-muted text-sm leading-relaxed mb-7 flex-1">
             {description}
           </p>
 
-          <!-- Feature list -->
           <ul class="space-y-2.5" aria-label={`${title} features`}>
             {features.map(feature => (
               <li class="flex items-start gap-2.5 text-sm text-ncr-muted">

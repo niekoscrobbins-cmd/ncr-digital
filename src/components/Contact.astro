@@ -1,6 +1,5 @@
 ---
 // Form action: replace YOUR_FORM_ID with your Formspree form ID
-// Sign up free at https://formspree.io
 const FORMSPREE_ID = 'mwvrkrqn';
 ---
 
@@ -8,7 +7,6 @@ const FORMSPREE_ID = 'mwvrkrqn';
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-16">
 
-      <!-- Left: heading + direct contact -->
       <div>
         <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
           <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
@@ -18,10 +16,9 @@ const FORMSPREE_ID = 'mwvrkrqn';
           Ready to Scale<br />Your Organic?
         </h2>
         <p class="text-ncr-muted leading-relaxed mb-10 max-w-md">
-          Tell us where you are and where you need to be. We'll deliver a data-modeled growth path within 48 hours.
+          Tell us where you are and where you need to be. <span class="text-ncr-text">NCR Digital</span> will deliver a data-modeled growth path within 48 hours.
         </p>
 
-        <!-- Direct contact info -->
         <div class="space-y-5">
           <a
             href="mailto:niekos.c.robbins+ncr@gmail.com"
@@ -34,7 +31,7 @@ const FORMSPREE_ID = 'mwvrkrqn';
               </svg>
             </div>
             <div>
-              <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Email</p>
+              <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Direct Inquiry</p>
               <p class="text-ncr-text text-sm font-medium">niekos.c.robbins+ncr@gmail.com</p>
             </div>
           </a>
@@ -47,22 +44,20 @@ const FORMSPREE_ID = 'mwvrkrqn';
               </svg>
             </div>
             <div>
-              <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Based in</p>
-              <p class="text-ncr-text text-sm font-medium">College Station, TX — Serving globally</p>
+              <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Headquarters</p>
+              <p class="text-ncr-text text-sm font-medium">College Station, TX — Serving Global Ventures</p>
             </div>
           </div>
         </div>
 
-        <!-- Response time note -->
         <div class="mt-10 border border-ncr-border/60 px-5 py-4 bg-ncr-card">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-ncr-green animate-pulse" aria-hidden="true"></span>
-            <span class="font-mono text-xs text-ncr-muted tracking-wide">Typical response: &lt; 48 hours</span>
+            <span class="font-mono text-xs text-ncr-muted tracking-wide">Agency Status: Accepting New Pilots</span>
           </div>
         </div>
       </div>
 
-      <!-- Right: form -->
       <div>
         <form
           method="POST"
@@ -71,7 +66,6 @@ const FORMSPREE_ID = 'mwvrkrqn';
           aria-label="Contact form"
           novalidate
         >
-          <!-- Name + Company -->
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
               <label for="name" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
@@ -83,7 +77,7 @@ const FORMSPREE_ID = 'mwvrkrqn';
                 name="name"
                 required
                 autocomplete="name"
-                placeholder="Niekos Robbins"
+                placeholder="Your Name"
                 class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
               />
             </div>
@@ -96,13 +90,12 @@ const FORMSPREE_ID = 'mwvrkrqn';
                 id="company"
                 name="company"
                 autocomplete="organization"
-                placeholder="Your Company"
+                placeholder="Domain / Firm"
                 class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
               />
             </div>
           </div>
 
-          <!-- Email -->
           <div>
             <label for="email" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
               Email <span class="text-ncr-cyan" aria-hidden="true">*</span>
@@ -113,15 +106,14 @@ const FORMSPREE_ID = 'mwvrkrqn';
               name="email"
               required
               autocomplete="email"
-              placeholder="you@company.com"
+              placeholder="you@domain.com"
               class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
             />
           </div>
 
-          <!-- Service interest -->
           <div>
             <label for="service" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
-              I'm interested in
+              Objective
             </label>
             <select
               id="service"
@@ -136,36 +128,29 @@ const FORMSPREE_ID = 'mwvrkrqn';
             </select>
           </div>
 
-          <!-- Message -->
           <div>
             <label for="message" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
-              Message <span class="text-ncr-cyan" aria-hidden="true">*</span>
+              Project Brief <span class="text-ncr-cyan" aria-hidden="true">*</span>
             </label>
             <textarea
               id="message"
               name="message"
               required
               rows="5"
-              placeholder="Tell us about your site, current traffic, and where you want to be in 12 months..."
+              placeholder="Current traffic status and 12-month goals..."
               class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors resize-none"
             ></textarea>
           </div>
 
-          <!-- Submit -->
           <button
             type="submit"
             class="w-full bg-ncr-cyan text-ncr-bg font-semibold py-4 px-6 text-sm tracking-wide hover:bg-[#00ccdd] active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2"
           >
-            Send Message
+            Initialize Engagement
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4"/>
             </svg>
           </button>
-
-          <p class="text-ncr-muted text-xs text-center font-mono">
-            <!-- Replace YOUR_FORM_ID in Formspree to activate form submission -->
-            Fields marked <span class="text-ncr-cyan">*</span> are required.
-          </p>
         </form>
       </div>
 
