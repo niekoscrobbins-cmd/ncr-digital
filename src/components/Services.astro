@@ -1,0 +1,97 @@
+---
+const services = [
+  {
+    id: 'audit',
+    title: 'Technical Audits',
+    description:
+      'Deep crawl analysis, Core Web Vitals optimization, and structured data implementation that earns Google\'s trust — and rankings.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>`,
+    features: [
+      'Core Web Vitals & CrUX analysis',
+      'Crawl budget optimization',
+      'JSON-LD schema markup',
+      'Indexation & canonicalization audit',
+      'Internal link architecture',
+    ],
+  },
+  {
+    id: 'content',
+    title: 'Content Strategy',
+    description:
+      'Topical authority clusters, intent-mapped content, and semantic keyword architecture built to dominate SERP real estate.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+    features: [
+      'Topical authority mapping',
+      'Semantic keyword clustering',
+      'Content gap & competitor analysis',
+      'Entity optimization',
+      'EEAT-aligned editorial framework',
+    ],
+  },
+  {
+    id: 'growth',
+    title: 'Data-Backed Growth',
+    description:
+      'Multi-channel campaigns grounded in GSC and GA4 data. We model your SEO ROI before we execute — then we deliver on it.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    features: [
+      'Google Search Console deep dive',
+      'GA4 conversion tracking setup',
+      'Python-powered rank tracking',
+      'Financial ROI modeling',
+      'Monthly exec-level reporting',
+    ],
+  },
+];
+---
+
+<section id="services" class="py-28 bg-ncr-surface" aria-labelledby="services-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section header -->
+    <header class="mb-16">
+      <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+        <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
+        Our Expertise
+      </p>
+      <h2 id="services-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+        What We Engineer
+      </h2>
+    </header>
+
+    <!-- Cards grid -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {services.map(({ id, title, description, icon, features }) => (
+        <article
+          class="bg-ncr-card border border-ncr-border p-8 group hover:border-ncr-cyan/60 transition-colors duration-300 flex flex-col"
+          aria-labelledby={`service-${id}-title`}
+        >
+          <!-- Icon -->
+          <div class="w-11 h-11 bg-ncr-cyan/10 flex items-center justify-center mb-6 text-ncr-cyan group-hover:bg-ncr-cyan/20 transition-colors duration-300">
+            <Fragment set:html={icon} />
+          </div>
+
+          <!-- Title -->
+          <h3 id={`service-${id}-title`} class="text-xl font-bold mb-3 group-hover:text-ncr-cyan transition-colors duration-200">
+            {title}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-ncr-muted text-sm leading-relaxed mb-7 flex-1">
+            {description}
+          </p>
+
+          <!-- Feature list -->
+          <ul class="space-y-2.5" aria-label={`${title} features`}>
+            {features.map(feature => (
+              <li class="flex items-start gap-2.5 text-sm text-ncr-muted">
+                <span class="text-ncr-green mt-0.5 flex-shrink-0 font-mono" aria-hidden="true">→</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

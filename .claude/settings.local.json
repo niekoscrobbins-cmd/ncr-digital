@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir)",
+      "Bash(cmd.exe /c \"dir C:\\\\Users\\\\Niekos Robbins\\\\Desktop\\\\NCRDIGITAL\")",
+      "Bash(cmd.exe /c \"node --version && npm --version\")",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(echo \"PATH: $PATH\")",
+      "Bash(powershell.exe -Command \"Get-Command node -ErrorAction SilentlyContinue | Select-Object Source\")",
+      "Bash(powershell -Command \"node --version; npm --version\")"
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+---
+const metrics = [
+  { value: '20 → 44', label: 'Domain Authority',   sub: 'in 7 months' },
+  { value: '3.2x',    label: 'Organic Traffic',     sub: 'YoY increase' },
+  { value: '47',      label: 'First-Page Rankings', sub: 'new keywords' },
+  { value: '100',     label: 'Lighthouse Score',    sub: 'all categories' },
+];
+
+// DA progress bar data: month → DA value (out of 100 max display)
+const daProgress = [
+  { month: 'Month 1', da: 20, pct: 30 },
+  { month: 'Month 2', da: 25, pct: 37 },
+  { month: 'Month 3', da: 30, pct: 44 },
+  { month: 'Month 4', da: 35, pct: 52 },
+  { month: 'Month 5', da: 39, pct: 58 },
+  { month: 'Month 6', da: 42, pct: 63 },
+  { month: 'Month 7', da: 44, pct: 66 },
+];
+---
+
+<section id="case-studies" class="py-28" aria-labelledby="casestudy-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section header -->
+    <header class="mb-14">
+      <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+        <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
+        Case Study
+      </p>
+      <h2 id="casestudy-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+        Proven Results
+      </h2>
+    </header>
+
+    <!-- Feature card -->
+    <div class="border border-ncr-border bg-ncr-card relative overflow-hidden">
+      <!-- Decorative glow -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-ncr-cyan/5 blur-3xl rounded-full" aria-hidden="true"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-500/5 blur-3xl rounded-full" aria-hidden="true"></div>
+
+      <div class="relative p-8 lg:p-14">
+        <!-- Client badge -->
+        <div class="inline-flex items-center gap-2 border border-ncr-border px-4 py-1.5 mb-10">
+          <span class="w-2 h-2 rounded-full bg-ncr-green animate-pulse" aria-hidden="true"></span>
+          <span class="font-mono text-xs tracking-widest text-ncr-muted uppercase">AutoUnify × NCR Digital</span>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-14 items-start">
+
+          <!-- Left: narrative + metrics -->
+          <div>
+            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-5 leading-tight">
+              Domain Authority<br />
+              <span class="text-ncr-cyan font-mono">20 → 44</span> in 7 Months
+            </h3>
+            <p class="text-ncr-muted leading-relaxed mb-10 max-w-xl">
+              Executed a full-stack technical SEO transformation for AutoUnify, a Porsche-backed automotive marketplace.
+              Rebuilt content architecture, eliminated crawl waste, resolved Core Web Vitals deficits, and deployed
+              programmatic JSON-LD schema at scale — turning a stagnant domain into a compounding organic asset.
+            </p>
+
+            <!-- Metrics grid -->
+            <div class="grid grid-cols-2 gap-5" role="list" aria-label="Case study metrics">
+              {metrics.map(({ value, label, sub }) => (
+                <div
+                  class="border-l-2 border-ncr-cyan pl-4 py-1"
+                  role="listitem"
+                >
+                  <p class="font-mono text-2xl font-bold text-ncr-green tracking-tight">{value}</p>
+                  <p class="text-ncr-text text-sm font-medium mt-0.5">{label}</p>
+                  <p class="text-ncr-muted text-xs mt-0.5">{sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right: DA progress chart (pure CSS) -->
+          <div aria-label="Domain authority progression chart" role="figure">
+            <p class="font-mono text-xs text-ncr-muted tracking-widest uppercase mb-5">DA Trajectory</p>
+            <div class="space-y-3">
+              {daProgress.map(({ month, da, pct }) => (
+                <div class="flex items-center gap-3">
+                  <span class="font-mono text-xs text-ncr-muted w-16 flex-shrink-0">{month}</span>
+                  <div class="flex-1 h-7 bg-ncr-border/40 relative overflow-hidden" role="progressbar" aria-valuenow={da} aria-valuemin={0} aria-valuemax={100} aria-label={`DA ${da}`}>
+                    <div
+                      class="absolute inset-y-0 left-0 flex items-center bg-gradient-to-r from-ncr-cyan/30 to-ncr-cyan/50 transition-all"
+                      style={`width: ${pct}%`}
+                    >
+                    </div>
+                    <span class="absolute right-2 top-1/2 -translate-y-1/2 font-mono text-xs text-ncr-cyan font-bold">
+                      {da}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Key actions taken -->
+            <div class="mt-8 pt-6 border-t border-ncr-border/60">
+              <p class="font-mono text-xs text-ncr-muted tracking-widest uppercase mb-4">Levers Pulled</p>
+              <ul class="space-y-2">
+                {[
+                  'Core Web Vitals: LCP, CLS, INP remediation',
+                  'Programmatic schema at 12k+ pages',
+                  'Content silo rebuild with semantic clusters',
+                  'Toxic backlink disavow + link building sprint',
+                  'GSC-guided crawl budget management',
+                ].map(item => (
+                  <li class="flex items-start gap-2 text-sm text-ncr-muted">
+                    <span class="text-ncr-cyan font-mono mt-0.5 flex-shrink-0" aria-hidden="true">+</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

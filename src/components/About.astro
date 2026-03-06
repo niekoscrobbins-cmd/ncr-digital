@@ -1,0 +1,77 @@
+---
+const credentials = [
+  'Texas A&M University — Finance',
+  'SEO Lead for Porsche-backed AutoUnify',
+  'Technical audits across automotive, SaaS & DTC',
+  'Python automation for rank tracking & reporting',
+  'Data-modeled SEO ROI frameworks',
+];
+---
+
+<section id="about" class="py-28" aria-labelledby="about-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: text -->
+      <div>
+        <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+          <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
+          About
+        </p>
+        <h2 id="about-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-7 leading-tight">
+          Finance Brain.<br />SEO Execution.
+        </h2>
+        <div class="space-y-5 text-ncr-muted leading-relaxed">
+          <p>
+            NCR Digital was founded on a simple premise: most SEO agencies optimize for vanity metrics.
+            We optimize for <span class="text-ncr-text font-medium">compounding business value</span>.
+          </p>
+          <p>
+            As a Finance student at Texas A&M with hands-on experience scaling organic search for
+            a Porsche-backed automotive startup, I bring an analytical lens that most SEOs lack —
+            modeling projected traffic value before we write a single word or fix a single redirect.
+          </p>
+          <p>
+            Every recommendation we make is tied to a number. Every campaign is measured against a baseline.
+            That's the NCR standard.
+          </p>
+        </div>
+
+        <ul class="mt-10 space-y-3" aria-label="Credentials">
+          {credentials.map(item => (
+            <li class="flex items-start gap-3 text-sm">
+              <span class="text-ncr-cyan font-mono mt-0.5 flex-shrink-0" aria-hidden="true">✦</span>
+              <span class="text-ncr-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right: decorative panel -->
+      <div class="hidden lg:block relative" aria-hidden="true">
+        <div class="border border-ncr-border bg-ncr-card p-10 relative overflow-hidden">
+          <!-- Corner accents -->
+          <span class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-ncr-cyan"></span>
+          <span class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-ncr-cyan"></span>
+          <span class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-ncr-cyan"></span>
+          <span class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-ncr-cyan"></span>
+
+          <div class="font-mono text-xs text-ncr-muted space-y-3 leading-loose">
+            <p><span class="text-ncr-cyan">$</span> ncr analyze --domain autounify.com</p>
+            <p class="pl-4 text-ncr-muted/70">→ crawling 12,847 pages...</p>
+            <p class="pl-4 text-ncr-muted/70">→ parsing Core Web Vitals...</p>
+            <p class="pl-4 text-ncr-muted/70">→ mapping content clusters...</p>
+            <p class="pl-4 text-ncr-muted/70">→ running Python rank tracker...</p>
+            <div class="my-4 h-px bg-ncr-border"></div>
+            <p><span class="text-ncr-green">✓</span> Opportunities identified: <span class="text-ncr-cyan">214</span></p>
+            <p><span class="text-ncr-green">✓</span> Estimated traffic uplift: <span class="text-ncr-cyan">+3.2x</span></p>
+            <p><span class="text-ncr-green">✓</span> Projected ROI (12mo): <span class="text-ncr-cyan">high</span></p>
+            <div class="my-4 h-px bg-ncr-border"></div>
+            <p class="text-ncr-muted/60"># Ready. Awaiting execution.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

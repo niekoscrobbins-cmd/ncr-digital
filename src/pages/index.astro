@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import CaseStudy from '../components/CaseStudy.astro';
+import TechStack from '../components/TechStack.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="NCR Digital | Technical SEO for High-Growth Ventures"
+  description="Boutique technical SEO agency delivering data-driven growth for startups and mid-market firms. Core Web Vitals optimization, content strategy, and domain authority acceleration — anchored in financial rigor."
+>
+  <Navigation />
+
+  <main id="main-content">
+    <Hero />
+    <Services />
+    <CaseStudy />
+    <TechStack />
+    <About />
+    <Contact />
+  </main>
+
+  <Footer />
+</Layout>

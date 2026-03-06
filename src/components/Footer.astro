@@ -1,0 +1,48 @@
+---
+const year = new Date().getFullYear();
+const navLinks = [
+  { label: 'Services',     href: '#services' },
+  { label: 'Case Studies', href: '#case-studies' },
+  { label: 'About',        href: '#about' },
+  { label: 'Contact',      href: '#contact' },
+];
+---
+
+<footer class="border-t border-ncr-border/60 bg-ncr-bg py-12" aria-label="Site footer">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+
+      <!-- Logo + tagline -->
+      <div>
+        <a href="/" class="font-mono font-bold text-lg tracking-widest" aria-label="NCR Digital home">
+          <span class="text-ncr-text">NCR</span><span class="text-ncr-cyan">D</span><span class="text-ncr-text">IGITAL</span>
+        </a>
+        <p class="text-ncr-muted text-xs mt-2 font-mono">Technical SEO for High-Growth Ventures.</p>
+      </div>
+
+      <!-- Nav -->
+      <nav aria-label="Footer navigation">
+        <ul class="flex flex-wrap gap-x-8 gap-y-2">
+          {navLinks.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class="text-ncr-muted hover:text-ncr-text text-sm transition-colors duration-200"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-10 pt-8 border-t border-ncr-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-ncr-muted text-xs font-mono">
+      <p>© {year} NCR Digital. All rights reserved.</p>
+      <a href="mailto:niekosrobbins@tamu.edu" class="hover:text-ncr-cyan transition-colors">
+        niekosrobbins@tamu.edu
+      </a>
+    </div>
+  </div>
+</footer>

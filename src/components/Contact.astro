@@ -1,0 +1,174 @@
+---
+// Form action: replace YOUR_FORM_ID with your Formspree form ID
+// Sign up free at https://formspree.io
+const FORMSPREE_ID = 'mwvrkrqn';
+---
+
+<section id="contact" class="py-28 bg-ncr-surface border-t border-ncr-border/40" aria-labelledby="contact-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16">
+
+      <!-- Left: heading + direct contact -->
+      <div>
+        <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+          <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
+          Contact
+        </p>
+        <h2 id="contact-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-7 leading-tight">
+          Ready to Scale<br />Your Organic?
+        </h2>
+        <p class="text-ncr-muted leading-relaxed mb-10 max-w-md">
+          Tell us where you are and where you need to be. We'll deliver a data-modeled growth path within 48 hours.
+        </p>
+
+        <!-- Direct contact info -->
+        <div class="space-y-5">
+          <a
+            href="mailto:niekosrobbins@tamu.edu"
+            class="flex items-center gap-4 group text-ncr-muted hover:text-ncr-text transition-colors"
+          >
+            <div class="w-10 h-10 border border-ncr-border flex items-center justify-center group-hover:border-ncr-cyan/50 transition-colors flex-shrink-0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ncr-cyan" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Email</p>
+              <p class="text-ncr-text text-sm font-medium">niekosrobbins@tamu.edu</p>
+            </div>
+          </a>
+
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 border border-ncr-border flex items-center justify-center flex-shrink-0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ncr-cyan" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Based in</p>
+              <p class="text-ncr-text text-sm font-medium">College Station, TX — Serving globally</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Response time note -->
+        <div class="mt-10 border border-ncr-border/60 px-5 py-4 bg-ncr-card">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-ncr-green animate-pulse" aria-hidden="true"></span>
+            <span class="font-mono text-xs text-ncr-muted tracking-wide">Typical response: &lt; 48 hours</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div>
+        <form
+          method="POST"
+          action={`https://formspree.io/f/${FORMSPREE_ID}`}
+          class="space-y-5"
+          aria-label="Contact form"
+          novalidate
+        >
+          <!-- Name + Company -->
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
+                Name <span class="text-ncr-cyan" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Niekos Robbins"
+                class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
+              />
+            </div>
+            <div>
+              <label for="company" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
+                Company
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                autocomplete="organization"
+                placeholder="AutoUnify"
+                class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
+              />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
+              Email <span class="text-ncr-cyan" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="you@company.com"
+              class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
+            />
+          </div>
+
+          <!-- Service interest -->
+          <div>
+            <label for="service" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
+              I'm interested in
+            </label>
+            <select
+              id="service"
+              name="service"
+              class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-muted focus:outline-none focus:border-ncr-cyan transition-colors appearance-none"
+            >
+              <option value="">Select a service...</option>
+              <option value="audit">Technical SEO Audit</option>
+              <option value="content">Content Strategy</option>
+              <option value="growth">Data-Backed Growth</option>
+              <option value="full">Full Engagement</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
+              Message <span class="text-ncr-cyan" aria-hidden="true">*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="5"
+              placeholder="Tell us about your site, current traffic, and where you want to be in 12 months..."
+              class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="w-full bg-ncr-cyan text-ncr-bg font-semibold py-4 px-6 text-sm tracking-wide hover:bg-[#00ccdd] active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2"
+          >
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </button>
+
+          <p class="text-ncr-muted text-xs text-center font-mono">
+            <!-- Replace YOUR_FORM_ID in Formspree to activate form submission -->
+            Fields marked <span class="text-ncr-cyan">*</span> are required.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
