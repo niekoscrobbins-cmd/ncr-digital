@@ -24,6 +24,11 @@ function formatDate(date: Date): string {
   });
 }
 
+// Resolve absolute image URL — used by schema, OG, and Twitter tags
+const absoluteImage = post.data.image
+  ? `https://ncrdigi.com${post.data.image}`
+  : undefined;
+
 // BlogPosting JSON-LD for individual post SEO
 const postSchema = {
   '@context': 'https://schema.org',
@@ -42,26 +47,24 @@ const postSchema = {
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id':   Astro.url.href,
+    '@id':    Astro.url.href,
   },
-  ...(post.data.image ? { image: `https://ncrdigi.com${post.data.image}` } : {}),
+  ...(absoluteImage ? { image: absoluteImage } : {}),
 };
 ---
 
 <Layout
   title={`${post.data.title} | NCR Digital`}
   description={post.data.description}
+  ogImage={absoluteImage}
 >
-  <!-- Inject BlogPosting schema in addition to the base ProfessionalService schema -->
   <script type="application/ld+json" set:html={JSON.stringify(postSchema)} slot="head" />
 
   <Navigation />
 
   <main id="main-content" class="pt-16">
 
-    <!-- Post header -->
     <header class="relative py-20 overflow-hidden bg-ncr-bg border-b border-ncr-border/40">
-      <!-- Dot grid -->
       <div
         class="absolute inset-0"
         style="background-image: radial-gradient(rgba(0,229,255,0.05) 1px, transparent 1px); background-size: 28px 28px;"
@@ -74,7 +77,6 @@ const postSchema = {
       ></div>
 
       <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Breadcrumb -->
         <nav aria-label="Breadcrumb" class="mb-8">
           <ol class="flex items-center gap-2 font-mono text-xs text-ncr-muted">
             <li><a href="/" class="hover:text-ncr-cyan transition-colors">Home</a></li>
@@ -85,7 +87,6 @@ const postSchema = {
           </ol>
         </nav>
 
-        <!-- Meta -->
         <div class="flex items-center gap-3 mb-6">
           <time
             datetime={post.data.pubDate.toISOString()}
@@ -97,29 +98,40 @@ const postSchema = {
           <span class="font-mono text-xs text-ncr-muted">{post.data.author}</span>
         </div>
 
-        <!-- Title -->
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-ncr-text mb-6">
           {post.data.title}
         </h1>
 
-        <!-- Description -->
         <p class="text-ncr-muted text-lg leading-relaxed">
           {post.data.description}
         </p>
       </div>
     </header>
 
-    <!-- Post body -->
     <article
       class="py-16 bg-ncr-surface"
       aria-label={post.data.title}
     >
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {absoluteImage && (
+          <div class="mb-12 border border-ncr-border overflow-hidden">
+            <img
+              src={absoluteImage}
+              alt={post.data.title}
+              width="1200"
+              height="630"
+              class="w-full h-auto object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        )}
+
         <div class="ncr-prose">
           <Content />
         </div>
 
-        <!-- Back link -->
         <div class="mt-16 pt-10 border-t border-ncr-border/60">
           <a
             href="/blog/"
