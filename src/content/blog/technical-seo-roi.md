@@ -12,18 +12,20 @@ At **NCR Digital**, we’ve seen the data: that model is broken. Without a techn
 
 ## The Case for Compounding Assets
 
-Paid acquisition is a "pay-to-play" model. The moment you stop spending, your leads vanish. Technical SEO, however, is a **compounding asset**. 
+Paid acquisition is a "pay-to-play" model. The moment you stop spending, your leads vanish. Technical SEO, however, is a [compounding asset](https://www.searchenginejournal.com/seo-vs-ppc-business-investment/452174/){target="_blank" rel="noopener noreferrer"}. 
 
 When you optimize your site’s architecture, you aren't just fixing bugs; you're building a system that delivers returns months and years after the work is done. 
 
+
+
 ### Why "Technical-First" Wins:
 - **Zero Waste:** We eliminate "crawl waste" so Googlebot focuses only on your high-revenue pages.
-- **Speed as a Service:** A 1-second delay in page load can drop conversions by 7%. We treat Core Web Vitals (LCP, CLS, INP) as revenue drivers, not just IT metrics.
-- **Structured Data:** We use JSON-LD schema to give you "Rich Snippets." This makes your result stand out in Google with stars, prices, and FAQs—often doubling your click-through rate without changing your rank.
+- **Speed as a Service:** A 1-second delay in page load can [drop conversions by 7%](https://www.portent.com/blog/analytics/site-speed-why-it-matters.htm){target="_blank" rel="noopener noreferrer"}. We treat Core Web Vitals (LCP, CLS, INP) as revenue drivers, not just IT metrics.
+- **Structured Data:** We use [JSON-LD schema](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data){target="_blank" rel="noopener noreferrer"} to give you "Rich Snippets." This makes your result stand out in Google with stars, prices, and FAQs—often doubling your click-through rate without changing your rank.
 
 ## The Financial Reality
 
-We don't just "do SEO." We build financial models for our clients. Before we audit a single line of code, we look at the math:
+We don't just "do SEO." We build financial models for our clients. Before we audit a single line of code, we look at the [UX-driven conversion math](https://baymard.com/lists/cart-abandonment-rate){target="_blank" rel="noopener noreferrer"} behind your traffic:
 
 > **(Projected Monthly Sessions × Conv. Rate) × Avg. Deal Value = SEO Revenue**
 
