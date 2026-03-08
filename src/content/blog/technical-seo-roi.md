@@ -12,13 +12,15 @@ At **NCR Digital**, we’ve seen the data: that model is broken. Without a techn
 
 ## The Case for Compounding Assets
 
-Paid acquisition is a "pay-to-play" model. The moment you stop spending, your leads vanish. Technical SEO, however, is a <a href="https://www.searchenginejournal.com/seo-vs-ppc-business-investment/452174/" target="_blank" rel="noopener noreferrer">compounding asset</a>. 
+Paid acquisition is a "pay-to-play" model. The moment you stop spending, your leads vanish. Technical SEO, however, is a <a href="https://www.searchenginejournal.com/seo-vs-ppc-strategy-whats-right-for-your-business/567778/" target="_blank" rel="noopener noreferrer">compounding asset</a>. 
 
 When you optimize your site’s architecture, you aren't just fixing bugs; you're building a system that delivers returns months and years after the work is done. 
 
+
+
 ### Why "Technical-First" Wins:
 - **Zero Waste:** We eliminate "crawl waste" so Googlebot focuses only on your high-revenue pages.
-- **Speed as a Service:** A 1-second delay in page load can <a href="https://www.portent.com/blog/analytics/site-speed-why-it-matters.htm" target="_blank" rel="noopener noreferrer">drop conversions by 7%</a>. We treat Core Web Vitals (LCP, CLS, INP) as revenue drivers, not just IT metrics.
+- **Speed as a Service:** A 1-second delay in page load can <a href="https://www.portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm" target="_blank" rel="noopener noreferrer">drop conversions by 7%</a>. We treat Core Web Vitals (LCP, CLS, INP) as revenue drivers, not just IT metrics.
 - **Structured Data:** We use <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer">JSON-LD schema</a> to give you "Rich Snippets." This makes your result stand out in Google with stars, prices, and FAQs—often doubling your click-through rate without changing your rank.
 
 ## The Financial Reality
