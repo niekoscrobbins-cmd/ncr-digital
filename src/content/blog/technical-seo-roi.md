@@ -35,4 +35,10 @@ If the technical lift doesn't move that number, we don't do it. We focus on the 
 
 If your organic traffic has plateaued despite your content efforts, the bottleneck is likely technical. You don't need more articles; you need a better engine.
 
-[Get a free technical audit from NCR Digital](/#contact) and we'll identify your highest-leverage growth opportunities within 48 hours.
+[Get a custom quote from NCR Digital](/#contact) and we'll identify your highest-leverage growth opportunities within 48 hours.
+
+## Other reads
+
+- [Core Web Vitals Explained: LCP, CLS, and INP for Non-Engineers](/blog/core-web-vitals-explained/)
+- [The Difference Between Indexing and Ranking (And Why It Matters)](/blog/indexing-vs-ranking-seo/)
+- [Canonical Tags: When to Use Them and When They Break Everything](/blog/canonical-tags-guide/)
