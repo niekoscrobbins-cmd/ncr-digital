@@ -3,5 +3,13 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "astro"
+  "framework": "astro",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.ncrdigi.com" }],
+      "destination": "https://ncrdigi.com/:path*",
+      "permanent": true
+    }
+  ]
 }

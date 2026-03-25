@@ -9,7 +9,7 @@ export interface Props {
 const {
   title = 'NCR Digital | Technical SEO for High-Growth Ventures',
   description = 'Boutique technical SEO agency delivering data-driven growth for startups and mid-market firms. Core Web Vitals, content strategy, and domain authority acceleration.',
-  canonicalUrl = Astro.url.href,
+  canonicalUrl = new URL(Astro.url.pathname, 'https://ncrdigi.com').href,
   ogImage = 'https://ncrdigi.com/og-main-cover.png',
 } = Astro.props;
 
