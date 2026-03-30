@@ -3,7 +3,8 @@ title: "Robots.txt Mistakes That Are Blocking Your Best Pages"
 description: "A single line in robots.txt can de-index your highest-converting pages. Here are the most common errors and how to find them."
 pubDate: 2026-03-25
 author: "Niekos Robbins"
-image: "/favicon.svg"
+image: "/blog/robots-txt-cover.png"
+imageAlt: "Laptop lid engraved with a stop sign and Disallow: /* rule blocking CSS and JavaScript icons"
 ---
 
 Robots.txt is the first thing Googlebot reads when it visits your site. It's also one of the easiest files to get catastrophically wrong. A misplaced disallow rule can block entire sections of your site from being crawled — and unlike most technical SEO issues, the damage shows up fast. Here are the robots.txt SEO mistakes that cause the most harm, and how to catch them before they cost you rankings.

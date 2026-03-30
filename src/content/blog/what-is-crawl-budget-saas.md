@@ -3,7 +3,8 @@ title: "What Is Crawl Budget and Why It Matters for SaaS Sites"
 description: "A plain-English breakdown of crawl budget and how to stop wasting Googlebot's attention on low-value pages."
 pubDate: 2026-03-25
 author: "Niekos Robbins"
-image: "/favicon.svg"
+image: "/blog/crawl-budget-cover.png"
+imageAlt: "Laptop lid engraved with two crawl spiders progressing toward a stop sign, flanked by hourglasses representing crawl time limits"
 ---
 
 Googlebot doesn't have infinite time for your site. It visits, crawls what it can within a budget it silently assigns to your domain, and moves on. If you're running a SaaS platform with thousands of pages — dashboards, filtered views, user-generated content, paginated results — a significant chunk of that budget may be getting burned on pages that will never rank and shouldn't be indexed in the first place. That's the crawl budget optimization problem, and it's more common than most teams realize.

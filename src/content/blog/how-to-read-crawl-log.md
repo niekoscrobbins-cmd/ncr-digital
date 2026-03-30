@@ -3,7 +3,8 @@ title: "How to Read a Crawl Log: A Beginner's Guide"
 description: "Crawl logs are goldmines most SEOs ignore. Here's how to extract actionable insights in under an hour."
 pubDate: 2026-03-25
 author: "Niekos Robbins"
-image: "/favicon.svg"
+image: "/blog/crawl-log-cover.png"
+imageAlt: "Laptop lid engraved with a flowchart connecting a document, gear, and magnifying glass representing crawl log analysis"
 ---
 
 Most SEOs rely entirely on Google Search Console to understand how Googlebot interacts with their site. GSC is useful, but it's a filtered, aggregated view. Crawl logs are the raw feed — every request Googlebot made to your server, with a timestamp, status code, and URL. Knowing how to read crawl logs turns vague indexation problems into specific, fixable issues. Here's how to get started.

@@ -4,6 +4,7 @@ description: "Stop chasing vanity metrics. Learn why a technical-first SEO strat
 pubDate: 2026-03-06
 author: "Niekos Robbins"
 image: "/blog/technical-seo-roi-marketing.png"
+imageAlt: "Marketing graphic illustrating technical SEO ROI compounding over time versus paid ad spend"
 ---
 
 Most marketing teams treat SEO as a "content problem"—thinking that if they just write enough blog posts, the traffic will come. 

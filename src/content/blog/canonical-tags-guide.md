@@ -3,7 +3,8 @@ title: "Canonical Tags: When to Use Them and When They Break Everything"
 description: "Canonical tags are the most misused technical SEO tool. This post shows how to use them correctly — and what happens when you don't."
 pubDate: 2026-03-25
 author: "Niekos Robbins"
-image: "/favicon.svg"
+image: "/blog/canonical-tags-cover.png"
+imageAlt: "Laptop screen displaying canonical link tag HTML code, with a key symbolizing locked URL authority"
 ---
 
 The canonical tag has one job: tell Google which version of a page you want indexed when multiple URLs serve similar or identical content. It's a simple concept that breaks in practice constantly — because teams apply it without understanding how Google actually interprets it. A misconfigured canonical doesn't just fail to solve duplicate content; it can actively suppress pages you want to rank. Here's the full picture.

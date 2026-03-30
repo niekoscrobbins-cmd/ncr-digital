@@ -3,7 +3,8 @@ title: "The Difference Between Indexing and Ranking (And Why It Matters)"
 description: "Your page can be indexed and invisible. Understanding this distinction is the foundation of every SEO strategy."
 pubDate: 2026-03-25
 author: "Niekos Robbins"
-image: "/favicon.svg"
+image: "/blog/indexing-ranking-cover.png"
+imageAlt: "Laptop lid engraved with side-by-side icons for Indexing (database vault) and Ranking (podium chart), linked by a chain"
 ---
 
 "Why isn't my page showing up on Google?" is one of the most common questions in SEO — and the answer depends entirely on which problem you actually have. Indexing and ranking are two separate stages of Google's process, and they fail for completely different reasons. Confusing them leads to months of wasted effort fixing the wrong thing. Here's how to tell them apart and what to do about each.

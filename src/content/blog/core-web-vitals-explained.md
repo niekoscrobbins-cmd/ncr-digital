@@ -3,7 +3,8 @@ title: "Core Web Vitals Explained: LCP, CLS, and INP for Non-Engineers"
 description: "Most CEOs can't explain why their site is slow. This post closes that gap — and ties each metric to revenue."
 pubDate: 2026-03-25
 author: "Niekos Robbins"
-image: "/favicon.svg"
+image: "/blog/core-web-vitals-cover.png"
+imageAlt: "Laptop lid engraved with three performance gauges representing Core Web Vitals: paint, link interaction, and load time"
 ---
 
 Your site might be losing customers before they read a single word. Core Web Vitals are Google's way of measuring the actual experience of loading and using a page — and they're a confirmed ranking factor. If your scores are poor, you're paying a tax in both rankings and conversions. The good news: once you understand what LCP, CLS, and INP actually measure, knowing where to focus becomes obvious.

@@ -118,7 +118,7 @@ const postSchema = {
           <div class="mb-12 border border-ncr-border overflow-hidden">
             <img
               src={absoluteImage}
-              alt={post.data.title}
+              alt={post.data.imageAlt ?? post.data.title}
               width="1200"
               height="630"
               class="w-full h-auto object-cover"
