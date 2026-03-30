@@ -1,0 +1,69 @@
+<section id="partner" class="py-20 bg-ncr-bg border-t border-ncr-border/40" aria-labelledby="partner-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="border border-ncr-border bg-ncr-card p-10 sm:p-14 relative overflow-hidden">
+      <!-- Corner accents -->
+      <span class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-ncr-gold" aria-hidden="true"></span>
+      <span class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-ncr-gold" aria-hidden="true"></span>
+      <span class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-ncr-gold" aria-hidden="true"></span>
+      <span class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-ncr-gold" aria-hidden="true"></span>
+
+      <!-- Subtle bg glow -->
+      <div
+        class="absolute -top-24 right-0 w-[400px] h-[300px]"
+        style="background: radial-gradient(ellipse at top right, rgba(245,197,24,0.05) 0%, transparent 70%);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="relative grid lg:grid-cols-2 gap-10 items-center">
+
+        <!-- Left: copy -->
+        <div>
+          <p class="font-mono text-ncr-gold text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+            <span class="inline-block h-px w-8 bg-ncr-gold" aria-hidden="true"></span>
+            Strategic Partner
+          </p>
+          <h2 id="partner-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-5 leading-tight">
+            Technical SEO tells you<br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-ncr-gold to-yellow-300">where to grow.</span><br />
+            BlackLine CFO funds it.
+          </h2>
+          <p class="text-ncr-muted leading-relaxed mb-8 max-w-lg">
+            High-growth companies need more than rankings — they need the financial infrastructure to capitalize on them. NCR Digital partners with <span class="text-ncr-text font-medium">BlackLine CFO</span>, a fractional CFO firm built for scaling businesses that need executive-level financial strategy without the full-time overhead.
+          </p>
+          <a
+            href="https://blacklinecfo.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2.5 bg-ncr-gold text-ncr-bg font-bold text-sm px-7 py-3.5 tracking-wide hover:bg-yellow-300 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ncr-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ncr-card"
+          >
+            Visit BlackLine CFO
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+              <path d="M2 7h10M7 2l5 5-5 5"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Right: what they offer -->
+        <div class="space-y-4">
+          {[
+            { label: 'Fractional CFO Services', detail: 'Executive-level financial leadership on a flexible engagement model.' },
+            { label: 'Financial Modeling & Forecasting', detail: 'Data-driven projections that align capital allocation with growth targets.' },
+            { label: 'Fundraising & Investor Readiness', detail: 'Pitch-ready financials, cap table management, and due diligence support.' },
+            { label: 'Cash Flow & Burn Rate Optimization', detail: 'Runway extension strategies and operational finance for lean teams.' },
+          ].map(({ label, detail }) => (
+            <div class="flex items-start gap-4 p-4 border border-ncr-border/60 bg-ncr-bg/50">
+              <span class="text-ncr-gold font-mono mt-0.5 flex-shrink-0" aria-hidden="true">✦</span>
+              <div>
+                <p class="text-ncr-text font-semibold text-sm mb-0.5">{label}</p>
+                <p class="text-ncr-muted text-xs leading-relaxed">{detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
