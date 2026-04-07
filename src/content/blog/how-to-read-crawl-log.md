@@ -53,6 +53,8 @@ Red flags: Googlebot spending 40%+ of its crawl activity on URLs that return non
 
 Once you've identified the waste, the fix is usually a robots.txt update, canonical tag additions, or a conversation with your dev team about URL parameter handling. The crawl log tells you exactly where to start.
 
+If you'd rather have this analysis done for you, [our technical SEO audit](/#services) includes a full crawl log review and prioritized action plan.
+
 ## Other reads
 
 - [What Is Crawl Budget and Why It Matters for SaaS Sites](/blog/what-is-crawl-budget-saas/)

@@ -53,6 +53,8 @@ Cross-check against your GSC Coverage report. If pages you've canonicalized to a
 
 Canonical tags done right are invisible — Google consolidates your duplicates cleanly, your preferred URLs get indexed, and crawl budget isn't wasted. Canonical tags done wrong can quietly suppress the pages your business depends on.
 
+If you want your canonical implementation validated across your full site, [our technical SEO audit](/#services) includes canonical tag review as a standard deliverable.
+
 ## Other reads
 
 - [What Is Crawl Budget and Why It Matters for SaaS Sites](/blog/what-is-crawl-budget-saas/)

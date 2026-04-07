@@ -53,6 +53,8 @@ Once a page is indexed, ranking is determined by Google's assessment of relevanc
 
 The diagnostic split is simple: if your page isn't in GSC's index, fix the indexation problem first. If it is indexed but not ranking, that's a content and authority conversation. Treating a ranking problem as an indexation problem — or vice versa — is how teams spend quarters spinning their wheels.
 
+If you want help diagnosing which stage your pages are stuck at, a [technical SEO audit](/#services) will give you a clear answer fast.
+
 ## Other reads
 
 - [What Is Crawl Budget and Why It Matters for SaaS Sites](/blog/what-is-crawl-budget-saas/)

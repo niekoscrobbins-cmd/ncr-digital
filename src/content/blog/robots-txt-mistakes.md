@@ -60,6 +60,8 @@ Run your five highest-converting pages through the URL Inspection tool right now
 
 Robots.txt changes take effect quickly — often within hours of Googlebot's next visit. It's one of the rare technical SEO fixes where you can see the impact fast. But the same speed that makes it easy to fix makes mistakes easy to introduce. Treat every change to robots.txt with the same care you'd give a production deployment.
 
+Robots.txt review is part of every [technical SEO audit](/#services) we run — along with every other crawlability signal that could be suppressing your pages.
+
 ## Other reads
 
 - [Canonical Tags: When to Use Them and When They Break Everything](/blog/canonical-tags-guide/)

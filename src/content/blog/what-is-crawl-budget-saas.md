@@ -52,6 +52,8 @@ A straightforward crawl budget audit — mapping what Googlebot is actually visi
 
 If your SaaS site has meaningful page depth and you haven't looked at crawl budget yet, it's worth putting it near the top of your technical SEO list. The indexation gains tend to be fast and measurable.
 
+If you'd like a full crawl budget analysis as part of your technical foundation, [our technical SEO audit](/#services) covers this end-to-end.
+
 ## Other reads
 
 - [Robots.txt Mistakes That Are Blocking Your Best Pages](/blog/robots-txt-mistakes/)

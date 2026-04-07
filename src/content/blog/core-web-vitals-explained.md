@@ -44,6 +44,8 @@ Run this for your five most important pages. The results will tell you exactly w
 
 Core Web Vitals aren't a box-checking exercise — they're a proxy for whether your site is actually pleasant to use. Fix them, and you improve both your rankings and your conversion rate at the same time.
 
+If you want these fixed on your site, [our technical SEO audit](/#services) covers full Core Web Vitals remediation.
+
 ## Other reads
 
 - [Technical SEO ROI: Why It Outperforms Ads in 2026](/blog/technical-seo-roi/)
