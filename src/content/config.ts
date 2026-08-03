@@ -6,9 +6,14 @@ const blog = defineCollection({
     title:       z.string(),
     description: z.string(),
     pubDate:     z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
     author:      z.string().default('Niekos Robbins'),
+    category:    z.enum(['marketing', 'finance', 'operations']),
+    tags:        z.array(z.string()).default([]),
     image:       z.string().optional(),
     imageAlt:    z.string().optional(),
+    keyFacts:    z.array(z.string()).optional(),
+    draft:       z.boolean().default(false),
   }),
 });
 

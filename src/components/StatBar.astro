@@ -1,0 +1,38 @@
+---
+// `countTo`/`decimals`/`prefix`/`suffix` are optional, opt-in hooks for a
+// count-up animation (see the pin/count-up script wherever StatBar is used
+// with GSAP). The rendered `value` text is always the real final value by
+// default, so JS-disabled and reduced-motion visitors see correct content
+// with no animation dependency.
+export interface Props {
+  stats: {
+    value: string;
+    label: string;
+    sub?: string;
+    countTo?: number;
+    decimals?: number;
+    prefix?: string;
+    suffix?: string;
+  }[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-x-10 gap-y-6" role="list" aria-label="Key stats">
+  {stats.map(({ value, label, sub, countTo, decimals, prefix, suffix }, i) => (
+    <div class={`flex flex-col ${i > 0 ? 'sm:border-l sm:border-ncr-border sm:pl-10' : ''}`} role="listitem">
+      <span
+        class="stat-value font-mono text-3xl font-bold text-ncr-cyan tracking-tight"
+        data-count-to={countTo}
+        data-decimals={decimals ?? 0}
+        data-prefix={prefix ?? ''}
+        data-suffix={suffix ?? ''}
+      >
+        {value}
+      </span>
+      <span class="text-ncr-text text-sm font-medium mt-1">{label}</span>
+      {sub && <span class="text-ncr-muted text-xs mt-0.5">{sub}</span>}
+    </div>
+  ))}
+</div>

@@ -1,0 +1,275 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHero from '@/components/SectionHero.astro';
+import StickySubnav from '@/components/StickySubnav.astro';
+import KeyFactsBlock from '@/components/KeyFactsBlock.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
+import FAQBlock from '@/components/FAQBlock.astro';
+import CaseStudyBlock from '@/components/CaseStudyBlock.astro';
+import PageByline from '@/components/PageByline.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import { getCollection } from 'astro:content';
+import { buildFaqPageSchema, buildServiceSchema, SITE_URL } from '@/lib/schema';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const relatedPosts = allPosts
+  .filter((p) => p.data.category === 'marketing')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'geo', label: 'AI-Answer Visibility' },
+  { id: 'seo', label: 'Technical SEO' },
+  { id: 'paid', label: 'Paid Media' },
+  { id: 'tools', label: 'Tools' },
+  { id: 'case-study', label: 'Case Study' },
+  { id: 'faq', label: 'FAQ' },
+];
+
+const faqItems = [
+  {
+    question: 'What is generative engine optimization (GEO)?',
+    answer:
+      'GEO is the practice of structuring a website so that AI answer engines (ChatGPT, Perplexity, Google AI Overviews, Claude) can extract, cite, and attribute it as a source. It builds on technical SEO fundamentals but adds requirements specific to how large language models parse and select content: answer-first structure, extractable facts, and entity-linked structured data.',
+  },
+  {
+    question: 'Is GEO replacing traditional SEO?',
+    answer:
+      'No. It extends it. Traditional ranking factors (crawlability, Core Web Vitals, backlink authority, content depth) still determine whether a page is indexed and considered credible at all. GEO adds a second layer on top: whether the content, once indexed, is structured so an AI system can lift a clean, citable answer from it.',
+  },
+  {
+    question: 'Do you run paid ads as well as organic/SEO?',
+    answer:
+      'Yes. The Marketing pillar covers both: Google Ads and other paid placement, alongside organic technical SEO and GEO. As AI-answer surfaces increasingly carry paid placements of their own, the two disciplines are converging rather than staying siloed.',
+  },
+  {
+    question: 'How is this different from a typical SEO agency?',
+    answer:
+      'A typical SEO agency stops at rankings. NCR Digital models the ROI of the marketing work against your financial plan (via the Finance pillar) and considers whether your operations (via the Operations pillar) can actually convert and fulfill the resulting demand. Marketing visibility that the rest of the business can\'t capitalize on isn\'t the goal.',
+  },
+];
+const faqSchema = buildFaqPageSchema(faqItems);
+
+const serviceSchema = buildServiceSchema({
+  id: `${SITE_URL}/capabilities/marketing#service`,
+  name: 'AI-Era Marketing & GEO Strategy',
+  serviceType: 'Marketing Strategy',
+  description:
+    'Paid and organic marketing strategy for AI-answer visibility, including generative engine optimization (GEO), technical SEO, and Google Ads.',
+});
+---
+
+<Layout
+  title="Marketing: AI-Answer Visibility & Technical SEO | NCR Digital"
+  description="NCR Digital's Marketing pillar covers paid media, technical SEO, and generative engine optimization (GEO), the practice of making a site citable by AI answer engines like ChatGPT, Perplexity, and Google AI Overviews."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} slot="head" />
+
+  <Navigation />
+  <main id="main-content">
+    <SectionHero
+      eyebrow="Capability"
+      title="Marketing: How You Get Found When the Answer Is Written by AI"
+      subtitle="NCR Digital's Marketing pillar builds visibility across paid media, technical SEO, and generative engine optimization (GEO), so your company shows up whether the searcher is a person scrolling Google or an AI model composing an answer."
+      size="lg"
+    />
+
+    <StickySubnav sections={sections} />
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <PageByline author="Niekos Robbins" publishedDate={new Date('2026-03-01')} />
+    </div>
+
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
+      <section id="overview">
+        <p class="text-lg text-ncr-text leading-relaxed">
+          <strong>NCR Digital's Marketing pillar is paid and organic visibility strategy built for an internet
+          where search results are increasingly written by AI, not just listed by it.</strong> It combines
+          technical SEO, generative engine optimization (GEO, the practice of making a site citable by AI
+          answer engines), and paid media like Google Ads into one practice, because a searcher today might
+          land on your site through a blue link, an AI Overview, or a direct answer inside ChatGPT, and each
+          of those requires the same underlying discipline: a technically sound, clearly structured, factually
+          dense site.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-6">
+          This pillar grew directly out of NCR Digital's original practice: technical SEO work scaling organic
+          search for a high-growth automotive SaaS platform (see the case study below). What's changed is the
+          scope, not the underlying skill: the same crawl-log literacy and structured-data discipline that
+          used to be aimed purely at Google's ranking algorithm is now aimed at a second audience: the retrieval
+          and citation logic inside large language models.
+        </p>
+      </section>
+
+      <ScrollReveal>
+      <section id="geo">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          What is generative engine optimization (GEO), and why does it matter now?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>GEO is the practice of structuring content so AI answer engines can extract, cite, and
+          attribute it as a source, and it matters now because a growing share of buyer research happens inside
+          chat interfaces and AI Overviews rather than a traditional list of blue links.</strong> When an AI
+          system answers a question, it isn't ranking ten pages for a human to click through; it's synthesizing
+          one answer from a handful of sources, and it needs those sources to hand it something extractable:
+          a direct answer, a dense fact, a clean comparison, not three paragraphs of scene-setting before the
+          point.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-4">
+          NCR Digital applies four concrete GEO practices to every page it touches:
+        </p>
+        <ul class="mt-4 space-y-2 text-ncr-muted">
+          <li class="flex items-start gap-2"><span class="text-ncr-cyan mt-0.5" aria-hidden="true">→</span> Answer-first structure: a direct 40-60 word answer before any framing or scene-setting.</li>
+          <li class="flex items-start gap-2"><span class="text-ncr-cyan mt-0.5" aria-hidden="true">→</span> Question-format headings that mirror how people actually phrase queries to an AI system.</li>
+          <li class="flex items-start gap-2"><span class="text-ncr-cyan mt-0.5" aria-hidden="true">→</span> Entity-linked structured data (JSON-LD) so the organization, the author, and the service being described are all machine-legible, not just human-readable.</li>
+          <li class="flex items-start gap-2"><span class="text-ncr-cyan mt-0.5" aria-hidden="true">→</span> Dense, citable "key facts" blocks and comparison tables in place of adjective-heavy prose.</li>
+        </ul>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="seo">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          What technical SEO work is included in the Marketing pillar?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>Technical SEO remains the foundation underneath GEO: if a page isn't crawlable, fast, and
+          properly structured, no amount of AI-answer optimization will help, because most AI answer engines
+          still rely on the underlying search index to discover content in the first place.</strong> NCR Digital's
+          technical SEO work covers three areas:
+        </p>
+        <div class="grid sm:grid-cols-3 gap-6 mt-6">
+          <div class="border border-ncr-border bg-ncr-card p-6">
+            <h3 class="font-semibold text-ncr-text mb-2">Technical Audits</h3>
+            <p class="text-ncr-muted text-sm leading-relaxed">
+              Core Web Vitals and CrUX analysis, crawl budget optimization, JSON-LD schema implementation,
+              indexation and canonicalization review, and internal link architecture.
+            </p>
+          </div>
+          <div class="border border-ncr-border bg-ncr-card p-6">
+            <h3 class="font-semibold text-ncr-text mb-2">Content Strategy</h3>
+            <p class="text-ncr-muted text-sm leading-relaxed">
+              Topical authority mapping, semantic keyword clustering, content-gap analysis, entity
+              optimization, and an E-E-A-T-aligned editorial framework.
+            </p>
+          </div>
+          <div class="border border-ncr-border bg-ncr-card p-6">
+            <h3 class="font-semibold text-ncr-text mb-2">Data-Backed Growth</h3>
+            <p class="text-ncr-muted text-sm leading-relaxed">
+              Google Search Console and GA4 instrumentation, Python-powered rank tracking, and financial
+              ROI modeling tied back to the Finance pillar, reporting framed for executives, not just marketers.
+            </p>
+          </div>
+        </div>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="paid">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          How does paid advertising fit into an AI-answer world?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>Paid placement is converging with AI-answer surfaces rather than staying separate from
+          them. Google Ads increasingly appears alongside AI Overviews, and paid placement inside chat
+          interfaces is an emerging channel in its own right.</strong> NCR Digital treats paid and organic as
+          one coordinated budget rather than two competing line items: organic/GEO work establishes durable,
+          compounding visibility, while paid campaigns fill gaps for high-intent terms where organic
+          visibility hasn't caught up yet, or where a launch needs immediate volume. The Finance pillar's
+          modeling determines the split, so paid spend is sized against actual customer acquisition economics
+          rather than a fixed percentage-of-revenue rule of thumb.
+        </p>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="tools">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          What tools power the Marketing pillar?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>The Marketing pillar runs on the same toolkit across every engagement: Python for
+          automation, Google Search Console and GA4 for analytics, Screaming Frog for technical crawling,
+          Ahrefs and Semrush for competitive research, and JSON-LD/schema tooling for structured data,
+          plus financial modeling to translate marketing output into revenue terms.</strong>
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6" role="list" aria-label="Marketing pillar tools">
+          {[
+            ['Python', 'Automation'],
+            ['Google Search Console', 'Analytics'],
+            ['GA4', 'Analytics'],
+            ['Financial Modeling', 'Strategy'],
+            ['Screaming Frog', 'Technical'],
+            ['Ahrefs', 'Research'],
+            ['Semrush', 'Research'],
+            ['JSON-LD / Schema', 'Structured Data'],
+          ].map(([name, category]) => (
+            <div class="border border-ncr-border bg-ncr-card p-4" role="listitem">
+              <p class="text-ncr-text text-sm font-semibold">{name}</p>
+              <p class="text-ncr-muted text-xs mt-1 font-mono tracking-wide">{category}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      </ScrollReveal>
+
+      <KeyFactsBlock
+        title="Key Facts"
+        facts={[
+          'The Marketing pillar covers three disciplines: paid media, technical SEO, and generative engine optimization (GEO).',
+          'GEO makes content citable by AI answer engines (ChatGPT, Perplexity, Google AI Overviews); technical SEO makes it discoverable in the first place. Both are required.',
+          'Core GEO practices: answer-first structure, question-format headings, entity-linked JSON-LD, and dense key-facts/comparison-table content.',
+          'Paid and organic budgets are coordinated as one system, sized against Finance-pillar acquisition economics rather than a fixed ratio.',
+          'The pillar\'s toolkit: Python, GSC, GA4, Screaming Frog, Ahrefs, Semrush, and JSON-LD/schema tooling.',
+        ]}
+      />
+
+      <ComparisonTable
+        caption="Paid vs. Organic: When Each Leads"
+        columns={['Organic / GEO', 'Paid Media']}
+        rows={[
+          { label: 'Time to visibility', cells: ['Weeks to months, compounding.', 'Immediate, but stops when spend stops.'] },
+          { label: 'Best for', cells: ['Durable, citable authority for core topics.', 'Launches, high-intent gaps, and testing new markets fast.'] },
+          { label: 'Cost structure', cells: ['Upfront build cost, low marginal cost after.', 'Ongoing spend scales with volume.'] },
+          { label: 'Sizing method', cells: ['Content/technical roadmap.', 'Finance-pillar acquisition-economics modeling.'] },
+        ]}
+      />
+
+      <ScrollReveal>
+        <CaseStudyBlock />
+      </ScrollReveal>
+
+      {relatedPosts.length > 0 && (
+        <section aria-labelledby="related-heading">
+          <h2 id="related-heading" class="text-xl font-bold text-ncr-text mb-4">Related Insights</h2>
+          <ul class="space-y-3">
+            {relatedPosts.map((post) => (
+              <li>
+                <a href={`/insights/${post.slug}/`} class="text-ncr-cyan hover:underline font-medium">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div id="faq">
+        <FAQBlock items={faqItems} />
+      </div>
+
+      <div>
+        <a
+          href="/contact"
+          class="inline-flex px-6 py-3 bg-ncr-cyan text-white text-sm font-medium tracking-wide hover:bg-ncr-cyan/90 transition-all duration-200"
+        >
+          Talk to Us About Marketing
+        </a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

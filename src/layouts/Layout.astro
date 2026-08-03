@@ -1,4 +1,6 @@
 ---
+import { ORG_ID, FOUNDER_ID } from '@/lib/schema';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -7,77 +9,45 @@ export interface Props {
 }
 
 const {
-  title = 'NCR Digital | Technical SEO for High-Growth Ventures',
-  description = 'Boutique technical SEO agency delivering data-driven growth for startups and mid-market firms. Core Web Vitals, content strategy, and domain authority acceleration.',
+  title = 'NCR Digital | AI Strategy for Marketing, Finance & Operations',
+  description = 'NCR Digital is a boutique AI strategy consultancy helping high-growth companies win visibility in AI-answer search, sharpen financial strategy, and adopt AI operationally.',
   canonicalUrl = new URL(Astro.url.pathname, 'https://ncrdigi.com').href,
   ogImage = 'https://ncrdigi.com/og-main-cover.png',
 } = Astro.props;
 
-// Consolidated Schema: ProfessionalService + LocalBusiness
+// Sitewide entity graph: Organization + founder Person, both carrying stable
+// @ids so pillar-page Service nodes and per-post BlogPosting nodes can
+// reference them instead of duplicating the same data inline.
+// TODO: add Person.image once a founder photo asset exists (see plan Phase 3).
 const schema = {
   '@context': 'https://schema.org',
-  '@type': ['ProfessionalService', 'LocalBusiness'],
-  name: 'NCR Digital',
-  url: 'https://ncrdigi.com',
-  logo: 'https://ncrdigi.com/og-main-cover.png',
-  image: 'https://ncrdigi.com/og-main-cover.png',
-  description,
-  // TODO: Update email to branded domain address (e.g. hello@ncrdigi.com) once email is configured
-  email: 'niekos.c.robbins+ncr@gmail.com',
-  priceRange: '$$$',
-  address: {
-    '@type': 'PostalAddress',
-    'addressLocality': 'College Station',
-    'addressRegion': 'TX',
-    'addressCountry': 'US'
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    'latitude': 30.6280,
-    'longitude': -96.3344
-  },
-  founder: {
-    '@type': 'Person',
-    name: 'Niekos Robbins',
-    alumniOf: {
-      '@type': 'CollegeOrUniversity',
-      name: 'Texas A&M University',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': ORG_ID,
+      name: 'NCR Digital',
+      url: 'https://ncrdigi.com',
+      logo: 'https://ncrdigi.com/og-main-cover.png',
+      description,
+      // TODO: Update email to branded domain address (e.g. hello@ncrdigi.com) once email is configured
+      email: 'niekos.c.robbins+ncr@gmail.com',
+      founder: { '@id': FOUNDER_ID },
+      areaServed: 'Worldwide',
+      knowsAbout: ['AI Strategy', 'Generative Engine Optimization', 'Technical SEO', 'FP&A', 'AI Adoption Strategy'],
     },
-  },
-  areaServed: 'Worldwide',
-  serviceType: 'Technical SEO',
-  sameAs: ['https://ncrdigi.com'],
-  knowsAbout: ['Technical SEO', 'Core Web Vitals', 'Content Strategy', 'Financial Modeling', 'Python'],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'SEO Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Technical SEO Audit',
-          description: 'Comprehensive Core Web Vitals, crawl analysis, and structured data implementation',
-        },
+    {
+      '@type': 'Person',
+      '@id': FOUNDER_ID,
+      name: 'Niekos Robbins',
+      url: 'https://ncrdigi.com/about',
+      sameAs: ['https://www.linkedin.com/in/niekolas-robbins'],
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'Texas A&M University',
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Content Strategy',
-          description: 'Topical authority building, content mapping, and semantic clustering',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Data-Backed Growth',
-          description: 'Multi-channel SEO with GA4 analytics and conversion tracking',
-        },
-      },
-    ],
-  },
+      worksFor: { '@id': ORG_ID },
+    },
+  ],
 };
 ---
 
@@ -134,15 +104,40 @@ const schema = {
 </html>
 
 <style is:global>
-  /* Custom scrollbar for dark theme */
+  /* Custom scrollbar, light theme */
   ::-webkit-scrollbar          { width: 5px; }
-  ::-webkit-scrollbar-track    { background: #020509; }
-  ::-webkit-scrollbar-thumb    { background: #0f2040; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+  ::-webkit-scrollbar-track    { background: #f7f8fa; }
+  ::-webkit-scrollbar-thumb    { background: #cbd2dc; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #0072ce; }
 
   /* Smooth focus outlines */
-  :focus-visible { outline: 2px solid #00e5ff; outline-offset: 2px; }
+  :focus-visible { outline: 2px solid #0072ce; outline-offset: 2px; }
 
   /* Selection color */
-  ::selection { background: rgba(0, 229, 255, 0.25); color: #e8f0fe; }
+  ::selection { background: rgba(0, 114, 206, 0.15); color: #0b0e14; }
 </style>
+
+<script>
+  // Sitewide scroll-reveal: progressively enhances any `.reveal`-wrapped
+  // content (see ScrollReveal.astro). Resting state in CSS is always fully
+  // visible; this script only ever adds a `.js-enabled` class (which the
+  // stylesheet gates behind `prefers-reduced-motion: no-preference`) and
+  // then flips `.revealed` on intersection. JS-disabled and reduced-motion
+  // users both simply see the already-visible resting state.
+  const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
+  if (revealEls.length) {
+    revealEls.forEach((el) => el.classList.add('js-enabled'));
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+  }
+</script>
