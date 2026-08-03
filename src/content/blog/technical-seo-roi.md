@@ -3,11 +3,12 @@ title: "Technical SEO ROI: Measure the Revenue Impact"
 description: "Learn how to calculate and communicate the ROI of technical SEO fixes. A practical framework for agencies and in-house teams."
 pubDate: 2026-03-06
 author: "Niekos Robbins"
+category: marketing
 image: "/blog/technical-seo-roi-marketing.png"
 imageAlt: "Marketing graphic illustrating technical SEO ROI compounding over time versus paid ad spend"
 ---
 
-Most marketing teams treat SEO as a "content problem"—thinking that if they just write enough blog posts, the traffic will come. 
+Most marketing teams treat SEO as a "content problem," thinking that if they just write enough blog posts, the traffic will come. 
 
 At **NCR Digital**, we’ve seen the data: that model is broken. Without a technical foundation, your content is effectively invisible to search engines.
 
@@ -22,7 +23,7 @@ When you optimize your site’s architecture, you aren't just fixing bugs; you'r
 ### Why "Technical-First" Wins:
 - **Zero Waste:** We eliminate "crawl waste" so Googlebot focuses only on your high-revenue pages.
 - **Speed as a Service:** A 1-second delay in page load can <a href="https://www.portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm" target="_blank" rel="noopener noreferrer">drop conversions by 7%</a>. We treat Core Web Vitals (LCP, CLS, INP) as revenue drivers, not just IT metrics.
-- **Structured Data:** We use <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer">JSON-LD schema</a> to give you "Rich Snippets." This makes your result stand out in Google with stars, prices, and FAQs—often doubling your click-through rate without changing your rank.
+- **Structured Data:** We use <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer">JSON-LD schema</a> to give you "Rich Snippets." This makes your result stand out in Google with stars, prices, and FAQs, often doubling your click-through rate without changing your rank.
 
 ## The Financial Reality
 
@@ -36,10 +37,10 @@ If the technical lift doesn't move that number, we don't do it. We focus on the 
 
 If your organic traffic has plateaued despite your content efforts, the bottleneck is likely technical. You don't need more articles; you need a better engine.
 
-[Get a custom quote from NCR Digital](/#contact) and we'll identify your highest-leverage growth opportunities within 48 hours.
+[Talk to NCR Digital](/contact) and we'll identify your highest-leverage growth opportunities.
 
 ## Other reads
 
-- [Core Web Vitals Explained: LCP, CLS, and INP for Non-Engineers](/blog/core-web-vitals-explained/)
-- [The Difference Between Indexing and Ranking (And Why It Matters)](/blog/indexing-vs-ranking-seo/)
-- [Canonical Tags: When to Use Them and When They Break Everything](/blog/canonical-tags-guide/)
+- [Core Web Vitals Explained: LCP, CLS, and INP for Non-Engineers](/insights/core-web-vitals-explained/)
+- [The Difference Between Indexing and Ranking (And Why It Matters)](/insights/indexing-vs-ranking-seo/)
+- [Canonical Tags: When to Use Them and When They Break Everything](/insights/canonical-tags-guide/)

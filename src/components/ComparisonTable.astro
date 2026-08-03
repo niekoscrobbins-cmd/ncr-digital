@@ -1,0 +1,33 @@
+---
+export interface Props {
+  caption?: string;
+  columns: string[];
+  rows: { label: string; cells: string[] }[];
+}
+
+const { caption, columns, rows } = Astro.props;
+---
+
+<div class="overflow-x-auto my-8 border border-ncr-border">
+  <table class="w-full text-left border-collapse text-sm sm:text-base">
+    {caption && <caption class="text-left p-4 font-mono text-xs text-ncr-muted tracking-widest uppercase border-b border-ncr-border">{caption}</caption>}
+    <thead>
+      <tr class="bg-ncr-surface">
+        <th scope="col" class="p-4 font-semibold text-ncr-text border-b border-ncr-border"></th>
+        {columns.map((col) => (
+          <th scope="col" class="p-4 font-semibold text-ncr-text border-b border-ncr-border">{col}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(({ label, cells }) => (
+        <tr class="border-b border-ncr-border last:border-b-0">
+          <th scope="row" class="p-4 font-medium text-ncr-text align-top">{label}</th>
+          {cells.map((cell) => (
+            <td class="p-4 text-ncr-muted align-top" set:html={cell} />
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

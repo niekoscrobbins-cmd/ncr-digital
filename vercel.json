@@ -10,6 +10,9 @@
       "has": [{ "type": "host", "value": "www.ncrdigi.com" }],
       "destination": "https://ncrdigi.com/:path*",
       "permanent": true
-    }
+    },
+    { "source": "/blog", "destination": "/insights", "permanent": true },
+    { "source": "/blog/", "destination": "/insights/", "permanent": true },
+    { "source": "/blog/:slug", "destination": "/insights/:slug", "permanent": true }
   ]
 }

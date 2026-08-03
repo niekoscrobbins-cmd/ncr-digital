@@ -4,36 +4,27 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Light-first editorial palette. Namespace/class names (ncr-cyan etc.)
+        // kept stable even where the underlying color changed, to avoid a
+        // repo-wide class rename during the redesign.
         ncr: {
-          bg:      '#020509',
-          surface: '#050d1a',
-          card:    '#071226',
-          border:  '#0f2040',
-          cyan:    '#00e5ff',
-          gold:    '#f5c518',
-          green:   '#00ff87',
-          text:    '#e8f0fe',
-          muted:   '#6b7a99',
+          bg:      '#ffffff',
+          surface: '#f7f8fa',
+          card:    '#ffffff',
+          border:  '#e2e5eb',
+          cyan:    '#0072ce',
+          text:    '#0b0e14',
+          muted:   '#5b6472',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"Roboto Mono"', 'monospace'],
       },
-      backgroundImage: {
-        'grid-pattern':
-          'linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px)',
-        'hero-glow':
-          'radial-gradient(ellipse 80% 60% at 50% -5%, rgba(0,229,255,0.12), transparent)',
-      },
-      animation: {
-        'fade-up': 'fadeUp 0.7s ease-out forwards',
-      },
-      keyframes: {
-        fadeUp: {
-          from: { opacity: '0', transform: 'translateY(24px)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
-        },
+      fontSize: {
+        'display-xl': ['4.5rem', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '800' }],
+        'display-lg': ['3.25rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '800' }],
+        'display-md': ['2.25rem', { lineHeight: '1.15', letterSpacing: '-0.01em', fontWeight: '700' }],
       },
     },
   },

@@ -1,0 +1,31 @@
+---
+// Single source of truth for FAQ content: pass the same `items` array here
+// and into `buildFaqPageSchema` (src/lib/schema.ts) at the page level, so the
+// visible markup and the FAQPage JSON-LD can never drift apart. This
+// component is presentational only. Schema emission happens in the page
+// template, since Layout's `slot="head"` only forwards direct children of
+// the <Layout> invocation, not elements nested inside a child component.
+export interface Props {
+  items: { question: string; answer: string }[];
+  title?: string;
+}
+
+const { items, title = 'Frequently Asked Questions' } = Astro.props;
+---
+
+<section class="py-12" aria-labelledby="faq-heading">
+  <h2 id="faq-heading" class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-6">
+    {title}
+  </h2>
+  <div class="divide-y divide-ncr-border border-t border-b border-ncr-border">
+    {items.map(({ question, answer }) => (
+      <details class="group py-4">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-medium text-ncr-text">
+          {question}
+          <span class="text-ncr-cyan flex-shrink-0 group-open:rotate-45 transition-transform duration-200" aria-hidden="true">+</span>
+        </summary>
+        <p class="text-ncr-muted text-sm sm:text-base leading-relaxed mt-3">{answer}</p>
+      </details>
+    ))}
+  </div>
+</section>

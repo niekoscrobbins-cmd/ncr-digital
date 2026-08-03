@@ -1,0 +1,209 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHero from '@/components/SectionHero.astro';
+import StickySubnav from '@/components/StickySubnav.astro';
+import KeyFactsBlock from '@/components/KeyFactsBlock.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
+import FAQBlock from '@/components/FAQBlock.astro';
+import PageByline from '@/components/PageByline.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import { getCollection } from 'astro:content';
+import { buildFaqPageSchema, buildServiceSchema, SITE_URL } from '@/lib/schema';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const relatedPosts = allPosts
+  .filter((p) => p.data.category === 'operations')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'maturity', label: 'Adoption Maturity' },
+  { id: 'tooling', label: 'Tool Selection' },
+  { id: 'enablement', label: 'Enablement' },
+  { id: 'faq', label: 'FAQ' },
+];
+
+const faqItems = [
+  {
+    question: 'What does "AI adoption strategy" mean in practice?',
+    answer:
+      'It means deciding which workflows in a company should change because AI tools now make a faster or cheaper approach possible, sequencing those changes so teams can actually absorb them, and selecting specific tools rather than adopting AI in the abstract. It is a strategy and change-management practice, not a tool-installation service.',
+  },
+  {
+    question: 'Do you implement the tools, or just recommend them?',
+    answer:
+      'Both, depending on the engagement model. A project-based Operations engagement typically includes selecting and configuring the tooling; a subscription engagement adds ongoing enablement as the team\'s usage matures and new tools become relevant.',
+  },
+  {
+    question: 'How does Operations relate to the Marketing and Finance pillars?',
+    answer:
+      'Operations is what determines whether the rest of the business can actually execute on what Marketing finds and what Finance funds. A marketing pipeline that the operational team can\'t process, or a financial plan the organization isn\'t structured to deliver against, both fail at the operations layer, not the strategy layer.',
+  },
+];
+const faqSchema = buildFaqPageSchema(faqItems);
+
+const serviceSchema = buildServiceSchema({
+  id: `${SITE_URL}/capabilities/operations#service`,
+  name: 'AI Adoption & Operations Strategy',
+  serviceType: 'Operations Consulting',
+  description:
+    'AI adoption and workflow strategy (tooling selection, process design, and enablement) that makes an organization efficient enough to execute on its marketing and finance decisions.',
+});
+---
+
+<Layout
+  title="Operations: AI Adoption Strategy | NCR Digital"
+  description="NCR Digital's Operations pillar builds AI adoption strategy for mid-market companies: tooling selection, workflow redesign, and enablement, sequenced with a practical maturity model."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} slot="head" />
+
+  <Navigation />
+  <main id="main-content">
+    <SectionHero
+      eyebrow="Capability"
+      title="Operations: Making the Organization Fast Enough to Use What It Finds"
+      subtitle="NCR Digital's Operations pillar is AI adoption and workflow strategy: deciding which processes should change, in what order, and with which tools, so the organization can execute on what Marketing finds and what Finance funds."
+      size="lg"
+    />
+
+    <StickySubnav sections={sections} />
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <PageByline author="Niekos Robbins" publishedDate={new Date('2026-03-01')} />
+    </div>
+
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
+      <section id="overview">
+        <p class="text-lg text-ncr-text leading-relaxed">
+          <strong>NCR Digital's Operations pillar is AI adoption and workflow strategy for mid-market
+          companies: deciding which processes should change because of AI tooling, sequencing those changes
+          so teams can absorb them, and selecting the specific tools involved.</strong> It's the newest of the
+          three pillars, added because the same pattern that motivated Finance kept recurring: a company would
+          find growth (Marketing) and could afford to fund it (Finance), but the organization itself wasn't
+          structured to execute at the new pace, and the bottleneck moved to operations.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-6">
+          Most AI-adoption failures aren't tooling failures. They're sequencing failures. A company rolls out
+          five AI tools across five teams simultaneously, none of them stick, and the conclusion drawn is "AI
+          doesn't work for us" when the actual problem was trying to change too much, too fast, with no maturity
+          model guiding the order of operations.
+        </p>
+      </section>
+
+      <ScrollReveal>
+      <section id="maturity">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          What does an AI adoption maturity model actually look like?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>NCR Digital sequences AI adoption across four stages, moving from individual tool use to
+          embedded organizational process. Skipping stages is the most common cause of failed rollouts.</strong>
+        </p>
+        <ol class="mt-4 space-y-3 text-ncr-muted">
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-cyan flex-shrink-0">1.</span>
+            <span><strong class="text-ncr-text">Individual augmentation</strong>: specific people use AI tools to do their existing job faster (drafting, research, first-pass analysis), with no process change required.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-cyan flex-shrink-0">2.</span>
+            <span><strong class="text-ncr-text">Team workflow redesign</strong>: a specific team's process is rebuilt around AI tooling, with clear ownership of the new workflow and a defined handoff back to human review.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-cyan flex-shrink-0">3.</span>
+            <span><strong class="text-ncr-text">Cross-functional integration</strong>: the redesigned workflow connects to adjacent teams' systems (e.g., a marketing AI workflow feeding structured data into the finance model).</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-cyan flex-shrink-0">4.</span>
+            <span><strong class="text-ncr-text">Embedded operating model</strong>: AI-assisted processes are the default way work happens, with governance and quality-control built in rather than bolted on.</span>
+          </li>
+        </ol>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="tooling">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          How do you choose which AI tools to adopt?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>Tool selection starts from the workflow bottleneck, not the vendor landscape. NCR Digital
+          identifies the specific process that's slow or error-prone first, then evaluates tools against that
+          defined need, rather than starting from "which AI tools should we buy."</strong> This avoids the
+          common failure mode of licensing a broad platform that no team ends up using because it wasn't
+          selected to solve a problem anyone actually had.
+        </p>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="enablement">
+        <h2 class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+          What does enablement involve after a tool is selected?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          <strong>Enablement is the ongoing work of making a new workflow actually stick: training, defined
+          usage guidelines, and a feedback loop to catch where the new process is being avoided or worked
+          around.</strong> This is where subscription engagements matter most for the Operations pillar: tool
+          adoption maturity changes over months, not in a single rollout event, and enablement support keeps
+          pace with that.
+        </p>
+      </section>
+      </ScrollReveal>
+
+      <KeyFactsBlock
+        title="Key Facts"
+        facts={[
+          'The Operations pillar covers AI adoption strategy: tooling selection, workflow redesign, and enablement.',
+          'NCR Digital sequences adoption across four stages: individual augmentation, team workflow redesign, cross-functional integration, embedded operating model.',
+          'Most AI-adoption failures are sequencing failures (too much change at once), not tooling failures.',
+          'Tool selection starts from a defined workflow bottleneck, not from the vendor landscape.',
+          'Operations is what determines whether an organization can execute on what the Marketing and Finance pillars find and fund.',
+        ]}
+      />
+
+      <ComparisonTable
+        caption="Engagement Fit by Maturity Stage"
+        columns={['Best Engagement Model']}
+        rows={[
+          { label: 'Individual augmentation', cells: ['Project-based: a short tooling/training rollout.'] },
+          { label: 'Team workflow redesign', cells: ['Project-based, often followed by a subscription for enablement.'] },
+          { label: 'Cross-functional integration', cells: ['Subscription: ongoing coordination across teams.'] },
+          { label: 'Embedded operating model', cells: ['Subscription: ongoing governance and iteration.'] },
+        ]}
+      />
+
+      {relatedPosts.length > 0 && (
+        <section aria-labelledby="related-heading">
+          <h2 id="related-heading" class="text-xl font-bold text-ncr-text mb-4">Related Insights</h2>
+          <ul class="space-y-3">
+            {relatedPosts.map((post) => (
+              <li>
+                <a href={`/insights/${post.slug}/`} class="text-ncr-cyan hover:underline font-medium">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div id="faq">
+        <FAQBlock items={faqItems} />
+      </div>
+
+      <div>
+        <a
+          href="/contact"
+          class="inline-flex px-6 py-3 bg-ncr-cyan text-white text-sm font-medium tracking-wide hover:bg-ncr-cyan/90 transition-all duration-200"
+        >
+          Talk to Us About Operations
+        </a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

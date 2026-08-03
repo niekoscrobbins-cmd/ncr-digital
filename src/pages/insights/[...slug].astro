@@ -1,0 +1,252 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import PageByline from '@/components/PageByline.astro';
+import KeyFactsBlock from '@/components/KeyFactsBlock.astro';
+import { buildBreadcrumbSchema, ORG_ID, FOUNDER_ID, SITE_URL } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const pillarMeta: Record<string, { label: string; href: string }> = {
+  marketing: { label: 'Marketing', href: '/capabilities/marketing' },
+  finance: { label: 'Finance', href: '/capabilities/finance' },
+  operations: { label: 'Operations', href: '/capabilities/operations' },
+};
+const pillar = pillarMeta[post.data.category];
+
+// Resolve absolute image URL, used by schema, OG, and Twitter tags
+const absoluteImage = post.data.image ? `${SITE_URL}${post.data.image}` : undefined;
+
+const postSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@id': FOUNDER_ID },
+  publisher: { '@id': ORG_ID },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': Astro.url.href,
+  },
+  ...(absoluteImage ? { image: absoluteImage } : { image: `${SITE_URL}/og-main-cover.png` }),
+};
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: 'Home', item: `${SITE_URL}/` },
+  { name: 'Insights', item: `${SITE_URL}/insights/` },
+  { name: post.data.title, item: Astro.url.href },
+]);
+---
+
+<Layout
+  title={`${post.data.title} | NCR Digital`}
+  description={post.data.description}
+  ogImage={absoluteImage}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(postSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+
+  <Navigation />
+
+  <main id="main-content">
+    <header class="pt-32 pb-12 sm:pt-40 sm:pb-16 bg-ncr-bg border-b border-ncr-border">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" class="mb-8">
+          <ol class="flex items-center gap-2 font-mono text-xs text-ncr-muted">
+            <li><a href="/" class="hover:text-ncr-cyan transition-colors">Home</a></li>
+            <li aria-hidden="true" class="text-ncr-border">/</li>
+            <li><a href="/insights/" class="hover:text-ncr-cyan transition-colors">Insights</a></li>
+            <li aria-hidden="true" class="text-ncr-border">/</li>
+            <li class="text-ncr-muted/70 truncate max-w-[200px]" aria-current="page">{post.data.title}</li>
+          </ol>
+        </nav>
+
+        <p class="mb-4">
+          <a href={pillar.href} class="font-mono text-[10px] tracking-widest uppercase text-ncr-cyan border border-ncr-cyan/40 px-2 py-0.5 hover:bg-ncr-cyan hover:text-white transition-colors">
+            {pillar.label}
+          </a>
+        </p>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-display-lg font-extrabold tracking-tight leading-tight text-ncr-text mb-6">
+          {post.data.title}
+        </h1>
+
+        <p class="text-ncr-muted text-lg leading-relaxed mb-6">
+          {post.data.description}
+        </p>
+
+        <PageByline author={post.data.author} publishedDate={post.data.pubDate} updatedDate={post.data.updatedDate} />
+      </div>
+    </header>
+
+    <article class="py-16 bg-ncr-surface" aria-label={post.data.title}>
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {absoluteImage && (
+          <div class="mb-12 border border-ncr-border overflow-hidden">
+            <img
+              src={absoluteImage}
+              alt={post.data.imageAlt ?? post.data.title}
+              width="1200"
+              height="630"
+              class="w-full h-auto object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        )}
+
+        {post.data.keyFacts && post.data.keyFacts.length > 0 && (
+          <KeyFactsBlock facts={post.data.keyFacts} />
+        )}
+
+        <div class="ncr-prose">
+          <Content />
+        </div>
+
+        <div class="mt-12 p-6 border border-ncr-border bg-ncr-card">
+          <p class="text-ncr-muted text-sm mb-2">This post is part of the {pillar.label} capability.</p>
+          <a href={pillar.href} class="text-ncr-cyan font-medium hover:underline">
+            See the full {pillar.label} capability →
+          </a>
+        </div>
+
+        <div class="mt-10 pt-8 border-t border-ncr-border">
+          <a
+            href="/insights/"
+            class="inline-flex items-center gap-2 font-mono text-xs text-ncr-cyan tracking-widest uppercase hover:gap-3 transition-all duration-200"
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+              <path d="M10 6H2M6 2L2 6l4 4"/>
+            </svg>
+            Back to Insights
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* Prose styles for rendered markdown, scoped via .ncr-prose, light theme */
+  .ncr-prose {
+    color: #3a4250;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .ncr-prose h2 {
+    color: #0b0e14;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e5eb;
+  }
+
+  .ncr-prose h3 {
+    color: #0b0e14;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .ncr-prose p {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .ncr-prose a {
+    color: #0072ce;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(0, 114, 206, 0.35);
+    transition: text-decoration-color 0.2s;
+  }
+
+  .ncr-prose a:hover {
+    text-decoration-color: #0072ce;
+  }
+
+  .ncr-prose strong {
+    color: #0b0e14;
+    font-weight: 600;
+  }
+
+  .ncr-prose ul,
+  .ncr-prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ncr-prose ul { list-style-type: none; padding-left: 0; }
+  .ncr-prose ul li { padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; }
+  .ncr-prose ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #0072ce;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8em;
+  }
+
+  .ncr-prose ol { list-style-type: decimal; }
+  .ncr-prose ol li { margin-bottom: 0.5rem; padding-left: 0.5rem; }
+  .ncr-prose ol li::marker { color: #0072ce; font-family: 'Roboto Mono', monospace; }
+
+  .ncr-prose code:not(pre code) {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85em;
+    color: #0072ce;
+    background: rgba(0, 114, 206, 0.08);
+    padding: 0.15em 0.45em;
+    border-radius: 2px;
+  }
+
+  .ncr-prose pre {
+    background: #0b0e14;
+    border: 1px solid #e2e5eb;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #e8f0fe;
+  }
+
+  .ncr-prose pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+  .ncr-prose blockquote {
+    border-left: 2px solid #0072ce;
+    padding-left: 1.25rem;
+    margin-left: 0;
+    color: #5b6472;
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+
+  .ncr-prose hr {
+    border: none;
+    border-top: 1px solid #e2e5eb;
+    margin: 2rem 0;
+  }
+</style>

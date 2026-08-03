@@ -1,31 +1,237 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import CaseStudy from '../components/CaseStudy.astro';
-import TechStack from '../components/TechStack.astro';
-import About from '../components/About.astro';
-import PartnerCFO from '../components/PartnerCFO.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHero from '@/components/SectionHero.astro';
+import HeroCanvasBackground from '@/components/HeroCanvasBackground.astro';
+import StatBar from '@/components/StatBar.astro';
+import CapabilityCardGrid from '@/components/CapabilityCardGrid.astro';
+import CaseStudyBlock from '@/components/CaseStudyBlock.astro';
+import FAQBlock from '@/components/FAQBlock.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import { buildFaqPageSchema } from '@/lib/schema';
+
+const pillars = [
+  {
+    title: 'Marketing',
+    icon: '↗',
+    description:
+      'Paid and organic visibility built for how people find you now: Google Ads, technical SEO, and generative engine optimization (GEO) for AI-answer surfaces.',
+    href: '/capabilities/marketing',
+  },
+  {
+    title: 'Finance',
+    icon: '$',
+    description:
+      'FP&A and finance strategy: modeling, forecasting, and AI-assisted analysis that funds what your marketing finds.',
+    href: '/capabilities/finance',
+  },
+  {
+    title: 'Operations',
+    icon: '⚙',
+    description:
+      'AI adoption and workflow strategy that makes the rest of the organization faster: tooling selection, process design, enablement.',
+    href: '/capabilities/operations',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'What does NCR Digital actually do?',
+    answer:
+      'NCR Digital is an AI strategy consultancy working across three pillars: Marketing (paid, organic, and AI-answer visibility), Finance (FP&A and finance strategy), and Operations (AI adoption and workflow design), for high-growth startups and mid-market companies.',
+  },
+  {
+    question: 'Do you work project-based or on retainer?',
+    answer:
+      'Both. Engagements are either project-based (we build a specific deliverable and hand it off) or subscription-based (we consult, then maintain the work on an ongoing retainer). See /how-we-work for a full comparison.',
+  },
+  {
+    question: 'Do I need all three pillars, or can I hire NCR Digital for just one?',
+    answer:
+      'Just one. Most engagements start with a single pillar (most often Marketing) and expand once the first engagement proves out.',
+  },
+  {
+    question: 'Who is behind NCR Digital?',
+    answer:
+      'NCR Digital was founded by Niekos Robbins, who scaled organic search for a high-growth automotive SaaS platform before founding the firm. See /about for the full story.',
+  },
+];
+
+const faqSchema = buildFaqPageSchema(faqItems);
 ---
 
-<Layout
-  title="Technical SEO Agency for SaaS & Startups | NCR Digital"
-  description="NCR Digital is a boutique technical SEO agency specializing in audits, Core Web Vitals optimization, and content strategy for SaaS companies and high-growth startups."
->
+<Layout>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+
   <Navigation />
 
   <main id="main-content">
-    <Hero />
-    <Services />
-    <CaseStudy />
-    <TechStack />
-    <About />
-    <PartnerCFO />
-    <Contact />
+    <SectionHero
+      eyebrow="AI Strategy Consultancy · NCR Digital"
+      title="AI Strategy, Engineered Across Marketing, Finance, and Operations"
+      subtitle="NCR Digital helps high-growth companies turn AI from a buzzword into compounding revenue through GEO-ready marketing, sharper finance, and leaner operations."
+      ctaLabel="Book a Call"
+      ctaHref="/contact"
+      secondaryCtaLabel="See How We Work"
+      secondaryCtaHref="/how-we-work"
+    >
+      <HeroCanvasBackground slot="background" />
+    </SectionHero>
+
+    <section id="stats" class="pb-16 sm:pb-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <StatBar
+            stats={[
+              { value: 'DA 44', label: 'Peak Authority Hit', sub: 'Marketing pillar case study', countTo: 44, decimals: 0, prefix: 'DA ' },
+              { value: '7 mo', label: 'DA 20→44 Sprint', sub: 'Marketing pillar case study', countTo: 7, decimals: 0, suffix: ' mo' },
+              { value: '3.2x', label: 'Avg Traffic Growth', sub: 'Marketing pillar case study', countTo: 3.2, decimals: 1, suffix: 'x' },
+            ]}
+          />
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <section id="pillars" class="py-16 sm:py-24 bg-ncr-surface" aria-labelledby="pillars-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header class="mb-14 max-w-2xl">
+          <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+            <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
+            Three Pillars
+          </p>
+          <h2 id="pillars-heading" class="text-3xl sm:text-display-md font-extrabold tracking-tight text-ncr-text">
+            One consultancy, three levers for AI-era growth.
+          </h2>
+        </header>
+        <ScrollReveal>
+          <CapabilityCardGrid cards={pillars} />
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <ScrollReveal>
+      <CaseStudyBlock />
+    </ScrollReveal>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <FAQBlock items={faqItems} />
+    </div>
+
+    <section class="py-16 sm:py-24 border-t border-ncr-border" aria-labelledby="cta-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-start gap-6">
+        <h2 id="cta-heading" class="text-3xl sm:text-display-md font-extrabold tracking-tight text-ncr-text">
+          Ready to talk?
+        </h2>
+        <p class="text-ncr-muted max-w-xl">
+          Tell us where you are and where you need to be, and we'll tell you which pillar to start with.
+        </p>
+        <a
+          href="/contact"
+          class="px-6 py-3 bg-ncr-cyan text-white text-sm font-medium tracking-wide hover:bg-ncr-cyan/90 transition-all duration-200"
+        >
+          Book a Call
+        </a>
+      </div>
+    </section>
   </main>
 
   <Footer />
 </Layout>
+
+<script>
+  // Scroll-triggered count-up animations: the stat bar (brief pin while
+  // counting) and the Proven Results metrics + DA trajectory bars (no pin,
+  // just animate the moment the section scrolls into view). Gated entirely
+  // behind prefers-reduced-motion — the DOM default already shows the
+  // correct final content (real stat/metric values, bars at their real
+  // final width), so reduced-motion and JS-disabled visitors both simply
+  // see that default with no animation.
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReduced) {
+    const schedule = () => {
+      initScrollAnimations().catch(() => {
+        // If GSAP/ScrollTrigger fail to load for any reason, the page is
+        // already correct without them (see comment above).
+      });
+    };
+    // Deferred the same way as the hero's WebGL init: fetching gsap here
+    // runs on every device (unlike the hero visual, these aren't
+    // desktop-gated), so keeping it off the critical path matters for the
+    // mobile Lighthouse run in particular.
+    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void })
+      .requestIdleCallback;
+    if (ric) {
+      ric(schedule, { timeout: 2000 });
+    } else {
+      window.addEventListener('load', schedule, { once: true });
+    }
+  }
+
+  function countUp(
+    gsap: typeof import('gsap').gsap,
+    el: HTMLElement,
+    { from = 0 }: { from?: number } = {}
+  ) {
+    const to = parseFloat(el.dataset.countTo ?? '0');
+    const decimals = parseInt(el.dataset.decimals ?? '0', 10);
+    const prefix = el.dataset.prefix ?? '';
+    const suffix = el.dataset.suffix ?? '';
+    const proxy = { val: from };
+    el.textContent = `${prefix}${proxy.val.toFixed(decimals)}${suffix}`;
+    gsap.to(proxy, {
+      val: to,
+      duration: 1.2,
+      ease: 'power2.out',
+      onUpdate: () => {
+        el.textContent = `${prefix}${proxy.val.toFixed(decimals)}${suffix}`;
+      },
+    });
+  }
+
+  async function initScrollAnimations() {
+    const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger'),
+    ]);
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- Stat bar: pin briefly, count each value up from 0 ---
+    const statSection = document.querySelector<HTMLElement>('#stats');
+    const statEls = Array.from(document.querySelectorAll<HTMLElement>('.stat-value[data-count-to]'));
+
+    if (statSection && statEls.length) {
+      ScrollTrigger.create({
+        trigger: statSection,
+        start: 'top 75%',
+        end: '+=30%',
+        pin: true,
+        once: true,
+        onEnter: () => statEls.forEach((el) => countUp(gsap, el)),
+      });
+    }
+
+    // --- Proven Results: no pin, just animate once the section is in view ---
+    const caseStudySection = document.querySelector<HTMLElement>('#case-study');
+    const metricEls = Array.from(document.querySelectorAll<HTMLElement>('.metric-value[data-count-to]'));
+    const barEls = Array.from(document.querySelectorAll<HTMLElement>('.da-bar-fill[data-target-width]'));
+
+    if (caseStudySection && (metricEls.length || barEls.length)) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          io.disconnect();
+          metricEls.forEach((el) => countUp(gsap, el, { from: parseFloat(el.dataset.countFrom ?? '0') }));
+          barEls.forEach((el) => {
+            const target = el.dataset.targetWidth ?? '0';
+            el.style.width = '0%';
+            gsap.to(el, { width: `${target}%`, duration: 1, ease: 'power2.out' });
+          });
+        },
+        { threshold: 0.3 }
+      );
+      io.observe(caseStudySection);
+    }
+  }
+</script>

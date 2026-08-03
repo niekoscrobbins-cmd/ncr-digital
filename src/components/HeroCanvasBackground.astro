@@ -1,0 +1,191 @@
+---
+// Signature homepage hero visual: a generative, code-only WebGL particle
+// network (Three.js), scroll-reactive, lazy-loaded behind a static gradient.
+//
+// Budget/behavior, by design:
+// - Static gradient (below) is the real DOM default. It's always visible
+//   first and remains the fallback if WebGL never initializes.
+// - The Three.js module is only fetched (dynamic import) when the visitor
+//   is NOT on prefers-reduced-motion AND is on a desktop-width, fine-pointer
+//   device — mobile/touch and reduced-motion visitors never download it.
+// - Fetch is deferred to requestIdleCallback (or `load` as a fallback), so it
+//   never competes with LCP/TBT-relevant work.
+// - Render loop pauses via IntersectionObserver (hero out of view) and
+//   document.visibilitychange (tab hidden).
+---
+
+<div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+  <div class="hero-gradient absolute inset-0"></div>
+  <canvas class="hero-canvas absolute inset-0 w-full h-full"></canvas>
+</div>
+
+<style>
+  .hero-gradient {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 114, 206, 0.12), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 90% 100%, rgba(0, 114, 206, 0.06), transparent 70%);
+  }
+  .hero-canvas {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .hero-canvas.is-ready {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isDesktop =
+    window.matchMedia('(min-width: 768px)').matches && window.matchMedia('(pointer: fine)').matches;
+
+  if (!prefersReduced && isDesktop) {
+    const schedule = () => {
+      initParticleNetwork().catch(() => {
+        // WebGL init failed for any reason (no context, driver issue, etc.):
+        // the static gradient underneath is already the visible fallback.
+      });
+    };
+    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void })
+      .requestIdleCallback;
+    if (ric) {
+      ric(schedule, { timeout: 2000 });
+    } else {
+      window.addEventListener('load', schedule, { once: true });
+    }
+  }
+
+  async function initParticleNetwork() {
+    const canvas = document.querySelector<HTMLCanvasElement>('.hero-canvas');
+    const container = canvas?.parentElement;
+    if (!canvas || !container) return;
+
+    // Named destructured dynamic import (not `const THREE = await import('three')`):
+    // Rollup can only tree-shake a dynamically-imported module when it can
+    // statically see which named exports are pulled from it. A namespace
+    // import accessed as `THREE.Foo` at runtime defeats that analysis and
+    // ships the entire ~700KB library; this form ships only what's used.
+    const {
+      WebGLRenderer,
+      Scene,
+      PerspectiveCamera,
+      BufferGeometry,
+      BufferAttribute,
+      Float32BufferAttribute,
+      Points,
+      PointsMaterial,
+      LineSegments,
+      LineBasicMaterial,
+    } = await import('three');
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    if (width === 0 || height === 0) return;
+
+    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(width, height);
+
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(55, width / height, 0.1, 100);
+    camera.position.z = 18;
+
+    const COUNT = 80;
+    const positions = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 22;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 13;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+    }
+
+    const pointsGeo = new BufferGeometry();
+    pointsGeo.setAttribute('position', new BufferAttribute(positions, 3));
+    const pointsMat = new PointsMaterial({
+      color: 0x0072ce,
+      size: 0.14,
+      transparent: true,
+      opacity: 0.85,
+      sizeAttenuation: true,
+    });
+    const points = new Points(pointsGeo, pointsMat);
+    scene.add(points);
+
+    // Link nearby particles once, from their initial layout. The whole
+    // network then rotates as a rigid body (see animate()), so the
+    // relative distances (and therefore which pairs are linked) never
+    // change, and links never need recomputing per frame.
+    const LINK_DIST = 4.5;
+    const linkPositions: number[] = [];
+    for (let i = 0; i < COUNT; i++) {
+      for (let j = i + 1; j < COUNT; j++) {
+        const dx = positions[i * 3] - positions[j * 3];
+        const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+        const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+        if (dx * dx + dy * dy + dz * dz < LINK_DIST * LINK_DIST) {
+          linkPositions.push(
+            positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
+            positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
+          );
+        }
+      }
+    }
+    const lineGeo = new BufferGeometry();
+    lineGeo.setAttribute('position', new Float32BufferAttribute(linkPositions, 3));
+    const lineMat = new LineBasicMaterial({ color: 0x0072ce, transparent: true, opacity: 0.15 });
+    const lines = new LineSegments(lineGeo, lineMat);
+    scene.add(lines);
+
+    let scrollTarget = window.scrollY / window.innerHeight;
+    let scrollCurrent = scrollTarget;
+    window.addEventListener(
+      'scroll',
+      () => {
+        scrollTarget = window.scrollY / window.innerHeight;
+      },
+      { passive: true }
+    );
+
+    let running = true;
+    function animate() {
+      if (!running) return;
+      requestAnimationFrame(animate);
+      scrollCurrent += (scrollTarget - scrollCurrent) * 0.05;
+      points.rotation.y += 0.0007;
+      points.rotation.x = scrollCurrent * 0.15;
+      lines.rotation.copy(points.rotation);
+      renderer.render(scene, camera);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      const wasRunning = running;
+      running = document.visibilityState === 'visible';
+      if (running && !wasRunning) animate();
+    });
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const wasRunning = running;
+        running = entry.isIntersecting && document.visibilityState === 'visible';
+        if (running && !wasRunning) animate();
+      },
+      { threshold: 0 }
+    );
+    io.observe(container);
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        if (w === 0 || h === 0) return;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }, 200);
+    });
+
+    animate();
+    canvas.classList.add('is-ready');
+  }
+</script>

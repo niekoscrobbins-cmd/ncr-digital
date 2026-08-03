@@ -1,0 +1,112 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHero from '@/components/SectionHero.astro';
+import KeyFactsBlock from '@/components/KeyFactsBlock.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+
+const credentials = [
+  'Scaled organic search for a leading automotive SaaS platform',
+  'Applies financial-modeling discipline to marketing, not just reporting',
+  'Builds AI-adoption and FP&A practices with the same technical rigor as the original SEO work',
+  'Founder, NCR Digital: AI strategy across Marketing, Finance, and Operations',
+];
+
+const teamExperience = [
+  'Management consulting experience from Boston Consulting Group (BCG), applied to how engagements are scoped and structured.',
+  'Experience at a leading AI consultancy, informing the Operations pillar\'s tooling and adoption approach.',
+  'Finance research experience underpinning the Finance pillar\'s modeling work.',
+  'Financial modeling expertise applied consistently across Marketing ROI, Finance forecasting, and Operations business cases.',
+];
+---
+
+<Layout
+  title="About NCR Digital | Founder Niekos Robbins"
+  description="NCR Digital is an AI strategy consultancy founded by Niekos Robbins, built on the principle that most growth problems are read wrong when marketing, finance, and operations are treated as separate disciplines."
+>
+  <Navigation />
+  <main id="main-content">
+    <SectionHero
+      eyebrow="About"
+      title="Most agencies chase one number. We chase the whole system."
+      subtitle="NCR Digital was founded on a conviction: growth problems don't respect department lines. Marketing, finance, and operations are one system, and treating them separately is why most AI initiatives stall."
+    />
+
+    <section class="py-16 sm:py-24" aria-labelledby="founder-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-3 gap-14 items-start">
+          <div class="lg:col-span-2 space-y-6 text-ncr-muted leading-relaxed">
+            <h2 id="founder-heading" class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-2">
+              Founder: Niekos Robbins
+            </h2>
+            <p>
+              Coming from the trenches of scaling organic search for a high-growth automotive SaaS platform,
+              the path to founding NCR Digital was clear. The gap in the market wasn't creativity. It was
+              <span class="text-ncr-text font-medium"> bridging the gap between raw data and financial outcomes</span>.
+              Most consultants can't read a crawl log and a P&amp;L in the same sitting. That gap is the reason
+              NCR Digital exists, and it's why the firm now spans three pillars instead of one: the same
+              discipline that rebuilds a site's technical foundation also applies to a company's financial
+              model and its operational tooling.
+            </p>
+            <p class="border-l-2 border-ncr-cyan/40 pl-4 italic text-sm">
+              Based in Texas, NCR Digital is an independent consultancy founded by
+              <span class="text-ncr-text not-italic">Niekos Robbins</span>. We are a boutique firm and are not
+              affiliated with NCR Voyix or traditional banking hardware corporations.
+            </p>
+            <p>
+              NCR Digital's Marketing pillar grew out of that original technical-SEO practice: it's the
+              same skill set, now framed around how people (and increasingly, AI answer engines) actually find
+              companies. Finance and Operations were added because the same question kept surfacing with
+              clients: <span class="text-ncr-text font-medium">the growth is real, so why can't the business
+              capitalize on it?</span> That's a financial-modeling and operational-tooling problem as much as
+              a marketing one, which is why NCR Digital now owns all three, instead of referring clients
+              elsewhere for the other two.
+            </p>
+          </div>
+
+          <div class="border border-ncr-border bg-ncr-card p-8">
+            <!--
+              Placeholder monogram in place of a founder photo, consistent with
+              the site's typographic/geometric visual language. Replace with a
+              real photo asset once supplied (see plan Phase 3 open item).
+            -->
+            <div class="w-20 h-20 border-2 border-ncr-cyan flex items-center justify-center font-mono text-2xl font-bold text-ncr-cyan mb-6" aria-hidden="true">
+              NR
+            </div>
+            <p class="text-ncr-text font-semibold">Niekos Robbins</p>
+            <p class="text-ncr-muted text-sm mt-1">Founder &amp; Principal Consultant</p>
+            <p class="text-ncr-muted text-sm mt-4">College Station, TX · Serving Global Ventures</p>
+            <a
+              href="https://www.linkedin.com/in/niekolas-robbins"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-ncr-cyan text-sm font-medium mt-4 hover:underline"
+            >
+              LinkedIn ↗
+            </a>
+          </div>
+        </div>
+
+        <ScrollReveal>
+          <KeyFactsBlock title="Key Facts" facts={credentials} />
+        </ScrollReveal>
+
+        <section aria-labelledby="team-heading" class="mt-4">
+          <h2 id="team-heading" class="text-2xl sm:text-display-md font-bold tracking-tight text-ncr-text mb-4">
+            Team Experience
+          </h2>
+          <p class="text-ncr-muted leading-relaxed max-w-3xl mb-2">
+            Engagements draw on experience most boutique consultancies don't have in-house: management
+            consulting rigor, AI consulting practice, and hands-on finance research, brought together under
+            one team rather than referred out.
+          </p>
+          <ScrollReveal>
+            <KeyFactsBlock title="Team Experience" facts={teamExperience} />
+          </ScrollReveal>
+        </section>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

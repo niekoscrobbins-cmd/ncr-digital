@@ -1,0 +1,59 @@
+---
+export interface Props {
+  sections: { id: string; label: string }[];
+}
+
+const { sections } = Astro.props;
+---
+
+<nav
+  id="sticky-subnav"
+  class="sticky top-16 z-30 bg-ncr-bg/95 backdrop-blur-md border-b border-ncr-border overflow-x-auto"
+  aria-label="On this page"
+>
+  <ul class="flex gap-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 whitespace-nowrap">
+    {sections.map(({ id, label }) => (
+      <li>
+        <a
+          href={`#${id}`}
+          data-subnav-link={id}
+          class="subnav-link inline-block py-3 text-sm text-ncr-muted hover:text-ncr-cyan border-b-2 border-transparent transition-colors duration-200"
+        >
+          {label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.subnav-link'));
+  if (links.length) {
+    const targets = links
+      .map((link) => {
+        const id = link.dataset.subnavLink;
+        return id ? document.getElementById(id) : null;
+      })
+      .filter((el): el is HTMLElement => el !== null);
+
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        const isActive = link.dataset.subnavLink === id;
+        link.classList.toggle('text-ncr-cyan', isActive);
+        link.classList.toggle('border-ncr-cyan', isActive);
+        link.classList.toggle('text-ncr-muted', !isActive);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+
+    targets.forEach((target) => observer.observe(target));
+  }
+</script>

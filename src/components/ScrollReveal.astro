@@ -1,0 +1,35 @@
+---
+export interface Props {
+  delay?: number;
+  as?: string;
+}
+
+const { delay = 0 } = Astro.props;
+---
+
+<div class="reveal" style={delay ? `transition-delay: ${delay}ms` : undefined}>
+  <slot />
+</div>
+
+<style>
+  /*
+    Resting state is always fully visible. JS only progressively adds a
+    fade/slide-in transition. This guarantees content is present with JS
+    disabled and is not gated behind any script running.
+  */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal.js-enabled {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.js-enabled.revealed {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

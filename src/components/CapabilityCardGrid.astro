@@ -1,0 +1,32 @@
+---
+export interface Props {
+  cards: { title: string; description: string; href: string; icon?: string }[];
+  columns?: 2 | 3;
+}
+
+const { cards, columns = 3 } = Astro.props;
+const gridClass = columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
+---
+
+<div class={`grid ${gridClass} gap-6`} role="list">
+  {cards.map(({ title, description, href, icon }) => (
+    <a
+      href={href}
+      class="group flex flex-col gap-4 p-8 border border-ncr-border bg-ncr-card hover:border-ncr-cyan transition-colors duration-300"
+      role="listitem"
+    >
+      {icon && (
+        <span class="inline-flex items-center justify-center w-11 h-11 border border-ncr-border text-ncr-cyan group-hover:bg-ncr-cyan group-hover:text-white group-hover:border-ncr-cyan transition-colors duration-300 text-lg font-mono" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      <h3 class="text-xl font-bold tracking-tight text-ncr-text group-hover:text-ncr-cyan transition-colors duration-200">
+        {title}
+      </h3>
+      <p class="text-ncr-muted text-sm leading-relaxed">{description}</p>
+      <span class="mt-auto text-ncr-cyan text-sm font-medium inline-flex items-center gap-1">
+        Learn more <span aria-hidden="true">→</span>
+      </span>
+    </a>
+  ))}
+</div>
