@@ -4,7 +4,7 @@ description: "A plain-English breakdown of crawl budget and how to stop wasting 
 pubDate: 2026-03-21
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/crawl-budget-cover.png"
+image: "/blog/crawl-budget-cover.webp"
 imageAlt: "Laptop lid engraved with two crawl spiders progressing toward a stop sign, flanked by hourglasses representing crawl time limits"
 ---
 

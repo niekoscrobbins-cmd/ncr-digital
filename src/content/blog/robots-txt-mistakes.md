@@ -4,7 +4,7 @@ description: "A single line in robots.txt can de-index your highest-converting p
 pubDate: 2026-03-18
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/robots-txt-cover.png"
+image: "/blog/robots-txt-cover.webp"
 imageAlt: "Laptop lid engraved with a stop sign and Disallow: /* rule blocking CSS and JavaScript icons"
 ---
 

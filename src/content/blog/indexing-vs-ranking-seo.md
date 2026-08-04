@@ -4,7 +4,7 @@ description: "Your page can be indexed and invisible. Understanding this distinc
 pubDate: 2026-03-10
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/indexing-ranking-cover.png"
+image: "/blog/indexing-ranking-cover.webp"
 imageAlt: "Laptop lid engraved with side-by-side icons for Indexing (database vault) and Ranking (podium chart), linked by a chain"
 ---
 

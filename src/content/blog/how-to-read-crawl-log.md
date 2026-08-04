@@ -4,7 +4,7 @@ description: "Crawl logs are goldmines most SEOs ignore. Here's how to extract a
 pubDate: 2026-03-14
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/crawl-log-cover.png"
+image: "/blog/crawl-log-cover.webp"
 imageAlt: "Laptop lid engraved with a flowchart connecting a document, gear, and magnifying glass representing crawl log analysis"
 ---
 

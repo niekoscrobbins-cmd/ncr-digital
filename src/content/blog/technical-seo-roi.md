@@ -4,7 +4,7 @@ description: "Learn how to calculate and communicate the ROI of technical SEO fi
 pubDate: 2026-03-06
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/technical-seo-roi-marketing.png"
+image: "/blog/technical-seo-roi-marketing.webp"
 imageAlt: "Marketing graphic illustrating technical SEO ROI compounding over time versus paid ad spend"
 ---
 

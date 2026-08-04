@@ -4,7 +4,7 @@ description: "Canonical tags are the most misused technical SEO tool. This post 
 pubDate: 2026-03-28
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/canonical-tags-cover.png"
+image: "/blog/canonical-tags-cover.webp"
 imageAlt: "Laptop screen displaying canonical link tag HTML code, with a key symbolizing locked URL authority"
 ---
 

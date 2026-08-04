@@ -4,7 +4,7 @@ description: "Most CEOs can't explain why their site is slow. This post closes t
 pubDate: 2026-03-24
 author: "Niekos Robbins"
 category: marketing
-image: "/blog/core-web-vitals-cover.png"
+image: "/blog/core-web-vitals-cover.webp"
 imageAlt: "Laptop lid engraved with three performance gauges representing Core Web Vitals: paint, link interaction, and load time"
 ---
 
