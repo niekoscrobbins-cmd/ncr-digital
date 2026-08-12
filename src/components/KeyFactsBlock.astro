@@ -7,12 +7,11 @@ export interface Props {
 const { facts, title = 'Key Facts' } = Astro.props;
 ---
 
-<aside class="border border-ncr-border bg-ncr-surface p-6 sm:p-8 my-8" aria-label={title}>
-  <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4">{title}</p>
+<aside class="border border-ncr-border rounded-card bg-ncr-surface p-6 sm:p-8 my-8" aria-label={title}>
+  <p class="text-xs tracking-wide uppercase text-ncr-muted mb-4">{title}</p>
   <ul class="space-y-3">
     {facts.map((fact) => (
-      <li class="flex items-start gap-3 text-ncr-text text-sm sm:text-base leading-relaxed">
-        <span class="text-ncr-cyan font-mono mt-0.5 flex-shrink-0" aria-hidden="true">→</span>
+      <li class="text-ncr-text text-sm sm:text-base leading-relaxed pl-4 border-l-2 border-ncr-accent/40">
         <span set:html={fact} />
       </li>
     ))}

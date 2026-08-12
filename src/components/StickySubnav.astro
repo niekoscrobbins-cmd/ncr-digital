@@ -17,7 +17,7 @@ const { sections } = Astro.props;
         <a
           href={`#${id}`}
           data-subnav-link={id}
-          class="subnav-link inline-block py-3 text-sm text-ncr-muted hover:text-ncr-cyan border-b-2 border-transparent transition-colors duration-200"
+          class="subnav-link inline-block py-3 text-sm text-ncr-muted hover:text-ncr-accent border-b-2 border-transparent transition-colors duration-200"
         >
           {label}
         </a>
@@ -39,8 +39,8 @@ const { sections } = Astro.props;
     const setActive = (id: string) => {
       links.forEach((link) => {
         const isActive = link.dataset.subnavLink === id;
-        link.classList.toggle('text-ncr-cyan', isActive);
-        link.classList.toggle('border-ncr-cyan', isActive);
+        link.classList.toggle('text-ncr-accent', isActive);
+        link.classList.toggle('border-ncr-accent', isActive);
         link.classList.toggle('text-ncr-muted', !isActive);
       });
     };

@@ -2,10 +2,25 @@
 title: "The Difference Between Indexing and Ranking (And Why It Matters)"
 description: "Your page can be indexed and invisible. Understanding this distinction is the foundation of every SEO strategy."
 pubDate: 2026-03-10
+updatedDate: 2026-08-11
 author: "Niekos Robbins"
-category: marketing
+category: seo
+tags: ["indexing", "ranking factors", "technical SEO"]
 image: "/blog/indexing-ranking-cover.webp"
 imageAlt: "Laptop lid engraved with side-by-side icons for Indexing (database vault) and Ranking (podium chart), linked by a chain"
+keyFacts:
+  - "Indexing and ranking are separate stages. A page must be indexed before it can rank for anything, but being indexed guarantees nothing about ranking position."
+  - "GSC's Coverage report has three relevant states: Discovered-not-crawled, Crawled-not-indexed, and Indexed. Each has a different fix."
+  - "\"Discovered, not yet crawled\" is usually a crawl-budget problem; \"Crawled, not currently indexed\" is usually a content-quality signal."
+  - "Ranking, once indexed, is driven by relevance, authority (backlinks and trust signals), and quality (page experience, depth, E-E-A-T)."
+  - "A large gap between total page count and site: search results is a signal worth investigating, not a precise diagnostic on its own."
+faq:
+  - question: "My page is indexed but not ranking. What's wrong?"
+    answer: "That's a content, relevance, or authority problem, not a technical one — indexing already succeeded. Check whether the page actually matches search intent for its target query, and whether the domain or page has enough backlink signal to compete."
+  - question: "How long does indexing take after a page goes live?"
+    answer: "It varies widely — from hours for a well-linked page on an established, frequently-crawled site to weeks for a page with no internal links pointing to it. Submitting the URL through GSC's URL Inspection tool can prompt a faster crawl, but doesn't guarantee indexing."
+  - question: "Why would Google crawl a page but not index it?"
+    answer: "Usually a quality signal: thin content, duplication with another page already in the index, or a page that doesn't clear the bar Google sets for what's worth serving. It's rarely a technical block at that stage — the crawl already succeeded."
 ---
 
 "Why isn't my page showing up on Google?" is one of the most common questions in SEO, and the answer depends entirely on which problem you actually have. Indexing and ranking are two separate stages of Google's process, and they fail for completely different reasons. Confusing them leads to months of wasted effort fixing the wrong thing. Here's how to tell them apart and what to do about each.
@@ -24,11 +39,13 @@ Google doesn't instantly index every page it finds. There are actually multiple 
 
 The stages as they appear in GSC's Coverage report:
 
-1. **Discovered, not yet crawled**: Google knows the URL exists (from a sitemap or internal link) but hasn't visited it yet
-2. **Crawled, not currently indexed**: Google visited the page but decided not to index it (thin content, duplicate, or a quality signal issue)
-3. **Indexed**: The page is in Google's index and eligible to rank
+| Stage | What it means | Usual cause |
+|---|---|---|
+| Discovered, not yet crawled | Google knows the URL exists (sitemap or internal link) but hasn't visited it | Crawl budget hasn't reached it yet |
+| Crawled, not currently indexed | Google visited the page but decided not to index it | Thin content, duplication, or a quality signal issue |
+| Indexed | The page is in Google's index and eligible to rank | — |
 
-"Discovered, not yet crawled" usually means crawl budget is the bottleneck: Google has more URLs to process than it's getting to. "Crawled, not currently indexed" is a quality signal: Google saw the page and decided it wasn't worth indexing. These have very different remedies.
+"Discovered, not yet crawled" usually means [crawl budget](/insights/what-is-crawl-budget-saas/) is the bottleneck: Google has more URLs to process than it's getting to. "Crawled, not currently indexed" is a quality signal: Google saw the page and decided it wasn't worth indexing. These have very different remedies.
 
 ## How to Check Index Status
 
@@ -54,7 +71,7 @@ Once a page is indexed, ranking is determined by Google's assessment of relevanc
 
 The diagnostic split is simple: if your page isn't in GSC's index, fix the indexation problem first. If it is indexed but not ranking, that's a content and authority conversation. Treating a ranking problem as an indexation problem, or vice versa, is how teams spend quarters spinning their wheels.
 
-If you want help diagnosing which stage your pages are stuck at, a [technical SEO audit](/capabilities/marketing) will give you a clear answer fast.
+If you want help diagnosing which stage your pages are stuck at, a [technical SEO audit](/seo) will give you a clear answer fast.
 
 ## Other reads
 

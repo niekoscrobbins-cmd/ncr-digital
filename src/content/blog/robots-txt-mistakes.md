@@ -2,10 +2,25 @@
 title: "Robots.txt Mistakes That Are Blocking Your Best Pages"
 description: "A single line in robots.txt can de-index your highest-converting pages. Here are the most common errors and how to find them."
 pubDate: 2026-03-18
+updatedDate: 2026-08-11
 author: "Niekos Robbins"
-category: marketing
+category: seo
+tags: ["robots.txt", "crawlability", "technical SEO"]
 image: "/blog/robots-txt-cover.webp"
 imageAlt: "Laptop lid engraved with a stop sign and Disallow: /* rule blocking CSS and JavaScript icons"
+keyFacts:
+  - "robots.txt controls crawling, not indexing — blocking an already-indexed page with robots.txt does not remove it from the index."
+  - "A Disallow rule matches everything under that path. \"Disallow: /resources/\" blocks every URL under /resources/, not just the intended one."
+  - "Blocking CSS and JS files prevents Google from rendering pages correctly under mobile-first indexing, and can suppress rankings as a result."
+  - "Removing an indexed page requires both a crawlable noindex tag and Googlebot access — blocking it with robots.txt while also trying to noindex it is self-defeating."
+  - "robots.txt changes take effect within hours of Googlebot's next visit, which cuts both ways: fast to fix, fast to break."
+faq:
+  - question: "Does blocking a page in robots.txt remove it from Google's index?"
+    answer: "No. robots.txt only controls whether Googlebot can crawl a page, not whether an already-indexed page stays in the index. To remove an indexed page you need a noindex tag that Googlebot can actually see, which means the page must stay crawlable."
+  - question: "Should I block staging or dev environments in robots.txt?"
+    answer: "robots.txt alone isn't reliable protection — it's a public file anyone can read, and it doesn't stop non-compliant crawlers. Password-protect staging environments; use robots.txt only as a secondary signal, not the primary control."
+  - question: "How do I check whether a specific page is blocked?"
+    answer: "Use GSC's URL Inspection tool. Enter the URL and it will state explicitly whether robots.txt is blocking it and which rule is matching."
 ---
 
 Robots.txt is the first thing Googlebot reads when it visits your site. It's also one of the easiest files to get catastrophically wrong. A misplaced disallow rule can block entire sections of your site from being crawled, and unlike most technical SEO issues, the damage shows up fast. Here are the robots.txt SEO mistakes that cause the most harm, and how to catch them before they cost you rankings.
@@ -61,7 +76,16 @@ Run your five highest-converting pages through the URL Inspection tool right now
 
 Robots.txt changes take effect quickly, often within hours of Googlebot's next visit. It's one of the rare technical SEO fixes where you can see the impact fast. But the same speed that makes it easy to fix makes mistakes easy to introduce. Treat every change to robots.txt with the same care you'd give a production deployment.
 
-Robots.txt review is part of every [technical SEO audit](/capabilities/marketing) we run, along with every other crawlability signal that could be suppressing your pages.
+## The Four Mistakes at a Glance
+
+| Mistake | What it does | Fix |
+|---|---|---|
+| Disallowing CSS/JS | Google renders a broken, text-only version of your pages | Remove the legacy disallow rules |
+| Overly broad Disallow paths | Blocks every URL under the path, not just the intended target | Scope the rule to the exact path that needs protecting |
+| Blocking already-indexed pages | Page stays in the index; Google just can't see updates or a noindex tag | Keep the page crawlable and add a real noindex tag |
+| Missing or malformed sitemap declaration | Google has no conventional starting point to find your full URL set | Add an absolute-URL `Sitemap:` line pointing to your sitemap index |
+
+Robots.txt review is part of every [technical SEO audit](/seo) we run, along with every other crawlability signal that could be suppressing your pages.
 
 ## Other reads
 

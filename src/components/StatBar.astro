@@ -23,7 +23,7 @@ const { stats } = Astro.props;
   {stats.map(({ value, label, sub, countTo, decimals, prefix, suffix }, i) => (
     <div class={`flex flex-col ${i > 0 ? 'sm:border-l sm:border-ncr-border sm:pl-10' : ''}`} role="listitem">
       <span
-        class="stat-value font-mono text-3xl font-bold text-ncr-cyan tracking-tight"
+        class="stat-value font-mono text-3xl font-semibold text-ncr-accent"
         data-count-to={countTo}
         data-decimals={decimals ?? 0}
         data-prefix={prefix ?? ''}

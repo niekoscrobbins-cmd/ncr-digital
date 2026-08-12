@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import Navigation from '@/components/Navigation.astro';
 import Footer from '@/components/Footer.astro';
+import { capabilities } from '@/data/capabilities';
 
 // Form action: Formspree ID carried over from the prior site (still valid).
 const FORMSPREE_ID = 'mwvrkrqn';
@@ -9,7 +10,7 @@ const FORMSPREE_ID = 'mwvrkrqn';
 
 <Layout
   title="Contact NCR Digital"
-  description="Tell NCR Digital where you are and where you need to be, across marketing, finance, or operations, and get a response mapped to the right engagement model."
+  description="Tell NCR Digital where you are and where you need to be, in organic search or AI strategy, and get a response mapped to the right engagement."
 >
   <Navigation />
   <main id="main-content">
@@ -17,17 +18,13 @@ const FORMSPREE_ID = 'mwvrkrqn';
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-16">
           <div>
-            <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
-              <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
-              Contact
-            </p>
-            <h1 class="text-3xl sm:text-display-lg font-extrabold tracking-tight mb-7 leading-tight text-ncr-text">
-              Ready to Talk Strategy?
+            <p class="text-xs tracking-wide uppercase text-ncr-muted mb-4">Contact</p>
+            <h1 id="contact-heading" class="font-display text-3xl sm:text-display-lg mb-7 leading-tight text-ncr-text">
+              Tell us what you need.
             </h1>
             <p class="text-ncr-muted leading-relaxed mb-10 max-w-md">
-              Tell us where you are and where you need to be.
-              <span class="text-ncr-text">NCR Digital</span> will map a path back to you promptly,
-              scoped to whichever pillar and engagement model fits.
+              Where you are today, and where you need to be. We'll respond with which engagement
+              fits and what we'd need to scope it.
             </p>
 
             <div class="space-y-5">
@@ -35,37 +32,34 @@ const FORMSPREE_ID = 'mwvrkrqn';
                 href="mailto:niekos.c.robbins+ncr@gmail.com"
                 class="flex items-center gap-4 group text-ncr-muted hover:text-ncr-text transition-colors"
               >
-                <div class="w-10 h-10 border border-ncr-border flex items-center justify-center group-hover:border-ncr-cyan transition-colors flex-shrink-0">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ncr-cyan" aria-hidden="true">
+                <div class="w-10 h-10 rounded-card border border-ncr-border flex items-center justify-center group-hover:border-ncr-accent transition-colors flex-shrink-0">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ncr-accent" aria-hidden="true">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                     <polyline points="22,6 12,13 2,6"/>
                   </svg>
                 </div>
                 <div>
-                  <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Direct Inquiry</p>
+                  <p class="text-xs text-ncr-muted uppercase tracking-wide mb-0.5">Direct inquiry</p>
                   <p class="text-ncr-text text-sm font-medium">niekos.c.robbins+ncr@gmail.com</p>
                 </div>
               </a>
 
               <div class="flex items-center gap-4">
-                <div class="w-10 h-10 border border-ncr-border flex items-center justify-center flex-shrink-0">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ncr-cyan" aria-hidden="true">
+                <div class="w-10 h-10 rounded-card border border-ncr-border flex items-center justify-center flex-shrink-0">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ncr-accent" aria-hidden="true">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                     <circle cx="12" cy="10" r="3"/>
                   </svg>
                 </div>
                 <div>
-                  <p class="text-xs font-mono text-ncr-muted tracking-widest uppercase mb-0.5">Headquarters</p>
-                  <p class="text-ncr-text text-sm font-medium">College Station, TX · Serving Global Ventures</p>
+                  <p class="text-xs text-ncr-muted uppercase tracking-wide mb-0.5">Headquarters</p>
+                  <p class="text-ncr-text text-sm font-medium">College Station, TX · working with clients globally</p>
                 </div>
               </div>
             </div>
 
-            <div class="mt-10 border border-ncr-border px-5 py-4 bg-ncr-card">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-ncr-cyan animate-pulse" aria-hidden="true"></span>
-                <span class="font-mono text-xs text-ncr-muted tracking-wide">Status: Accepting New Engagements</span>
-              </div>
+            <div class="mt-10 rounded-card border border-ncr-border px-5 py-4 bg-ncr-card">
+              <p class="text-xs text-ncr-muted">Currently accepting new engagements.</p>
             </div>
           </div>
 
@@ -78,8 +72,8 @@ const FORMSPREE_ID = 'mwvrkrqn';
             >
               <div class="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label for="name" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
-                    Name <span class="text-ncr-cyan" aria-hidden="true">*</span>
+                  <label for="name" class="block text-xs text-ncr-muted uppercase tracking-wide mb-2">
+                    Name <span class="text-ncr-accent" aria-hidden="true">*</span>
                   </label>
                   <input
                     type="text"
@@ -87,12 +81,12 @@ const FORMSPREE_ID = 'mwvrkrqn';
                     name="name"
                     required
                     autocomplete="name"
-                    placeholder="Your Name"
-                    class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
+                    placeholder="Your name"
+                    class="w-full bg-ncr-card border border-ncr-border rounded-card px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-accent transition-colors"
                   />
                 </div>
                 <div>
-                  <label for="company" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
+                  <label for="company" class="block text-xs text-ncr-muted uppercase tracking-wide mb-2">
                     Company
                   </label>
                   <input
@@ -100,15 +94,15 @@ const FORMSPREE_ID = 'mwvrkrqn';
                     id="company"
                     name="company"
                     autocomplete="organization"
-                    placeholder="Company Name"
-                    class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
+                    placeholder="Company name"
+                    class="w-full bg-ncr-card border border-ncr-border rounded-card px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-accent transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label for="email" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
-                  Email <span class="text-ncr-cyan" aria-hidden="true">*</span>
+                <label for="email" class="block text-xs text-ncr-muted uppercase tracking-wide mb-2">
+                  Email <span class="text-ncr-accent" aria-hidden="true">*</span>
                 </label>
                 <input
                   type="email"
@@ -117,30 +111,28 @@ const FORMSPREE_ID = 'mwvrkrqn';
                   required
                   autocomplete="email"
                   placeholder="you@domain.com"
-                  class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors"
+                  class="w-full bg-ncr-card border border-ncr-border rounded-card px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-accent transition-colors"
                 />
               </div>
 
               <div>
-                <label for="pillar" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
-                  Primary Interest
+                <label for="capability" class="block text-xs text-ncr-muted uppercase tracking-wide mb-2">
+                  Primary interest
                 </label>
                 <select
-                  id="pillar"
-                  name="pillar"
-                  class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-muted focus:outline-none focus:border-ncr-cyan transition-colors appearance-none"
+                  id="capability"
+                  name="capability"
+                  class="w-full bg-ncr-card border border-ncr-border rounded-card px-4 py-3 text-sm text-ncr-muted focus:outline-none focus:border-ncr-accent transition-colors appearance-none"
                 >
-                  <option value="">Select a pillar...</option>
-                  <option value="marketing">Marketing (Paid, Organic, GEO)</option>
-                  <option value="finance">Finance (FP&amp;A &amp; Strategy)</option>
-                  <option value="operations">Operations (AI Adoption)</option>
-                  <option value="full">Full Engagement (Multiple Pillars)</option>
+                  <option value="">Select one...</option>
+                  {capabilities.map((c) => <option value={c.slug}>{c.formLabel}</option>)}
+                  <option value="both">Both</option>
                 </select>
               </div>
 
               <div>
-                <label for="message" class="block font-mono text-xs text-ncr-muted tracking-widest uppercase mb-2">
-                  Project Brief <span class="text-ncr-cyan" aria-hidden="true">*</span>
+                <label for="message" class="block text-xs text-ncr-muted uppercase tracking-wide mb-2">
+                  Project brief <span class="text-ncr-accent" aria-hidden="true">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -148,18 +140,15 @@ const FORMSPREE_ID = 'mwvrkrqn';
                   required
                   rows="5"
                   placeholder="Where you are today and what you're trying to achieve in the next 12 months..."
-                  class="w-full bg-ncr-card border border-ncr-border px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-cyan transition-colors resize-none"
+                  class="w-full bg-ncr-card border border-ncr-border rounded-card px-4 py-3 text-sm text-ncr-text placeholder-ncr-muted/50 focus:outline-none focus:border-ncr-accent transition-colors resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                class="w-full bg-ncr-cyan text-white font-semibold py-4 px-6 text-sm tracking-wide hover:bg-ncr-cyan/90 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2"
+                class="w-full bg-ncr-accent text-white font-medium py-4 px-6 text-sm rounded-pill hover:bg-ncr-accentHover active:scale-[0.99] transition-all duration-200"
               >
-                Send Inquiry
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
+                Send inquiry
               </button>
             </form>
           </div>

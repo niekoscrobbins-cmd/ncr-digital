@@ -1,0 +1,24 @@
+---
+// A recurring "how we decide" module, one per capability page. This is
+// where the data-driven positioning gets a concrete, load-bearing home
+// instead of being an adjective sprinkled through the copy — it states the
+// actual evidence standard a recommendation has to clear.
+export interface Props {
+  title?: string;
+  items: string[];
+}
+
+const { title = 'How we decide', items } = Astro.props;
+---
+
+<section class="rounded-card border border-ncr-border bg-ncr-surface p-6 sm:p-8 my-8" aria-label={title}>
+  <p class="text-xs tracking-wide uppercase text-ncr-muted mb-4">{title}</p>
+  <ol class="space-y-3">
+    {items.map((item, i) => (
+      <li class="flex gap-3 text-ncr-text text-sm sm:text-base leading-relaxed">
+        <span class="font-mono text-ncr-accent flex-shrink-0">{i + 1}.</span>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ol>
+</section>

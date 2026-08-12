@@ -4,32 +4,29 @@ import Layout from '@/layouts/Layout.astro';
 import Navigation from '@/components/Navigation.astro';
 import Footer from '@/components/Footer.astro';
 import SectionHero from '@/components/SectionHero.astro';
+import { capabilityBySlug } from '@/data/capabilities';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const categoryLabels: Record<string, string> = {
-  marketing: 'Marketing',
-  finance: 'Finance',
-  operations: 'Operations',
-};
-
 function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  // timeZone: 'UTC' pinned for the same reason as PageByline.astro: frontmatter
+  // dates parse as UTC midnight, so an unpinned format can render a day early.
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
 ---
 
 <Layout
   title="Insights | NCR Digital"
-  description="Practitioner-level writing on AI-era marketing (GEO and technical SEO), finance strategy, and AI adoption, from the team at NCR Digital."
+  description="Technical SEO walkthroughs, AI search notes, and adoption strategy, written by the people doing the work at NCR Digital."
 >
   <Navigation />
 
   <main id="main-content">
     <SectionHero
       eyebrow="Insights"
-      title="Marketing, Finance, and Operations: Explained by the People Doing the Work"
-      subtitle="Strategy frameworks, technical walkthroughs, and data-backed analysis across all three NCR Digital pillars."
+      title="Notes from the work"
+      subtitle="Technical SEO breakdowns and AI strategy notes, written by the people doing the work."
       size="lg"
     />
 
@@ -39,18 +36,18 @@ function formatDate(date: Date): string {
 
         {posts.length === 0 ? (
           <div class="text-center py-24">
-            <p class="font-mono text-ncr-muted text-sm">No posts yet. Check back soon.</p>
+            <p class="text-ncr-muted text-sm">No posts yet. Check back soon.</p>
           </div>
         ) : (
-          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+          <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" role="list">
             {posts.map((post) => (
               <li role="listitem">
                 <a
                   href={`/insights/${post.slug}/`}
-                  class="group flex flex-col h-full bg-ncr-card border border-ncr-border hover:border-ncr-cyan transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ncr-cyan"
+                  class="group flex flex-col h-full bg-ncr-card border border-ncr-border rounded-card overflow-hidden hover:border-ncr-accent transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ncr-accent"
                   aria-label={`Read: ${post.data.title}`}
                 >
-                  <div class="aspect-[16/7] bg-ncr-bg border-b border-ncr-border relative overflow-hidden flex items-center justify-center">
+                  <div class="aspect-[16/9] bg-ncr-surface border-b border-ncr-border relative overflow-hidden flex items-center justify-center">
                     {post.data.image ? (
                       <img
                         src={post.data.image}
@@ -62,21 +59,21 @@ function formatDate(date: Date): string {
                         decoding="async"
                       />
                     ) : (
-                      <span class="font-mono text-ncr-cyan/20 text-4xl font-bold select-none" aria-hidden="true">NCR</span>
+                      <span class="font-display text-ncr-accent/15 text-4xl select-none" aria-hidden="true">NCR</span>
                     )}
                   </div>
 
                   <div class="flex flex-col flex-1 p-7">
                     <div class="flex items-center gap-3 mb-4">
-                      <span class="font-mono text-[10px] tracking-widest uppercase text-ncr-cyan border border-ncr-cyan/40 px-2 py-0.5">
-                        {categoryLabels[post.data.category]}
+                      <span class="text-[11px] tracking-wide uppercase text-ncr-accent bg-ncr-surface rounded-pill px-2.5 py-1">
+                        {capabilityBySlug[post.data.category]?.label ?? post.data.category}
                       </span>
                       <time datetime={post.data.pubDate.toISOString()} class="font-mono text-xs text-ncr-muted tracking-wide">
                         {formatDate(post.data.pubDate)}
                       </time>
                     </div>
 
-                    <h3 class="text-ncr-text font-bold text-lg leading-snug mb-3 group-hover:text-ncr-cyan transition-colors duration-200">
+                    <h3 class="font-display text-ncr-text text-xl leading-snug mb-3 group-hover:text-ncr-accent transition-colors duration-200">
                       {post.data.title}
                     </h3>
 
@@ -84,11 +81,8 @@ function formatDate(date: Date): string {
                       {post.data.description}
                     </p>
 
-                    <div class="mt-6 flex items-center gap-1.5 font-mono text-xs text-ncr-cyan tracking-widest uppercase group-hover:gap-3 transition-all duration-200">
-                      Read Article
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
-                        <path d="M2 6h8M6 2l4 4-4 4"/>
-                      </svg>
+                    <div class="mt-6 text-sm text-ncr-accent underline decoration-ncr-accent/30 underline-offset-4 group-hover:decoration-ncr-accent transition-colors duration-200">
+                      Read article
                     </div>
                   </div>
                 </a>

@@ -1,5 +1,15 @@
 ---
-import { ORG_ID, FOUNDER_ID } from '@/lib/schema';
+// Self-hosted fonts, bundled by Astro rather than fetched from a third-party
+// CDN — a firm that sells Core Web Vitals work should not ship a
+// render-blocking cross-origin font request. Each file declares
+// unicode-range per subset, so browsers only download the latin cut.
+// `wght.css` is the weight axis alone: no optical-size axis, no italics.
+import '@fontsource-variable/newsreader/wght.css';
+import '@fontsource-variable/ibm-plex-sans/wght.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import { SITE_URL, ORG_ID, FOUNDER_ID, WEBSITE_ID } from '@/lib/schema';
 
 export interface Props {
   title?: string;
@@ -9,21 +19,28 @@ export interface Props {
 }
 
 const {
-  title = 'NCR Digital | AI Strategy for Marketing, Finance & Operations',
-  description = 'NCR Digital is a boutique AI strategy consultancy helping high-growth companies win visibility in AI-answer search, sharpen financial strategy, and adopt AI operationally.',
+  title = 'NCR Digital | SEO & AI Strategy',
+  description = 'NCR Digital is a boutique consultancy doing two things: technical SEO and AI-answer visibility, and AI strategy consulting grounded in financial modeling.',
   canonicalUrl = new URL(Astro.url.pathname, 'https://ncrdigi.com').href,
   ogImage = 'https://ncrdigi.com/og-main-cover.png',
 } = Astro.props;
 
-// Sitewide entity graph: Organization + founder Person, both carrying stable
-// @ids so pillar-page Service nodes and per-post BlogPosting nodes can
-// reference them instead of duplicating the same data inline.
-// TODO: add Person.image once a founder photo asset exists (see plan Phase 3).
+// Sitewide entity graph: Organization + founder Person + WebSite, all
+// carrying stable @ids so capability-page Service nodes and per-post
+// BlogPosting nodes can reference them instead of duplicating the same
+// data inline. Enriched once, per the plan's "one schema pass, then stop"
+// rule — see src/pages/credentials.astro for the human-readable version of
+// every fact asserted here. Deliberately NOT included: legalName and
+// foundingDate (NCR Digital isn't a registered legal entity yet — asserting
+// either would be fabricating a claim /credentials explicitly says isn't
+// true), telephone (none exists), and priceRange (pricing stays unpublished
+// by design, see /how-we-work).
+// TODO: add Person.image once a founder photo asset exists.
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Organization',
+      '@type': 'ProfessionalService',
       '@id': ORG_ID,
       name: 'NCR Digital',
       url: 'https://ncrdigi.com',
@@ -32,20 +49,42 @@ const schema = {
       // TODO: Update email to branded domain address (e.g. hello@ncrdigi.com) once email is configured
       email: 'niekos.c.robbins+ncr@gmail.com',
       founder: { '@id': FOUNDER_ID },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'College Station',
+        addressRegion: 'TX',
+        addressCountry: 'US',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'niekos.c.robbins+ncr@gmail.com',
+        url: 'https://ncrdigi.com/contact',
+      },
+      sameAs: ['https://www.linkedin.com/in/niekolas-robbins'],
       areaServed: 'Worldwide',
-      knowsAbout: ['AI Strategy', 'Generative Engine Optimization', 'Technical SEO', 'FP&A', 'AI Adoption Strategy'],
+      knowsAbout: ['Technical SEO', 'Generative Engine Optimization', 'Organic Lead Generation', 'AI Strategy Consulting', 'AI Adoption Strategy'],
     },
     {
       '@type': 'Person',
       '@id': FOUNDER_ID,
       name: 'Niekos Robbins',
       url: 'https://ncrdigi.com/about',
+      jobTitle: 'Founder',
+      description: 'Founder of NCR Digital. Prior technical SEO work scaling organic search for a high-growth automotive SaaS platform is the basis for the case study referenced across this site.',
       sameAs: ['https://www.linkedin.com/in/niekolas-robbins'],
       alumniOf: {
         '@type': 'CollegeOrUniversity',
         name: 'Texas A&M University',
       },
       worksFor: { '@id': ORG_ID },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': WEBSITE_ID,
+      url: SITE_URL,
+      name: 'NCR Digital',
+      publisher: { '@id': ORG_ID },
     },
   ],
 };
@@ -76,13 +115,6 @@ const schema = {
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-
     <title>{title}</title>
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -104,17 +136,29 @@ const schema = {
 </html>
 
 <style is:global>
-  /* Custom scrollbar, light theme */
+  /* Palette tokens mirrored from tailwind.config.mjs. These few global rules
+     can't reach Tailwind's theme, so the values are declared once here as
+     custom properties instead of being hand-duplicated at each use site. */
+  :root {
+    --ncr-surface: #f2eee8;
+    --ncr-border:  #ded7cb;
+    --ncr-rule:    #c9c0b2;
+    --ncr-text:    #1b1917;
+    --ncr-muted:   #6b645c;
+    --ncr-accent:  #173248;
+  }
+
+  /* Custom scrollbar */
   ::-webkit-scrollbar          { width: 5px; }
-  ::-webkit-scrollbar-track    { background: #f7f8fa; }
-  ::-webkit-scrollbar-thumb    { background: #cbd2dc; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #0072ce; }
+  ::-webkit-scrollbar-track    { background: var(--ncr-surface); }
+  ::-webkit-scrollbar-thumb    { background: var(--ncr-rule); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ncr-accent); }
 
   /* Smooth focus outlines */
-  :focus-visible { outline: 2px solid #0072ce; outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--ncr-accent); outline-offset: 2px; }
 
   /* Selection color */
-  ::selection { background: rgba(0, 114, 206, 0.15); color: #0b0e14; }
+  ::selection { background: rgba(23, 50, 72, 0.14); color: var(--ncr-text); }
 </style>
 
 <script>

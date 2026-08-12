@@ -32,12 +32,11 @@ const titleClass = size === 'xl' ? 'text-4xl sm:text-display-lg lg:text-display-
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class={`flex flex-col gap-6 max-w-4xl ${alignClass}`}>
       {eyebrow && (
-        <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase flex items-center gap-3">
-          <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
+        <p class="text-xs tracking-wide uppercase text-ncr-muted">
           {eyebrow}
         </p>
       )}
-      <h1 class={`${titleClass} font-extrabold tracking-tight text-ncr-text`}>
+      <h1 class={`${titleClass} font-display text-ncr-text`}>
         {title}
       </h1>
       {subtitle && (
@@ -46,11 +45,11 @@ const titleClass = size === 'xl' ? 'text-4xl sm:text-display-lg lg:text-display-
         </p>
       )}
       {(ctaLabel || secondaryCtaLabel) && (
-        <div class="flex flex-wrap gap-4 mt-2">
+        <div class="flex flex-wrap items-center gap-6 mt-2">
           {ctaLabel && ctaHref && (
             <a
               href={ctaHref}
-              class="px-6 py-3 bg-ncr-cyan text-white text-sm font-medium tracking-wide hover:bg-ncr-cyan/90 active:scale-[0.98] transition-all duration-200"
+              class="px-6 py-3 rounded-pill bg-ncr-accent text-white text-sm font-medium hover:bg-ncr-accentHover active:scale-[0.98] transition-all duration-200"
             >
               {ctaLabel}
             </a>
@@ -58,7 +57,7 @@ const titleClass = size === 'xl' ? 'text-4xl sm:text-display-lg lg:text-display-
           {secondaryCtaLabel && secondaryCtaHref && (
             <a
               href={secondaryCtaHref}
-              class="px-6 py-3 border border-ncr-border text-ncr-text text-sm font-medium tracking-wide hover:border-ncr-cyan hover:text-ncr-cyan transition-all duration-200"
+              class="text-sm font-medium text-ncr-text underline decoration-ncr-rule underline-offset-4 hover:decoration-ncr-accent hover:text-ncr-accent transition-colors duration-200"
             >
               {secondaryCtaLabel}
             </a>

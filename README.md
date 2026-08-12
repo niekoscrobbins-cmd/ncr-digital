@@ -1,13 +1,14 @@
 # NCR Digital (ncrdigi.com)
 
-AI strategy consultancy site — Marketing (paid, organic, GEO), Finance (FP&A), and Operations
-(AI adoption) — built as a static Astro site.
+SEO and AI strategy consultancy site — organic search/AI-answer visibility, and AI adoption
+strategy grounded in financial modeling — built as a static Astro site.
 
 ## Stack
 
 - [Astro](https://astro.build) v5, `output: 'static'`
 - TypeScript (strict), `@/*` aliased to `src/*`
-- Tailwind CSS (light-first `ncr.*` design tokens in `tailwind.config.mjs`)
+- Tailwind CSS (warm editorial `ncr.*` design tokens in `tailwind.config.mjs`); display type is
+  Newsreader, UI/body is IBM Plex Sans, data/labels are IBM Plex Mono, self-hosted via `@fontsource*`
 - Content Collections + Zod for `/insights` posts (`src/content/blog/`)
 - Vanilla `<script>` only — no React/Vue/CMS
 - Deployed on Vercel (`vercel.json`)
@@ -25,15 +26,19 @@ npx astro check   # typecheck .astro files
 ## Site structure
 
 ```
-/                        Homepage — 3-pillar story
-/capabilities/marketing  Paid media, technical SEO, GEO
-/capabilities/finance    FP&A and financial modeling
-/capabilities/operations AI adoption and workflow strategy
+/                        Homepage
+/seo                     Technical SEO and AI-answer visibility (GEO)
+/ai-strategy             AI adoption strategy and financial modeling
 /how-we-work             Engagement models: project-based vs. subscription
-/about                   Founder story
+/about                   About
 /insights                Blog (content collection id: `blog`, route: `/insights/`)
 /contact                 Contact form (Formspree)
 ```
+
+The two capabilities (`slug`, `label`, `href`, copy) are defined once in `src/data/capabilities.ts`
+and derived everywhere else that needs them: nav, footer, homepage cards, the blog category enum,
+the insights index/post pages, and the contact form's select. Add a capability there, not in each
+of those places.
 
 `vercel.json` redirects legacy `/blog/*` URLs (and `www.`) to their new equivalents.
 
@@ -47,13 +52,13 @@ npx astro check   # typecheck .astro files
    title: "Post Title"
    description: "One-sentence summary."
    pubDate: 2026-08-01
-   category: marketing   # marketing | finance | operations — required, drives hub-spoke linking
+   category: seo   # seo | ai-strategy — required, drives hub-spoke linking (see src/data/capabilities.ts)
    tags: ["tag-one"]
    keyFacts:              # optional — renders as a KeyFactsBlock at the top of the post
      - "A dense, citable fact."
    ---
    ```
-3. Write the body in Markdown. Link up to the post's pillar page and to related posts near the
+3. Write the body in Markdown. Link up to the post's capability page and to related posts near the
    bottom under an `## Other reads` heading — this is the hub-spoke linking pattern the AI-SEO
    standard depends on.
 4. The post appears automatically at `/insights/<filename-without-extension>/` and in the
