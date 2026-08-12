@@ -113,7 +113,15 @@ const schema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    {/* SVG first for modern browser tabs; PNG fallbacks because Google's
+        search-results favicon crawler has inconsistent SVG support and
+        documents a preference for a raster icon sized a multiple of 48px.
+        Without these, Search Console can keep serving a stale/cached icon
+        indefinitely even after the live favicon changes. */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <title>{title}</title>
 
