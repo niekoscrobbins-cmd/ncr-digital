@@ -12,17 +12,17 @@ const faqItems = [
   {
     question: 'Which engagement model should I choose: project-based or subscription?',
     answer:
-      'Choose project-based if you have a defined deliverable (an audit, a financial model, a tooling rollout) and an internal team to run it afterward. Choose subscription if you want NCR Digital to keep executing month over month, or if the pillar (most often Marketing/GEO) needs ongoing iteration to keep working.',
+      'Project-based if you have a defined deliverable, an audit, a model, a tooling rollout, and a team in place to run it afterward. Subscription if you want the work to keep running month over month, which is most common with SEO, since it compounds with ongoing iteration.',
   },
   {
     question: 'Can I switch from project-based to subscription later?',
     answer:
-      'Yes. Most subscription engagements start as a project-based engagement first, so the initial build and the ongoing maintenance are scoped separately rather than bundled from day one.',
+      'Yes. Most subscription engagements start as a project first, so the initial build and the ongoing work are scoped separately rather than bundled from day one.',
   },
   {
     question: 'Do you publish pricing?',
     answer:
-      'Not publicly. Scope varies too much by pillar, company stage, and starting condition to make a published range meaningful. Book a call and you\'ll get a scoped proposal.',
+      'Not publicly. Scope varies too much by company stage and starting condition for a published range to mean much. Book a call and you\'ll get a scoped proposal.',
   },
 ];
 const faqSchema = buildFaqPageSchema(faqItems);
@@ -30,41 +30,44 @@ const faqSchema = buildFaqPageSchema(faqItems);
 
 <Layout
   title="How We Work | NCR Digital Engagement Models"
-  description="NCR Digital offers two engagement models across Marketing, Finance, and Operations: project-based (build and hand off) and subscription (consult, then maintain on retainer)."
+  description="NCR Digital offers two engagement models, project-based and subscription, across SEO and AI strategy work."
 >
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
 
   <Navigation />
   <main id="main-content">
     <SectionHero
-      eyebrow="How We Work"
-      title="Two engagement models. Every engagement fits one of them."
-      subtitle="NCR Digital works one of two ways across all three pillars: a project you own once it's built, or a subscription we keep running with you. Neither requires a published price; every engagement is scoped to your starting point."
+      eyebrow="How we work"
+      title="Two engagement models. Every project fits one of them."
+      subtitle="A project you own once it's built, or a subscription we keep running with you. Neither has a published price; every engagement is scoped to your starting point."
       size="lg"
     />
 
     <section class="py-16 sm:py-24" aria-labelledby="models-heading">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-ncr-muted text-xs mb-8">
+          Last reviewed <time datetime="2026-08-11">August 11, 2026</time>
+        </p>
         <h2 id="models-heading" class="sr-only">Engagement model comparison</h2>
         <ComparisonTable
-          caption="Project-Based vs. Subscription"
-          columns={['Project-Based', 'Subscription']}
+          caption="Project-based vs. subscription"
+          columns={['Project-based', 'Subscription']}
           rows={[
-            { label: 'What it is', cells: ['A defined deliverable, built and handed off.', 'Ongoing consulting plus execution, on retainer.'] },
-            { label: 'Best for', cells: ['A specific audit, model, or system with an internal team to run it after.', 'Pillars that need continuous iteration to keep compounding, most often Marketing/GEO.'] },
+            { label: 'What it is', cells: ['A defined deliverable, built and handed off.', 'Ongoing work, on retainer.'] },
+            { label: 'Best for', cells: ['A specific audit, model, or rollout with an internal team to run it after.', 'Work that compounds with continuous iteration, most often SEO.'] },
             { label: 'Duration', cells: ['Fixed scope, fixed end date.', 'Month-to-month, cancel any time after the initial term.'] },
             { label: 'Who owns execution after delivery', cells: ['Your team.', 'NCR Digital, with you.'] },
-            { label: 'Typical starting point', cells: ['A one-time engagement, often the first project with NCR Digital.', 'Follows a project-based engagement once the initial build is proven.'] },
+            { label: 'Typical starting point', cells: ['A one-time engagement, often the first project with us.', 'Follows a project once the initial build is proven.'] },
             { label: 'Pricing', cells: ['Scoped per engagement (book a call).', 'Scoped per engagement (book a call).'] },
           ]}
         />
 
         <KeyFactsBlock
-          title="Key Facts"
+          title="Key facts"
           facts={[
-            'Two engagement models exist: project-based (build and hand off) and subscription (consult, then maintain on retainer).',
-            'Every pillar (Marketing, Finance, Operations) can be engaged either way.',
-            'Most subscription clients start with a project-based engagement first.',
+            'Two engagement models: project-based (build and hand off) and subscription (ongoing work on retainer).',
+            'Both capabilities, SEO and AI strategy, can be engaged either way.',
+            'Most subscription clients start with a project first.',
             'No published pricing; every engagement is scoped to company stage and starting condition.',
           ]}
         />
@@ -76,9 +79,9 @@ const faqSchema = buildFaqPageSchema(faqItems);
         <div class="mt-8">
           <a
             href="/contact"
-            class="inline-flex px-6 py-3 bg-ncr-cyan text-white text-sm font-medium tracking-wide hover:bg-ncr-cyan/90 transition-all duration-200"
+            class="inline-flex px-6 py-3 rounded-pill bg-ncr-accent text-white text-sm font-medium hover:bg-ncr-accentHover transition-all duration-200"
           >
-            Book a Call
+            Book a call
           </a>
         </div>
       </div>

@@ -2,8 +2,9 @@
 title: "How AI Answer Engines Choose What to Cite"
 description: "A technical framework for why LLMs cite certain pages and ignore others, and what that means for how you structure content."
 pubDate: 2026-07-20
+updatedDate: 2026-08-11
 author: "Niekos Robbins"
-category: marketing
+category: seo
 tags: ["GEO", "AI SEO", "structured data"]
 keyFacts:
   - "AI answer engines retrieve a small set of candidate documents, then generate an answer grounded in whichever passages are easiest to extract cleanly."
@@ -11,6 +12,13 @@ keyFacts:
   - "Entity-linked JSON-LD (Organization, Person, Service nodes with stable @ids) gives a model unambiguous signals about who is making a claim, which affects whether it gets attributed."
   - "Comparison tables and key-facts blocks outperform adjective-heavy prose because they are already in a citable, tabular shape."
   - "Being indexed by traditional search is still a prerequisite: most AI answer engines rely on an underlying search index or a bot crawl to discover content in the first place."
+faq:
+  - question: "Does GEO replace traditional SEO?"
+    answer: "No — it's layered on top. Crawlability, indexation, and backlink authority still determine whether a page is even a candidate for retrieval. GEO is what determines whether an already-eligible page gets the citation once it's in the candidate pool."
+  - question: "Can I check whether my content is actually being cited?"
+    answer: "There's no single official dashboard for this yet. The practical approach is running a fixed set of prompts against the major answer engines on a regular cadence and logging whether your domain appears, which is exactly the measurement discipline behind this site's own SEO work."
+  - question: "Does adding FAQPage schema guarantee a citation?"
+    answer: "No. Schema disambiguates entities and gives crawlers a machine-readable confirmation of claims already visible on the page — it doesn't cause a citation on its own, and a schema block whose answers don't match the visible text is a liability, not an asset."
 ---
 
 If you've ever asked ChatGPT or Perplexity a question and watched it cite three sources while ignoring a dozen other pages that covered the same topic, you've seen generative engine optimization (GEO) working, or failing, in real time. Understanding why some pages get cited and others don't is now as practically important as understanding why some pages rank and others don't.
@@ -37,13 +45,15 @@ JSON-LD doesn't directly cause a model to quote your page, but it does two thing
 
 If you're auditing a page for GEO readiness, check for:
 
-1. A 40-60 word direct answer within the first two paragraphs.
-2. At least one question-format heading matching a real query pattern.
-3. A key-facts block or comparison table for any page comparing options or explaining a decision.
-4. Entity-linked JSON-LD (`@id` references, not duplicated inline objects) tying the content back to a verifiable organization and author.
-5. Confirmation that every schema claim is also present in the visible copy.
+| Check | What "pass" looks like |
+|---|---|
+| Answer-first structure | A 40-60 word direct answer within the first two paragraphs |
+| Question-format heading | At least one heading matching a real query pattern |
+| Citable structure | A key-facts block or comparison table for any page comparing options or explaining a decision |
+| Entity-linked JSON-LD | `@id` references, not duplicated inline objects, tying content to a verifiable organization and author |
+| Schema-copy match | Every schema claim is also present in the visible copy |
 
-This is the exact framework NCR Digital applies across its own [Marketing pillar](/capabilities/marketing) pages and every post on this site, including this one.
+This is the exact framework NCR Digital applies across its own [SEO](/seo) pages and every post on this site, including this one.
 
 ## Other reads
 

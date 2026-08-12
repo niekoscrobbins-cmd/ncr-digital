@@ -1,0 +1,231 @@
+---
+// Merges the former Finance and Operations pages into one advisory
+// offering. This is a compression, not a concatenation: fundraising support
+// and the fractional-CFO comparison table (which sold a standalone
+// finance-leadership product) are dropped, and the maturity model plus
+// decision-quality framing are kept and pulled up a level, because both are
+// fundamentally about sequencing a decision against what can be measured.
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHero from '@/components/SectionHero.astro';
+import StickySubnav from '@/components/StickySubnav.astro';
+import KeyFactsBlock from '@/components/KeyFactsBlock.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
+import EvidenceStandard from '@/components/EvidenceStandard.astro';
+import FAQBlock from '@/components/FAQBlock.astro';
+import PageByline from '@/components/PageByline.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import { getCollection } from 'astro:content';
+import { buildFaqPageSchema, buildServiceSchema, SITE_URL } from '@/lib/schema';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+// No slice — see the identical comment in src/pages/seo.astro. Only 2 posts
+// are in this category today so the cap wasn't yet starving anything here,
+// but removing it now means it can't quietly do so once more are added.
+const relatedPosts = allPosts
+  .filter((p) => p.data.category === 'ai-strategy')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'maturity', label: 'Adoption Maturity' },
+  { id: 'modeling', label: 'Modeling & Decisions' },
+  { id: 'tooling', label: 'Tool Selection' },
+  { id: 'faq', label: 'FAQ' },
+];
+
+const faqItems = [
+  {
+    question: 'What does an AI strategy engagement actually produce?',
+    answer:
+      'A sequenced plan for which processes change first, a financial model showing what the change is worth, and, if the engagement includes it, the tool selection and rollout that follow from both.',
+  },
+  {
+    question: 'Is this the same as hiring a fractional CFO or an ops consultant?',
+    answer:
+      'It overlaps with both but isn\'t either. We build the model and sequence the adoption; we don\'t take on broad financial leadership or run day-to-day operations. Most clients keep or hire their own finance and ops leads, and we work alongside them.',
+  },
+  {
+    question: 'What does "AI-assisted" mean in the modeling work?',
+    answer:
+      'AI tooling shortens the cycle time between a question and a modeled answer, scenario iteration, variance drafting, that kind of thing. It doesn\'t replace the underlying judgment. The model and its assumptions are still built and owned by a person, and a model built on messy data will produce a fast, confident, wrong answer just as easily as a slow one.',
+  },
+];
+const faqSchema = buildFaqPageSchema(faqItems);
+
+const serviceSchema = buildServiceSchema({
+  id: `${SITE_URL}/ai-strategy#service`,
+  name: 'AI Strategy Consulting',
+  serviceType: 'Management Consulting',
+  description:
+    'AI adoption sequencing and financial modeling for growth-stage companies deciding where AI tooling actually pays for itself.',
+});
+---
+
+<Layout
+  title="AI Strategy Consulting | NCR Digital"
+  description="AI adoption strategy and financial modeling: sequencing which processes change, and sizing what the change is worth, before anyone buys a tool."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} slot="head" />
+
+  <Navigation />
+  <main id="main-content">
+    <SectionHero
+      eyebrow="Capability"
+      title="Know what AI is worth before you adopt it"
+      subtitle="Advisory work on sequencing AI adoption and modeling what it's actually worth, so tooling decisions follow a business case instead of a trend."
+      size="lg"
+    />
+
+    <StickySubnav sections={sections} />
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* This page is genuinely new — it replaces the deleted
+          /capabilities/finance and /capabilities/operations rather than
+          succeeding either one, so it publishes today rather than
+          inheriting either page's old date. */}
+      <PageByline author="Niekos Robbins" publishedDate={new Date('2026-08-11')} />
+    </div>
+
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
+      <section id="overview">
+        <p class="text-lg text-ncr-text leading-relaxed">
+          Most AI adoption fails for one of two reasons: a company changes too much at once and
+          nothing sticks, or nobody built the model to know whether the change was worth the cost in
+          the first place. This is advisory work on both: sequencing which processes change, and
+          sizing what the change is worth before anyone commits budget to it.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-6">
+          The two problems are related. A company can find a process worth changing and still not
+          know whether it can afford to change it, or in what order, without a financial model behind
+          the decision. We build that model and the adoption sequence together, rather than treating
+          them as two separate engagements.
+        </p>
+      </section>
+
+      <ScrollReveal>
+      <section id="maturity">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          How do you sequence AI adoption?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          Across four stages, moving from individual tool use to an embedded process. Skipping stages
+          is the most common cause of failed rollouts: a company licenses five tools for five teams
+          at once, nothing sticks, and the conclusion is "AI doesn't work for us" when the actual
+          problem was sequencing.
+        </p>
+        <ol class="mt-4 space-y-3 text-ncr-muted">
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-accent flex-shrink-0">1.</span>
+            <span><strong class="text-ncr-text">Individual augmentation.</strong> Specific people use AI tools to do their existing job faster, no process change required.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-accent flex-shrink-0">2.</span>
+            <span><strong class="text-ncr-text">Team workflow redesign.</strong> One team's process is rebuilt around the tooling, with clear ownership and a defined human-review handoff.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-accent flex-shrink-0">3.</span>
+            <span><strong class="text-ncr-text">Cross-functional integration.</strong> The redesigned workflow connects to adjacent teams' systems, once stage 2 is proven in at least one team.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="font-mono text-ncr-accent flex-shrink-0">4.</span>
+            <span><strong class="text-ncr-text">Embedded operating model.</strong> The AI-assisted process is the default way the work happens, with governance built in rather than bolted on.</span>
+          </li>
+        </ol>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="modeling">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          How do you decide what a stage is worth?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          Before moving from one stage to the next, we build the model that answers whether it's
+          worth it: scenario and sensitivity analysis on what changes if the workflow scales, and a
+          monthly variance check tying the result back to what was forecast. AI tooling shortens how
+          long that modeling takes, not the judgment behind it. A model built on messy, uncategorized
+          data will produce a fast, confident, wrong answer just as easily as a slow one, so the data
+          structure gets fixed before any AI-assisted iteration runs on top of it.
+        </p>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="tooling">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          How do you choose which tools to adopt?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          From the workflow bottleneck, not the vendor landscape. We identify the specific process
+          that's slow or error-prone first, then evaluate tools against that defined need. That
+          avoids the common failure of licensing a broad platform that no team ends up using because
+          it was never selected to solve a problem anyone actually had. Enablement, training, usage
+          guidelines, and a feedback loop that catches where a workflow is quietly being avoided, is
+          what makes the redesign stick after the tool is chosen.
+        </p>
+      </section>
+      </ScrollReveal>
+
+      <EvidenceStandard
+        items={[
+          'No stage of the adoption sequence advances without a model showing what it\'s worth.',
+          'Fix the underlying data structure before any AI-assisted scenario modeling runs on top of it.',
+          'Tool selection starts from a measured bottleneck, never from a vendor pitch.',
+        ]}
+      />
+
+      <KeyFactsBlock
+        title="Key facts"
+        facts={[
+          'Adoption is sequenced across four stages: individual augmentation, team workflow redesign, cross-functional integration, embedded operating model.',
+          'Most AI-adoption failures are sequencing failures, changing too much at once, not tooling failures.',
+          'Every stage transition is backed by a financial model: scenario analysis, then a variance check against the forecast.',
+          'Tool selection starts from a defined workflow bottleneck, never from the vendor landscape.',
+        ]}
+      />
+
+      <ComparisonTable
+        caption="Engagement fit by maturity stage"
+        columns={['Best engagement model']}
+        rows={[
+          { label: 'Individual augmentation', cells: ['Project-based: a short tooling and training rollout.'] },
+          { label: 'Team workflow redesign', cells: ['Project-based, often followed by a subscription for enablement.'] },
+          { label: 'Cross-functional integration', cells: ['Subscription: ongoing coordination across teams.'] },
+          { label: 'Embedded operating model', cells: ['Subscription: ongoing governance and iteration.'] },
+        ]}
+      />
+
+      {relatedPosts.length > 0 && (
+        <section aria-labelledby="related-heading">
+          <h2 id="related-heading" class="font-display text-xl text-ncr-text mb-4">Related insights</h2>
+          <ul class="space-y-3">
+            {relatedPosts.map((post) => (
+              <li>
+                <a href={`/insights/${post.slug}/`} class="text-ncr-accent underline decoration-ncr-accent/30 underline-offset-4 hover:decoration-ncr-accent font-medium">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div id="faq">
+        <FAQBlock items={faqItems} />
+      </div>
+
+      <div>
+        <a
+          href="/contact"
+          class="inline-flex px-6 py-3 rounded-pill bg-ncr-accent text-white text-sm font-medium hover:bg-ncr-accentHover transition-all duration-200"
+        >
+          Talk to us about AI strategy
+        </a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

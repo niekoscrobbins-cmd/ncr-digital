@@ -11,10 +11,10 @@ import { navLinks, contactHref, contactCtaLabel } from '@/data/nav';
       <div class="flex items-center justify-between h-16">
 
         <!-- Logo -->
-        <a href="/" class="font-mono font-bold text-xl tracking-widest group" aria-label="NCR Digital home">
-          <span class="text-ncr-text group-hover:text-ncr-cyan transition-colors duration-200">NCR</span><!--
-          --><span class="text-ncr-cyan">D</span><!--
-          --><span class="text-ncr-text group-hover:text-ncr-cyan transition-colors duration-200">IGITAL</span>
+        <a href="/" class="font-display text-xl group" aria-label="NCR Digital home">
+          <span class="text-ncr-text group-hover:text-ncr-accent transition-colors duration-200">NCR</span><!--
+          --><span class="text-ncr-accent">D</span><!--
+          --><span class="text-ncr-text group-hover:text-ncr-accent transition-colors duration-200">igital</span>
         </a>
 
         <!-- Desktop links -->
@@ -22,15 +22,15 @@ import { navLinks, contactHref, contactCtaLabel } from '@/data/nav';
           {navLinks.map(({ label, href }) => (
             <a
               href={href}
-              class="text-ncr-muted hover:text-ncr-text text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+              class="text-ncr-muted hover:text-ncr-text text-sm font-medium transition-colors duration-200 relative group"
             >
               {label}
-              <span class="absolute -bottom-0.5 left-0 h-px w-0 bg-ncr-cyan transition-all duration-300 group-hover:w-full" />
+              <span class="absolute -bottom-0.5 left-0 h-px w-0 bg-ncr-accent transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
           <a
             href={contactHref}
-            class="px-5 py-2 bg-ncr-cyan text-white text-sm font-medium tracking-wide hover:bg-ncr-cyan/90 transition-all duration-200"
+            class="px-5 py-2 rounded-pill bg-ncr-accent text-white text-sm font-medium hover:bg-ncr-accentHover transition-all duration-200"
           >
             {contactCtaLabel}
           </a>
@@ -70,7 +70,7 @@ import { navLinks, contactHref, contactCtaLabel } from '@/data/nav';
         <div class="pt-3">
           <a
             href={contactHref}
-            class="inline-flex items-center px-5 py-2.5 bg-ncr-cyan text-white text-sm font-medium hover:bg-ncr-cyan/90 transition-all duration-200"
+            class="inline-flex items-center px-5 py-2.5 rounded-pill bg-ncr-accent text-white text-sm font-medium hover:bg-ncr-accentHover transition-all duration-200"
           >
             {contactCtaLabel}
           </a>

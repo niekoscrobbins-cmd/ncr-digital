@@ -1,31 +1,11 @@
 ---
-// Extracted/generalized from the original CaseStudy.astro so it can be
-// dropped into multiple pages (Marketing pillar, homepage proof section)
-// without duplicating markup. Content: the one existing, user-confirmed
-// automotive SaaS case study.
-//
-// `countFrom`/`countTo`/`decimals`/`prefix`/`suffix` on metrics, and the
-// `pct` used for each DA-bar's `data-target-width`, are opt-in hooks for a
-// count-up/bar-extend animation (currently wired up homepage-only in
-// src/pages/index.astro). The rendered text/width are always the real final
-// values by default, so this component works identically with no animation
-// wherever it's used without that script (e.g. the Marketing pillar page).
-const metrics = [
-  { value: '20 → 44', label: 'Domain Authority', sub: 'in 7 months', prefix: '20 → ', countFrom: 20, countTo: 44, decimals: 0, suffix: '' },
-  { value: '3.2x', label: 'Organic Traffic', sub: 'YoY increase', prefix: '', countFrom: 0, countTo: 3.2, decimals: 1, suffix: 'x' },
-  { value: '47', label: 'First-Page Rankings', sub: 'new keywords', prefix: '', countFrom: 0, countTo: 47, decimals: 0, suffix: '' },
-  { value: '100', label: 'Lighthouse Score', sub: 'all categories', prefix: '', countFrom: 0, countTo: 100, decimals: 0, suffix: '' },
-];
-
-const daProgress = [
-  { month: 'Month 1', da: 20, pct: 30 },
-  { month: 'Month 2', da: 25, pct: 37 },
-  { month: 'Month 3', da: 30, pct: 44 },
-  { month: 'Month 4', da: 35, pct: 52 },
-  { month: 'Month 5', da: 39, pct: 58 },
-  { month: 'Month 6', da: 42, pct: 63 },
-  { month: 'Month 7', da: 44, pct: 66 },
-];
+// The one existing case study: dropped into the homepage and the /seo page
+// without duplicating markup. All numbers, labels, and the attribution
+// framing come from src/data/proof.ts — the canonical fact set — so this
+// component and StatBar (src/pages/index.astro) can never disagree about
+// what a figure means or what window it covers. See proof.ts for the
+// history of what used to be wrong here.
+import { caseStudy } from '@/data/proof';
 
 export interface Props {
   id?: string;
@@ -36,41 +16,44 @@ const { id = 'case-study' } = Astro.props;
 
 <section id={id} class="py-16 sm:py-24" aria-labelledby="casestudy-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <header class="mb-14">
-      <p class="font-mono text-ncr-cyan text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
-        <span class="inline-block h-px w-8 bg-ncr-cyan" aria-hidden="true"></span>
-        Case Study
-      </p>
-      <h2 id="casestudy-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ncr-text">
-        Proven Results
+    <header class="mb-14 max-w-2xl">
+      <p class="text-xs tracking-wide uppercase text-ncr-muted mb-4">Case study</p>
+      <h2 id="casestudy-heading" class="font-display text-3xl sm:text-display-md text-ncr-text">
+        Proven results
       </h2>
     </header>
 
-    <div class="border border-ncr-border bg-ncr-card">
+    <div class="border border-ncr-border rounded-card bg-ncr-card">
       <div class="p-8 lg:p-14">
-        <div class="inline-flex items-center gap-2 border border-ncr-border px-4 py-1.5 mb-10">
-          <span class="w-2 h-2 rounded-full bg-ncr-cyan animate-pulse" aria-hidden="true"></span>
-          <span class="font-mono text-xs tracking-widest text-ncr-muted uppercase">Leading Automotive SaaS Platform × NCR Digital</span>
-        </div>
+        <p class="text-xs tracking-wide uppercase text-ncr-muted mb-2">
+          {caseStudy.client}
+        </p>
+        <p class="text-xs text-ncr-muted mb-10">
+          {caseStudy.attribution} · {caseStudy.window}
+        </p>
 
         <div class="grid lg:grid-cols-2 gap-14 items-start">
           <div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-5 leading-tight text-ncr-text">
-              Domain Authority<br />
-              <span class="text-ncr-cyan font-mono">20 → 44</span> in 7 Months
+            <h3 class="font-display text-2xl sm:text-3xl mb-5 leading-tight text-ncr-text">
+              Domain Rating<br />
+              <span class="text-ncr-accent">20 → 44</span> in 7 months
             </h3>
-            <p class="text-ncr-muted leading-relaxed mb-10 max-w-xl">
-              Executed a full-stack technical SEO transformation for a high-growth automotive SaaS platform,
-              as part of the marketing/GEO practice. Deployed strategic backlink architecture, rebuilt technical
-              content silos by search intent, resolved Core Web Vitals deficits, and rolled out programmatic
-              JSON-LD schema at scale, turning a stagnant domain into a compounding organic asset.
+            <p class="text-ncr-muted leading-relaxed mb-2 max-w-xl">
+              A full-stack technical SEO transformation for {caseStudy.client}.
+              Rebuilt content silos by search intent, resolved Core Web Vitals deficits, deployed
+              programmatic JSON-LD schema at scale, and ran a targeted link-building and disavow
+              campaign. A stagnant domain became a compounding organic asset.
+            </p>
+            <p class="text-ncr-muted text-xs mb-10">
+              Every figure below is sourced to the tool that produced it and states its own
+              measurement window — no rounding, no unscoped comparisons.
             </p>
 
             <div class="grid grid-cols-2 gap-5" role="list" aria-label="Case study metrics">
-              {metrics.map(({ value, label, sub, prefix, countFrom, countTo, decimals, suffix }) => (
-                <div class="border-l-2 border-ncr-cyan pl-4 py-1" role="listitem">
+              {caseStudy.metrics.map(({ value, label, sub, source, prefix, countFrom, countTo, decimals, suffix }) => (
+                <div class="border-l-2 border-ncr-accent pl-4 py-1" role="listitem">
                   <p
-                    class="metric-value font-mono text-2xl font-bold text-ncr-cyan tracking-tight"
+                    class="metric-value font-mono text-2xl font-semibold text-ncr-accent"
                     data-count-from={countFrom}
                     data-count-to={countTo}
                     data-decimals={decimals}
@@ -80,22 +63,23 @@ const { id = 'case-study' } = Astro.props;
                     {value}
                   </p>
                   <p class="text-ncr-text text-sm font-medium mt-0.5">{label}</p>
-                  <p class="text-ncr-muted text-xs mt-0.5">{sub}</p>
+                  <p class="text-ncr-muted text-xs mt-0.5">{sub} · {source}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div aria-label="Domain authority progression chart" role="figure">
-            <p class="font-mono text-xs text-ncr-muted tracking-widest uppercase mb-5">DA Trajectory</p>
+          <div aria-label="Domain Rating progression chart" role="figure">
+            <p class="text-xs tracking-wide uppercase text-ncr-muted mb-1">DR trajectory (Ahrefs)</p>
+            <p class="text-ncr-muted text-xs mb-5">Bars are scaled to their own 0-100 axis.</p>
             <div class="space-y-3">
-              {daProgress.map(({ month, da, pct }) => (
+              {caseStudy.drProgress.map(({ month, dr }) => (
                 <div class="flex items-center gap-3">
                   <span class="font-mono text-xs text-ncr-muted w-16 flex-shrink-0">{month}</span>
-                  <div class="flex-1 h-7 bg-ncr-border/60 relative overflow-hidden" role="progressbar" aria-valuenow={da} aria-valuemin={0} aria-valuemax={100} aria-label={`DA ${da}`}>
-                    <div class="da-bar-fill absolute inset-y-0 left-0 bg-ncr-cyan/20" data-target-width={pct} style={`width: ${pct}%`}></div>
-                    <span class="absolute right-2 top-1/2 -translate-y-1/2 font-mono text-xs text-ncr-cyan font-bold">
-                      {da}
+                  <div class="flex-1 h-6 bg-ncr-surface rounded-full relative overflow-hidden" role="progressbar" aria-valuenow={dr} aria-valuemin={0} aria-valuemax={100} aria-label={`Domain Rating ${dr}`}>
+                    <div class="dr-bar-fill absolute inset-y-0 left-0 bg-ncr-accent/25 rounded-full" data-target-width={dr} style={`width: ${dr}%`}></div>
+                    <span class="absolute right-2.5 top-1/2 -translate-y-1/2 font-mono text-xs text-ncr-accent font-semibold">
+                      {dr}
                     </span>
                   </div>
                 </div>
@@ -103,17 +87,10 @@ const { id = 'case-study' } = Astro.props;
             </div>
 
             <div class="mt-8 pt-6 border-t border-ncr-border">
-              <p class="font-mono text-xs text-ncr-muted tracking-widest uppercase mb-4">Levers Pulled</p>
+              <p class="text-xs tracking-wide uppercase text-ncr-muted mb-4">Levers pulled</p>
               <ul class="space-y-2">
-                {[
-                  'Core Web Vitals: LCP, CLS, INP remediation',
-                  'Programmatic schema at 12k+ pages',
-                  'Content silo rebuild with semantic clusters',
-                  'Toxic backlink disavow + link building sprint',
-                  'GSC-guided crawl budget management',
-                ].map((item) => (
-                  <li class="flex items-start gap-2 text-sm text-ncr-muted">
-                    <span class="text-ncr-cyan font-mono mt-0.5 flex-shrink-0" aria-hidden="true">+</span>
+                {caseStudy.leversPulled.map((item) => (
+                  <li class="text-sm text-ncr-muted pl-4 border-l border-ncr-border">
                     {item}
                   </li>
                 ))}

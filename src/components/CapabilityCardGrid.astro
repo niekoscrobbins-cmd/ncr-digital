@@ -1,31 +1,26 @@
 ---
 export interface Props {
-  cards: { title: string; description: string; href: string; icon?: string }[];
+  cards: { title: string; description: string; href: string }[];
   columns?: 2 | 3;
 }
 
-const { cards, columns = 3 } = Astro.props;
+const { cards, columns = 2 } = Astro.props;
 const gridClass = columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
 ---
 
 <div class={`grid ${gridClass} gap-6`} role="list">
-  {cards.map(({ title, description, href, icon }) => (
+  {cards.map(({ title, description, href }) => (
     <a
       href={href}
-      class="group flex flex-col gap-4 p-8 border border-ncr-border bg-ncr-card hover:border-ncr-cyan transition-colors duration-300"
+      class="group flex flex-col gap-4 p-8 rounded-card border border-ncr-border bg-ncr-card hover:border-ncr-accent transition-colors duration-300"
       role="listitem"
     >
-      {icon && (
-        <span class="inline-flex items-center justify-center w-11 h-11 border border-ncr-border text-ncr-cyan group-hover:bg-ncr-cyan group-hover:text-white group-hover:border-ncr-cyan transition-colors duration-300 text-lg font-mono" aria-hidden="true">
-          {icon}
-        </span>
-      )}
-      <h3 class="text-xl font-bold tracking-tight text-ncr-text group-hover:text-ncr-cyan transition-colors duration-200">
+      <h3 class="font-display text-2xl text-ncr-text group-hover:text-ncr-accent transition-colors duration-200">
         {title}
       </h3>
       <p class="text-ncr-muted text-sm leading-relaxed">{description}</p>
-      <span class="mt-auto text-ncr-cyan text-sm font-medium inline-flex items-center gap-1">
-        Learn more <span aria-hidden="true">→</span>
+      <span class="mt-auto text-ncr-accent text-sm font-medium underline decoration-ncr-accent/30 underline-offset-4 group-hover:decoration-ncr-accent">
+        Learn more
       </span>
     </a>
   ))}

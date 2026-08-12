@@ -2,10 +2,25 @@
 title: "Core Web Vitals Explained: LCP, CLS, and INP for Non-Engineers"
 description: "Most CEOs can't explain why their site is slow. This post closes that gap and ties each metric to revenue."
 pubDate: 2026-03-24
+updatedDate: 2026-08-11
 author: "Niekos Robbins"
-category: marketing
+category: seo
+tags: ["Core Web Vitals", "page speed", "technical SEO"]
 image: "/blog/core-web-vitals-cover.webp"
 imageAlt: "Laptop lid engraved with three performance gauges representing Core Web Vitals: paint, link interaction, and load time"
+keyFacts:
+  - "Core Web Vitals are three metrics: LCP (loading), CLS (visual stability), and INP (responsiveness), each with its own Google-defined good/poor threshold."
+  - "LCP under 2.5 seconds is good; over 4 seconds is poor. It's the metric most directly tied to bounce rate."
+  - "CLS under 0.1 is good. It's frequently caused by images without defined dimensions, dynamically injected banners, and fonts that swap in late."
+  - "INP under 200ms is good; over 500ms is poor. It replaced First Input Delay in 2024 and catches sluggishness that LCP and CLS miss entirely."
+  - "PageSpeed Insights' Field Data (real user data) is what determines rankings — Lab Data is a diagnostic tool, not the ranking signal."
+faq:
+  - question: "Which Core Web Vital should I fix first?"
+    answer: "Whichever one is failing in your Field Data, not Lab Data. Run your five most important pages through PageSpeed Insights and prioritize the metric furthest from its threshold — there's no universal order, it depends on what's actually broken on your site."
+  - question: "Do Core Web Vitals affect rankings directly?"
+    answer: "Yes, they're a confirmed ranking factor, but a comparatively small one next to content relevance and authority. Their bigger effect is usually on conversion rate: a slow or unstable page loses visitors before they ever judge your content."
+  - question: "Can I fix Core Web Vitals without a developer?"
+    answer: "Some of it — image dimension attributes and font-display settings are often CMS-level changes. Render-blocking JavaScript and server response time (TTFB) usually require development work."
 ---
 
 Your site might be losing customers before they read a single word. Core Web Vitals are Google's way of measuring the actual experience of loading and using a page, and they're a confirmed ranking factor. If your scores are poor, you're paying a tax in both rankings and conversions. The good news: once you understand what LCP, CLS, and INP actually measure, knowing where to focus becomes obvious.
@@ -37,15 +52,23 @@ INP catches something LCP and CLS miss: a page can load fast and look stable but
 You can get your current scores in under two minutes:
 
 1. Go to [PageSpeed Insights](https://pagespeed.web.dev/) and enter your homepage and your highest-traffic landing page
-2. Look at the **Field Data** section first (real user data, what Google uses for rankings), not just Lab Data
+2. Look at the **Field Data** section first (real user data, what Google uses for rankings), not just Lab Data. This is the same [real-user data our measurement process](/seo#measurement) instruments from day one on every engagement, not a monthly snapshot.
 3. Note which of the three metrics is failing
 4. Check the **Opportunities** section for the specific fixes Google recommends
 
 Run this for your five most important pages. The results will tell you exactly which metric to prioritize and usually identify the specific resources causing the problem.
 
+## The Three Metrics at a Glance
+
+| Metric | Measures | Good | Poor |
+|---|---|---|---|
+| LCP | How long the largest visible element takes to load | Under 2.5s | Over 4s |
+| CLS | How much the layout shifts as the page loads | Under 0.1 | Over 0.25 |
+| INP | How quickly the page responds to an interaction | Under 200ms | Over 500ms |
+
 Core Web Vitals aren't a box-checking exercise. They're a proxy for whether your site is actually pleasant to use. Fix them, and you improve both your rankings and your conversion rate at the same time.
 
-If you want these fixed on your site, [our technical SEO audit](/capabilities/marketing) covers full Core Web Vitals remediation.
+If you want these fixed on your site, [our technical SEO audit](/seo) covers full Core Web Vitals remediation.
 
 ## Other reads
 

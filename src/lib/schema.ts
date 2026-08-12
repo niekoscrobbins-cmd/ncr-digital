@@ -8,6 +8,7 @@
 export const SITE_URL = 'https://ncrdigi.com';
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const FOUNDER_ID = `${SITE_URL}/#founder`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 export interface FaqItem {
   question: string;

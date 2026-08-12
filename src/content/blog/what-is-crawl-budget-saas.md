@@ -2,10 +2,25 @@
 title: "What Is Crawl Budget and Why It Matters for SaaS Sites"
 description: "A plain-English breakdown of crawl budget and how to stop wasting Googlebot's attention on low-value pages."
 pubDate: 2026-03-21
+updatedDate: 2026-08-11
 author: "Niekos Robbins"
-category: marketing
+category: seo
+tags: ["crawl budget", "SaaS SEO", "technical SEO"]
 image: "/blog/crawl-budget-cover.webp"
 imageAlt: "Laptop lid engraved with two crawl spiders progressing toward a stop sign, flanked by hourglasses representing crawl time limits"
+keyFacts:
+  - "Crawl budget is set by two factors: crawl rate limit (how fast Googlebot can crawl without overloading the server) and crawl demand (how often Google thinks pages need re-crawling)."
+  - "Google's own guidance is explicit that crawl budget rarely matters under a few hundred pages — it becomes a real constraint once a site reaches the thousands, which most SaaS platforms do quickly."
+  - "A high \"Crawled, not indexed\" count in GSC signals Googlebot is visiting pages it doesn't find useful; a swollen \"Discovered, not indexed\" count signals budget is being exhausted before it reaches priority content."
+  - "SaaS sites are especially vulnerable because in-app URLs, filtered views, and documentation hierarchies are built for product and support needs, not crawlability."
+  - "The fix toolkit is almost entirely configuration: robots.txt disallow rules, canonical tags, noindex, and internal link cleanup — not engineering work."
+faq:
+  - question: "How do I know if crawl budget is actually a problem for my site?"
+    answer: "Check the GSC Coverage report for \"Discovered, not indexed\" pages. If that bucket is growing and includes pages you actually want ranked, budget is likely the constraint. Under a few hundred total pages, it's rarely the issue at all."
+  - question: "Does crawl budget affect ranking directly?"
+    answer: "Not directly — a crawled and indexed page competes on relevance and authority like any other. But a page that never gets crawled can't be indexed, and a page that isn't indexed can't rank for anything, so crawl budget determines whether a page is even in the race."
+  - question: "What's the single highest-leverage fix?"
+    answer: "For most SaaS sites, it's disallowing the parameterized and faceted-navigation URL families that generate the most near-duplicate pages. That one change typically frees up more budget than any other single fix."
 ---
 
 Googlebot doesn't have infinite time for your site. It visits, crawls what it can within a budget it silently assigns to your domain, and moves on. If you're running a SaaS platform with thousands of pages (dashboards, filtered views, user-generated content, paginated results), a significant chunk of that budget may be getting burned on pages that will never rank and shouldn't be indexed in the first place. That's the crawl budget optimization problem, and it's more common than most teams realize.
@@ -38,10 +53,12 @@ The next level is crawl log analysis. Your server logs record every Googlebot vi
 
 From there, the fix toolkit is straightforward:
 
-1. **`robots.txt` disallow rules** for URL families that should never be crawled (internal search results, filtered navigation with no unique content)
-2. **Canonical tags** pointing parameter variants back to the clean URL
-3. **`noindex`** for pages that need to stay accessible but shouldn't enter the index
-4. **Internal link cleanup**: don't link to pages you don't want crawled
+| Fix | Use it when |
+|---|---|
+| `robots.txt` disallow rules | The URL family should never be crawled at all (internal search results, filtered navigation with no unique content) |
+| Canonical tags | Parameter variants exist but should consolidate to one clean, indexable URL |
+| `noindex` | The page needs to stay accessible to users but shouldn't enter the index |
+| Internal link cleanup | You're still linking to pages you don't want Googlebot to prioritize |
 
 ## Why SaaS Sites Are Especially Vulnerable
 
@@ -53,10 +70,10 @@ A straightforward crawl budget audit, mapping what Googlebot is actually visitin
 
 If your SaaS site has meaningful page depth and you haven't looked at crawl budget yet, it's worth putting it near the top of your technical SEO list. The indexation gains tend to be fast and measurable.
 
-If you'd like a full crawl budget analysis as part of your technical foundation, [our technical SEO audit](/capabilities/marketing) covers this end-to-end.
+If you'd like a full crawl budget analysis as part of your technical foundation, [our technical SEO audit](/seo) covers this end-to-end.
 
 ## Other reads
 
 - [Robots.txt Mistakes That Are Blocking Your Best Pages](/insights/robots-txt-mistakes/)
 - [Canonical Tags: When to Use Them and When They Break Everything](/insights/canonical-tags-guide/)
-- [How to Read a Crawl Log: A Beginner's Guide](/insights/how-to-read-crawl-log/)
+- [What the First 90 Days of an SEO Engagement Look Like](/insights/first-90-days-seo-engagement/)

@@ -1,0 +1,287 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navigation from '@/components/Navigation.astro';
+import Footer from '@/components/Footer.astro';
+import SectionHero from '@/components/SectionHero.astro';
+import StickySubnav from '@/components/StickySubnav.astro';
+import KeyFactsBlock from '@/components/KeyFactsBlock.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
+import FAQBlock from '@/components/FAQBlock.astro';
+import CaseStudyBlock from '@/components/CaseStudyBlock.astro';
+import EvidenceStandard from '@/components/EvidenceStandard.astro';
+import PageByline from '@/components/PageByline.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import { getCollection } from 'astro:content';
+import { buildFaqPageSchema, buildServiceSchema, SITE_URL } from '@/lib/schema';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+// No slice: an earlier cap of 3 meant 5 of this category's 8 posts got zero
+// link from their own capability page. Every post in the category links
+// back from here — see plan Workstream 5.
+const relatedPosts = allPosts
+  .filter((p) => p.data.category === 'seo')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'geo', label: 'AI Answer Visibility' },
+  { id: 'seo', label: 'Technical SEO' },
+  { id: 'measurement', label: 'Measurement' },
+  { id: 'tools', label: 'Tools' },
+  { id: 'case-study', label: 'Case Study' },
+  { id: 'faq', label: 'FAQ' },
+];
+
+const faqItems = [
+  {
+    question: 'What is generative engine optimization (GEO)?',
+    answer:
+      'GEO structures a page so AI answer engines, ChatGPT, Perplexity, Google AI Overviews, Claude, can extract and cite it. It sits on top of technical SEO fundamentals: answer-first structure, extractable facts, and entity-linked structured data.',
+  },
+  {
+    question: 'Is GEO replacing traditional SEO?',
+    answer:
+      'No, it extends it. Crawlability, Core Web Vitals, and backlink authority still determine whether a page gets indexed and considered credible. Most answer engines still rely on that index. GEO is what happens after: whether the content is structured cleanly enough for a model to lift a citable answer from it.',
+  },
+  {
+    question: 'Do you handle paid search too?',
+    answer:
+      'We advise on how paid should be sized against what organic is already producing, but building and running paid campaigns isn’t something we take on. Our work is organic: technical SEO and AI answer visibility.',
+  },
+  {
+    question: 'How is this different from a typical SEO agency?',
+    answer:
+      'Most SEO work stops at rankings. We report against a small set of numbers agreed at the start of an engagement, usually indexed pages, ranking movement on target terms, and traffic that converts, and we say plainly when a recommendation is a guess versus something the data actually supports.',
+  },
+];
+const faqSchema = buildFaqPageSchema(faqItems);
+
+const serviceSchema = buildServiceSchema({
+  id: `${SITE_URL}/seo#service`,
+  name: 'Organic Search & AI Answer Visibility',
+  serviceType: 'Search Engine Optimization',
+  description:
+    'Technical SEO and generative engine optimization (GEO) for companies that need organic visibility in both traditional search and AI answer engines.',
+});
+---
+
+<Layout
+  title="Organic Search & AI SEO | NCR Digital"
+  description="Technical SEO and generative engine optimization (GEO): the practice of making a site citable by AI answer engines like ChatGPT, Perplexity, and Google AI Overviews."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} slot="head" />
+
+  <Navigation />
+  <main id="main-content">
+    <SectionHero
+      eyebrow="Capability"
+      title="Get found where the answer is written by AI"
+      subtitle="Technical SEO and generative engine optimization (GEO), so your company shows up whether the searcher lands on a blue link or an AI-generated answer."
+      size="lg"
+    />
+
+    <StickySubnav sections={sections} />
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* publishedDate carried over from the page this succeeded (formerly
+          /capabilities/marketing); updatedDate reflects today's rewrite. */}
+      <PageByline author="Niekos Robbins" publishedDate={new Date('2026-03-01')} updatedDate={new Date('2026-08-11')} />
+    </div>
+
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
+      <section id="overview">
+        <p class="text-lg text-ncr-text leading-relaxed">
+          Search results are increasingly written by AI, not just listed by it. Getting found now
+          means two things: a technically sound site that Google can crawl and rank, and content
+          structured so an AI system can lift a clean answer from it and cite the source.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-6">
+          This practice grew out of technical SEO work scaling organic search for a high-growth
+          automotive SaaS platform (the case study below). The underlying skill hasn't changed:
+          crawl-log literacy and structured-data discipline. What changed is the audience. That
+          discipline used to be aimed purely at Google's ranking algorithm. Now it's aimed at a
+          second one: the retrieval logic inside large language models.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-6">
+          We don't run paid campaigns. If a client asks how paid should be sized against organic,
+          we'll advise, but the budget belongs to organic, and we'd rather be honest about that than
+          sell a channel we're not the right team to run.
+        </p>
+      </section>
+
+      <ScrollReveal>
+      <section id="geo">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          What is generative engine optimization, and why does it matter now?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          GEO structures content so AI answer engines can extract, cite, and attribute it. It
+          matters because a growing share of research now happens inside chat interfaces and AI
+          Overviews instead of a list of links. An AI system isn't ranking ten pages for a person to
+          click through. It's synthesizing one answer from a handful of sources, and those sources
+          need to hand it something extractable: a direct answer, a dense fact, a clean comparison.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-4">
+          Four practices we apply to every page:
+        </p>
+        <ul class="mt-4 space-y-2 text-ncr-muted list-disc pl-5">
+          <li>A direct 40-60 word answer before any framing.</li>
+          <li>Question-format headings that mirror how people phrase queries to an AI system.</li>
+          <li>Entity-linked JSON-LD, so the organization, author, and service are machine-legible.</li>
+          <li>Dense, citable key-facts blocks and comparison tables in place of adjective-heavy prose.</li>
+        </ul>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="seo">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          What technical SEO work is included?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          Technical SEO is the foundation underneath GEO. If a page isn't crawlable, fast, and
+          properly structured, no amount of AI-answer optimization helps, because most answer
+          engines still rely on the underlying search index to discover content at all.
+        </p>
+        <div class="grid sm:grid-cols-3 gap-6 mt-6">
+          <div class="rounded-card border border-ncr-border bg-ncr-card p-6">
+            <h3 class="font-semibold text-ncr-text mb-2">Technical audits</h3>
+            <p class="text-ncr-muted text-sm leading-relaxed">
+              Core Web Vitals and CrUX analysis, crawl budget optimization, JSON-LD implementation,
+              indexation and canonicalization review, and internal link architecture.
+            </p>
+          </div>
+          <div class="rounded-card border border-ncr-border bg-ncr-card p-6">
+            <h3 class="font-semibold text-ncr-text mb-2">Content strategy</h3>
+            <p class="text-ncr-muted text-sm leading-relaxed">
+              Topical authority mapping, semantic keyword clustering, content-gap analysis, and
+              entity optimization built to an E-E-A-T-aligned editorial standard.
+            </p>
+          </div>
+          <div class="rounded-card border border-ncr-border bg-ncr-card p-6">
+            <h3 class="font-semibold text-ncr-text mb-2">Data-backed growth</h3>
+            <p class="text-ncr-muted text-sm leading-relaxed">
+              Search Console and GA4 instrumentation, Python-powered rank tracking, and reporting
+              built for executives evaluating spend, not just marketers checking rankings.
+            </p>
+          </div>
+        </div>
+      </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+      <section id="measurement">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          How is this measured?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          Every engagement starts by agreeing on the numbers that will define success, before any
+          work begins. We instrument Search Console and GA4 on day one, track rankings weekly with
+          Python scripts rather than a dashboard snapshot once a month, and report against a short,
+          fixed list: indexed pages, ranking position on target terms, and traffic that actually
+          converts to pipeline.
+        </p>
+        <p class="text-ncr-muted leading-relaxed mt-4">
+          When something we recommend is a hypothesis rather than a proven pattern, we say so and
+          propose how to test it cheaply before committing budget to it at scale. Growth claims on
+          this page (the case study below included) are the same numbers a client would see in
+          their own dashboard, not a rounded-up version of them.
+        </p>
+      </section>
+      </ScrollReveal>
+
+      <EvidenceStandard
+        items={[
+          'Agree on the numbers that define success before any work begins, not after.',
+          'Instrument tracking on day one; report against real dashboard data, not a rounded-up summary.',
+          'Flag every recommendation that\'s a hypothesis rather than a proven pattern, and propose a cheap way to test it first.',
+        ]}
+      />
+
+      <ScrollReveal>
+      <section id="tools">
+        <h2 class="font-display text-2xl sm:text-display-md text-ncr-text mb-4">
+          What tools power this work?
+        </h2>
+        <p class="text-ncr-text leading-relaxed">
+          The same toolkit runs every engagement: Python for automation and rank tracking, Google
+          Search Console and GA4 for analytics, Screaming Frog for technical crawling, Ahrefs and
+          Semrush for competitive research, and JSON-LD/schema tooling for structured data.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6" role="list" aria-label="Tools">
+          {[
+            ['Python', 'Automation'],
+            ['Google Search Console', 'Analytics'],
+            ['GA4', 'Analytics'],
+            ['Screaming Frog', 'Technical'],
+            ['Ahrefs', 'Research'],
+            ['Semrush', 'Research'],
+            ['JSON-LD / Schema', 'Structured data'],
+          ].map(([name, category]) => (
+            <div class="rounded-card border border-ncr-border bg-ncr-card p-4" role="listitem">
+              <p class="text-ncr-text text-sm font-semibold">{name}</p>
+              <p class="text-ncr-muted text-xs mt-1 font-mono">{category}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      </ScrollReveal>
+
+      <KeyFactsBlock
+        title="Key facts"
+        facts={[
+          'This is an organic-only practice: technical SEO and generative engine optimization (GEO). We don\'t run paid campaigns.',
+          'GEO makes content citable by AI answer engines (ChatGPT, Perplexity, Google AI Overviews); technical SEO makes it discoverable in the first place. Both are required.',
+          'Core GEO practices: answer-first structure, question-format headings, entity-linked JSON-LD, and dense key-facts or comparison-table content.',
+          'Every engagement is measured against a fixed set of numbers agreed before work starts: indexed pages, ranking position, and converting traffic.',
+          'Toolkit: Python, Google Search Console, GA4, Screaming Frog, Ahrefs, Semrush, and JSON-LD/schema tooling.',
+        ]}
+      />
+
+      <ComparisonTable
+        caption="Technical SEO vs. GEO: what each is responsible for"
+        columns={['Technical SEO', 'GEO']}
+        rows={[
+          { label: 'What it controls', cells: ['Whether a page is crawled, indexed, and eligible to rank.', 'Whether an indexed page gets extracted and cited in an AI answer.'] },
+          { label: 'Core levers', cells: ['Core Web Vitals, crawl budget, internal linking, schema.', 'Answer-first structure, entity linking, citable fact density.'] },
+          { label: 'Time to effect', cells: ['Weeks, as crawl and index signals update.', 'Faster once indexed: answer engines re-check sources often.'] },
+          { label: 'Measured by', cells: ['Search Console coverage and ranking position.', 'Citation and reference tracking in answer-engine outputs.'] },
+        ]}
+      />
+
+      <ScrollReveal>
+        <CaseStudyBlock />
+      </ScrollReveal>
+
+      {relatedPosts.length > 0 && (
+        <section aria-labelledby="related-heading">
+          <h2 id="related-heading" class="font-display text-xl text-ncr-text mb-4">Related insights</h2>
+          <ul class="space-y-3">
+            {relatedPosts.map((post) => (
+              <li>
+                <a href={`/insights/${post.slug}/`} class="text-ncr-accent underline decoration-ncr-accent/30 underline-offset-4 hover:decoration-ncr-accent font-medium">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div id="faq">
+        <FAQBlock items={faqItems} />
+      </div>
+
+      <div>
+        <a
+          href="/contact"
+          class="inline-flex px-6 py-3 rounded-pill bg-ncr-accent text-white text-sm font-medium hover:bg-ncr-accentHover transition-all duration-200"
+        >
+          Talk to us about SEO
+        </a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
